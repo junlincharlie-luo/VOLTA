@@ -1,5 +1,5 @@
 """
-Run All 20 Hypotheses Benchmark with POPPER
+Run All 20 Hypotheses Benchmark with VOLTA
 
 Tests all 20 hypotheses from hypothesis_benchmark.md using specified LLM.
 Note: H11-H20 are designed to be non-verifiable with the available data.
@@ -16,7 +16,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Dict, List
 import pandas as pd
 
-# Add POPPER to path
+# Add VOLTA to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # All 20 hypotheses from the benchmark
@@ -213,7 +213,7 @@ def run_single_hypothesis(args) -> Dict:
         }
 
     try:
-        from popper.agent import SequentialFalsificationTest
+        from volta.agent import SequentialFalsificationTest
 
         # Create output directory for this hypothesis
         output_dir = os.path.join(config["output_base"], f"{hypothesis_id}_{hypothesis_data['name']}")
@@ -331,7 +331,7 @@ def run_benchmark(
         return {"status": "FAILED", "error": "API key not set"}
 
     print("=" * 70)
-    print("POPPER Full Hypothesis Benchmark (All 20 Hypotheses)")
+    print("VOLTA Full Hypothesis Benchmark (All 20 Hypotheses)")
     print("=" * 70)
     print(f"Model: {llm}")
     print(f"Alpha: {alpha}")
@@ -435,7 +435,7 @@ def run_benchmark(
     # Generate markdown summary
     md_summary_file = os.path.join(output_base, "SUMMARY.md")
     with open(md_summary_file, 'w') as f:
-        f.write("# POPPER Full Benchmark Results (All 20 Hypotheses)\n\n")
+        f.write("# VOLTA Full Benchmark Results (All 20 Hypotheses)\n\n")
         f.write(f"**Date**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"**Model**: {llm}\n")
         f.write(f"**Total Time**: {total_time:.1f} seconds\n\n")
@@ -480,7 +480,7 @@ def run_benchmark(
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Run all 20 hypothesis tests with POPPER")
+    parser = argparse.ArgumentParser(description="Run all 20 hypothesis tests with VOLTA")
     parser.add_argument("--llm", type=str, default="gemini-3.0",
                         help="LLM model to use (default: gemini-3.0)")
     parser.add_argument("--alpha", type=float, default=0.1,

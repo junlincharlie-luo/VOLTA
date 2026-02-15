@@ -84,7 +84,7 @@ def main():
         sys.exit(1)
 
     print("=" * 70)
-    print("POPPER Benchmark - All 20 Hypotheses with Gemini 2.5 Pro")
+    print("VOLTA Benchmark - All 20 Hypotheses with Gemini 2.5 Pro")
     print("=" * 70)
 
     script_dir = os.path.dirname(os.path.abspath(__file__))

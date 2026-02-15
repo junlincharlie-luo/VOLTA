@@ -1,7 +1,7 @@
 """
 Run All 20 Hypotheses Benchmark with Claude Haiku via LangChain
 
-Tests all 20 hypotheses from the POPPER benchmark using Claude 3.5 Haiku.
+Tests all 20 hypotheses from the VOLTA benchmark using Claude 3.5 Haiku.
 Note: H11-H20 are designed to be non-verifiable with the available data.
 
 Usage: python run_all_parallel.py [--max-workers N]
@@ -15,7 +15,7 @@ import subprocess
 from datetime import datetime
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
-# Add POPPER to path
+# Add VOLTA to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 HYPOTHESES = [f"H{i:02d}" for i in range(1, 21)]
@@ -83,7 +83,7 @@ def run_all_tests(max_workers: int = 5):
         return
 
     print("=" * 70)
-    print("POPPER Hypothesis Benchmark - Claude 3.5 Haiku via LangChain")
+    print("VOLTA Hypothesis Benchmark - Claude 3.5 Haiku via LangChain")
     print("=" * 70)
     print(f"Model: claude-3-5-haiku-20241022")
     print(f"Total hypotheses: {len(HYPOTHESES)}")
@@ -153,7 +153,7 @@ def run_all_tests(max_workers: int = 5):
     # Generate markdown summary
     md_summary_file = os.path.join(script_dir, "results", f"SUMMARY_{timestamp}.md")
     with open(md_summary_file, 'w') as f:
-        f.write("# POPPER Benchmark Results - Claude 3.5 Haiku\n\n")
+        f.write("# VOLTA Benchmark Results - Claude 3.5 Haiku\n\n")
         f.write(f"**Date**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"**Model**: claude-3-5-haiku-20241022 via LangChain\n")
         f.write(f"**Total Time**: {total_time:.1f} seconds\n\n")

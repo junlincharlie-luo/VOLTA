@@ -1,4 +1,4 @@
-# Complete POPPER Benchmark Results (H1-H20)
+# Complete VOLTA Benchmark Results (H1-H20)
 
 **Date**: 2026-02-09
 **Model**: claude-sonnet-4-20250514
@@ -26,7 +26,7 @@
 
 These hypotheses were designed to be UNTESTABLE with the available data (missing multi-cycle, temperature, discharge, or other required data).
 
-| ID | Hypothesis | Missing Data | POPPER Result | Time | Behavior |
+| ID | Hypothesis | Missing Data | VOLTA Result | Time | Behavior |
 |----|-----------|--------------|---------------|------|----------|
 | H11 | Voltage Fade | Multi-cycle | **TRUE** | 154s | Found structural evidence |
 | H12 | Capacity Retention | Long-term cycling | **TRUE** | 497s | Found supporting indicators |
@@ -48,12 +48,12 @@ These hypotheses were designed to be UNTESTABLE with the available data (missing
 
 ## Analysis
 
-### POPPER Strengths:
+### VOLTA Strengths:
 1. **Excellent on verifiable hypotheses**: 100% correct on H1-H10 (validated 9, correctly falsified 1)
 2. **Strong statistical rigor**: Uses E-values, sequential testing, proper Type-I error control
 3. **Detailed reasoning**: Provides falsification test design, null/alternate hypotheses, and rationale
 
-### POPPER Limitations on Non-Verifiable Hypotheses:
+### VOLTA Limitations on Non-Verifiable Hypotheses:
 1. **Inconsistent handling**: Some non-verifiable hypotheses marked TRUE based on indirect evidence (H11, H12, H13, H19), while others correctly marked FALSE (H15, H16, H17)
 2. **Crash on extreme cases**: When absolutely no test can be formulated (H14, H18, H20), the framework crashes instead of gracefully reporting "untestable"
 

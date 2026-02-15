@@ -130,7 +130,7 @@ The falsification test successfully rejected the null hypothesis that predicted 
 ## How to Reproduce
 
 ```bash
-cd /Users/carrot/Desktop/POPPER
+cd /Users/carrot/Desktop/VOLTA
 export ANTHROPIC_API_KEY="your-api-key"
 python hypothesis_1_A1g_peak_voltage_correlation/run_battery_hypothesis.py
 ```

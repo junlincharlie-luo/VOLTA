@@ -1,4 +1,4 @@
-# POPPER Hypothesis Benchmark Summary
+# VOLTA Hypothesis Benchmark Summary
 
 **Date**: 2026-02-08 23:53:13
 **Model**: claude-sonnet-4-20250514

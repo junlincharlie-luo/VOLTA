@@ -1,5 +1,5 @@
-from popper.utils import ExperimentalDataLoader, CustomDataLoader, DiscoveryBenchDataLoader
-from popper.agent import SequentialFalsificationTest
+from volta.utils import ExperimentalDataLoader, CustomDataLoader, DiscoveryBenchDataLoader
+from volta.agent import SequentialFalsificationTest
 from typing import Optional, Dict, Any
 import os
 import requests
@@ -10,11 +10,11 @@ import tarfile
 import subprocess
 import shutil
 
-class Popper:
+class Volta:
     """Wrapper class for hypothesis validation using sequential falsification testing."""
     
     def __init__(self, llm: str = "claude-3-5-sonnet-20240620", is_locally_served = False, server_port = None, api_key = "EMPTY", **kwargs):
-        """Initialize Popper.
+        """Initialize Volta.
         
         Args:
             llm (str): Name of the LLM model to use
@@ -226,7 +226,7 @@ class Popper:
             print(evt.index, evt.liked, evt.value)
 
         with gr.Blocks() as demo:
-            gr.Markdown("# POPPER - Sequential Hypothesis Falsification")
+            gr.Markdown("# VOLTA - Sequential Hypothesis Falsification")
 
             # Reference Agent panel (only show if enabled)
             with gr.Row():
@@ -242,7 +242,7 @@ class Popper:
 
             with gr.Row():
                 with gr.Column(scale=1):
-                    designer_chatbot = gr.Chatbot(label="Popper Experiment Designer",
+                    designer_chatbot = gr.Chatbot(label="Volta Experiment Designer",
                                         type="messages", height=500,
                                         show_copy_button=True,
                                         show_share_button = True,
@@ -258,7 +258,7 @@ class Popper:
                     )
 
                 with gr.Column(scale=1):
-                    executor_chatbot = gr.Chatbot(label="Popper Experiment Executor",
+                    executor_chatbot = gr.Chatbot(label="Volta Experiment Executor",
                                                 type="messages", height=500,
                                                 show_copy_button=True,
                                                 show_share_button = True,
@@ -288,7 +288,7 @@ class Popper:
                     feedback_input = gr.Textbox(label="Feedback (for reject/edit)", placeholder="Enter your feedback...")
 
             with gr.Row():
-                summarizer = gr.Chatbot(label="Popper Summarizer",
+                summarizer = gr.Chatbot(label="Volta Summarizer",
                                                 type="messages", height=250,
                                                 show_copy_button=True,
                                                 show_share_button = True,
@@ -316,7 +316,7 @@ class Popper:
 
     def download_all_data(self):
         url = "https://dataverse.harvard.edu/api/access/datafile/10888484"
-        file_name = 'popper_data_processed'
+        file_name = 'volta_data_processed'
         self._download_and_extract_data(url, file_name)
 
     def _download_and_extract_data(self, url, file_name):
@@ -333,7 +333,7 @@ class Popper:
             print("Extracting files...")
             with tarfile.open(tar_file_path, 'r:gz') as tar:
                 for member in tqdm(tar.getmembers(), desc="Extracting: "):
-                    member.name = member.name.split('popper_data_processed/')[-1]  # Strip directory structure
+                    member.name = member.name.split('volta_data_processed/')[-1]  # Strip directory structure
                     tar.extract(member, self.data_path)           
                 print("Extraction complete.")
 

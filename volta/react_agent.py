@@ -1,6 +1,6 @@
-from popper.react_utils import create_agent
-from popper.prompt_utils import get_react_coding_agent_system_prompt
-from popper.llm.custom_model import CustomChatModel
+from volta.react_utils import create_agent
+from volta.prompt_utils import get_react_coding_agent_system_prompt
+from volta.llm.custom_model import CustomChatModel
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
 import os

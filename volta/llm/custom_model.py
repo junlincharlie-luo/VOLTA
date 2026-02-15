@@ -65,8 +65,8 @@ from langchain_core.tools import BaseTool
 from langchain_openai import ChatOpenAI
 # from langchain_openai.chat_models import _convert_dict_to_message
 # from langchain_community.chat_models.openai import ChatOpenAI
-from popper.llm.prompt_utils import bind_tools_to_system_prompt
-from popper.llm.utils import parse_llm_output
+from volta.llm.prompt_utils import bind_tools_to_system_prompt
+from volta.llm.utils import parse_llm_output
 
 
 def _convert_message_to_dict(message: BaseMessage) -> dict:

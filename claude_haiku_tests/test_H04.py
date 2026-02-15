@@ -5,7 +5,7 @@ Hypothesis: The Eg peak amplitude (related to M-O bending in layered structure) 
 during charging, reflecting enhanced Raman scattering from M-O bending modes as lithium
 extraction modifies the electronic structure.
 
-Uses Claude Haiku via LangChain for POPPER hypothesis testing.
+Uses Claude Haiku via LangChain for VOLTA hypothesis testing.
 """
 
 import os
@@ -57,7 +57,7 @@ Battery Operando Raman Spectroscopy Data:
 
 
 def run_hypothesis_test():
-    """Run POPPER hypothesis test for H04 using Claude Haiku via LangChain."""
+    """Run VOLTA hypothesis test for H04 using Claude Haiku via LangChain."""
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
@@ -65,11 +65,11 @@ def run_hypothesis_test():
         print("Set it with: export ANTHROPIC_API_KEY='your-key'")
         return None
 
-    from popper.agent import SequentialFalsificationTest
+    from volta.agent import SequentialFalsificationTest
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    popper_dir = os.path.dirname(script_dir)
-    data_path = os.path.join(popper_dir, "Battery_Data")
+    volta_dir = os.path.dirname(script_dir)
+    data_path = os.path.join(volta_dir, "Battery_Data")
     output_dir = os.path.join(script_dir, "results", HYPOTHESIS_ID)
     os.makedirs(output_dir, exist_ok=True)
 

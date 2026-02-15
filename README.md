@@ -1,4 +1,4 @@
-# POPPER: Automated Hypothesis Validation with Agentic Sequential Falsifications
+# VOLTA: Automated Hypothesis Validation with Agentic Sequential Falsifications
 
 This repository hosts the code base for the paper
 
@@ -11,7 +11,7 @@ Kexin Huang*, Ying Jin*, Ryan Li*, Michael Y. Li, Emmanuel Candès, Jure Leskove
 If you find this work useful, please consider cite:
 
 ```
-@misc{popper,
+@misc{volta,
       title={Automated Hypothesis Validation with Agentic Sequential Falsifications}, 
       author={Kexin Huang and Ying Jin and Ryan Li and Michael Y. Li and Emmanuel Candès and Jure Leskovec},
       year={2025},
@@ -23,12 +23,12 @@ If you find this work useful, please consider cite:
 
 ### Overview
 Hypotheses are central to information acquisition, decision-making, and discovery. However, many real-world hypotheses are abstract, high-level statements that are difficult to validate directly. 
-This challenge is further intensified by the rise of hypothesis generation from Large Language Models (LLMs), which are prone to hallucination and produce hypotheses in volumes that make manual validation impractical. Here we propose Popper, an agentic framework for rigorous automated validation of free-form hypotheses. 
-Guided by Karl Popper's principle of falsification, Popper validates a hypothesis using LLM agents that design and execute falsification experiments targeting its measurable implications. A novel sequential testing framework ensures strict Type-I error control while actively gathering evidence from diverse observations, whether drawn from existing data or newly conducted procedures.
-We demonstrate Popper on six domains including biology, economics, and sociology. Popper delivers robust error control, high power, and scalability. Furthermore, compared to human scientists, Popper achieved comparable performance in validating complex biological hypotheses while reducing time by 10 folds, providing a scalable, rigorous solution for hypothesis validation.
+This challenge is further intensified by the rise of hypothesis generation from Large Language Models (LLMs), which are prone to hallucination and produce hypotheses in volumes that make manual validation impractical. Here we propose Volta, an agentic framework for rigorous automated validation of free-form hypotheses. 
+Guided by Karl Volta's principle of falsification, Volta validates a hypothesis using LLM agents that design and execute falsification experiments targeting its measurable implications. A novel sequential testing framework ensures strict Type-I error control while actively gathering evidence from diverse observations, whether drawn from existing data or newly conducted procedures.
+We demonstrate Volta on six domains including biology, economics, and sociology. Volta delivers robust error control, high power, and scalability. Furthermore, compared to human scientists, Volta achieved comparable performance in validating complex biological hypotheses while reducing time by 10 folds, providing a scalable, rigorous solution for hypothesis validation.
 
 
-<p align="center"><img src="https://github.com/snap-stanford/POPPER/blob/main/figs/popper_agent_illustration.png" alt="logo" width="800px" /></p>
+<p align="center"><img src="https://github.com/snap-stanford/VOLTA/blob/main/figs/volta_agent_illustration.png" alt="logo" width="800px" /></p>
 
 
 ## Installation
@@ -36,19 +36,19 @@ We demonstrate Popper on six domains including biology, economics, and sociology
 We highly recommend using a virtual environment to manage the dependencies.
 
 ```bash
-conda create -n popper_env python=3.10
-conda activate popper_env
+conda create -n volta_env python=3.10
+conda activate volta_env
 ```
 
-For direct usage of Popper, you can install the package via pip:
+For direct usage of Volta, you can install the package via pip:
 ```bash
-pip install popper_agent
+pip install volta_agent
 ```
 
 For source code development, you can clone the repository and install the package:
 ```bash
-git clone https://github.com/snap-stanford/POPPER.git
-cd POPPER
+git clone https://github.com/snap-stanford/VOLTA.git
+cd VOLTA
 pip install -r requirements.txt
 ```
 
@@ -62,15 +62,15 @@ Datasets will be automatically downloaded to specified data folder when you run 
 
 ## Demo
 
-A demo is provided in [here](demo.ipynb) to show how to use the Popper agent to validate a hypothesis and basic functionalities of the Popper agent.
+A demo is provided in [here](demo.ipynb) to show how to use the Volta agent to validate a hypothesis and basic functionalities of the Volta agent.
 
 ## Core API Usage
 
 ```python
-from popper import Popper
+from volta import Volta
 
-# Initialize the Popper agent
-agent = Popper(llm="claude-3-5-sonnet-20240620")
+# Initialize the Volta agent
+agent = Volta(llm="claude-3-5-sonnet-20240620")
 
 # Register data for hypothesis testing; 
 # for bio/discoverybench data in the paper, 
@@ -96,7 +96,7 @@ print(results)
 ```
 
 ## Running locally-served LLM with OpenAI-Compatible API
-**Popper** supports inferencing with local LLM servers such as vLLM, SGLang, and llama.cpp, as long as they support OpenAI-compatible API. Here are some example usage with locally hosted LLMs:
+**Volta** supports inferencing with local LLM servers such as vLLM, SGLang, and llama.cpp, as long as they support OpenAI-compatible API. Here are some example usage with locally hosted LLMs:
 
 Using [SGLang](https://github.com/sgl-project/sglang/tree/main):
 ```bash
@@ -104,8 +104,8 @@ Using [SGLang](https://github.com/sgl-project/sglang/tree/main):
 python -m sglang.launch_server --model-path mistralai/Mistral-Large-Instruct-2411 --port 40000 --host 0.0.0.0 --tp 4 --quantization fp8 --mem-fraction-static 0.8 --trust-remote-code
 ```
 ```python
-from popper import Popper
-agent = Popper(llm="mistralai/Mistral-Large-Instruct-2411", is_locally_served=True, server_port=40000)
+from volta import Volta
+agent = Volta(llm="mistralai/Mistral-Large-Instruct-2411", is_locally_served=True, server_port=40000)
 agent.configure(alpha=0.1)
 agent.register_data(data_path='path/to/data', loader_type='bio')
 agent.validate(hypothesis = 'YOUR HYPOTHESIS')
@@ -116,8 +116,8 @@ Using [vLLM](https://docs.vllm.ai/en/latest/serving/openai_compatible_server.htm
 vllm serve NousResearch/Meta-Llama-3-8B-Instruct --dtype auto --api-key token-abc123
 ```
 ```python
-from popper import Popper
-agent = Popper(llm="NousResearch/Meta-Llama-3-8B-Instruct", is_locally_served=True, server_port=8000, api_key="token-abc123")
+from volta import Volta
+agent = Volta(llm="NousResearch/Meta-Llama-3-8B-Instruct", is_locally_served=True, server_port=8000, api_key="token-abc123")
 ```
 
 Using [llama.cpp](https://github.com/ggml-org/llama.cpp):
@@ -125,32 +125,32 @@ Using [llama.cpp](https://github.com/ggml-org/llama.cpp):
 llama-server -m model.gguf --port 8080
 ```
 ```python
-from popper import Popper
-agent = Popper(llm="qwen2 1.5B", is_locally_served=True, server_port=8080)
+from volta import Volta
+agent = Volta(llm="qwen2 1.5B", is_locally_served=True, server_port=8080)
 ```
 
 ## Run on your own hypothesis and database
 
-You can simply dump in a set of datasets in your domain (e.g. business, economics, political science, etc.) and run Popper on your own hypothesis. 
+You can simply dump in a set of datasets in your domain (e.g. business, economics, political science, etc.) and run Volta on your own hypothesis. 
 We only expect every file is in a csv or pkl format.
 
 ```python
-from popper import Popper   
+from volta import Volta   
 
-agent = Popper(llm="claude-3-5-sonnet-20240620")
+agent = Volta(llm="claude-3-5-sonnet-20240620")
 agent.configure(alpha = 0.1)
 agent.register_data(data_path='path/to/data', loader_type='custom')
 agent.validate(hypothesis = 'YOUR HYPOTHESIS')
 ```
 
-## Hypothesis in Popper
+## Hypothesis in Volta
 
 You can arbitrarily define any free-form hypothesis. In the paper, we provide two types of hypothesis: biological hypothesis and discovery-bench hypothesis.
 
 You can load the biological hypothesis with:
 
 ```python
-from popper.benchmark import gene_perturb_hypothesis
+from volta.benchmark import gene_perturb_hypothesis
 bm = gene_perturb_hypothesis(num_of_samples = samples, permuted=False, dataset = 'IL2', path = path)
 example = bm.get_example(0)
 ```
@@ -168,7 +168,7 @@ It will return something like:
 For discovery-bench, you can load the hypothesis with:
 
 ```python
-from popper.benchmark import discovery_bench_hypothesis
+from volta.benchmark import discovery_bench_hypothesis
 bm = discovery_bench_hypothesis(num_samples = samples, path = path)
 example = bm.get_example(0)
 ```
@@ -181,7 +181,7 @@ It will return something like:
  'metadataid': 5,
  'query_id': 0,
  'prompt': 'From 1700 BCE onwards, the use of hatchets and swords increased while the use of daggers decreased.',
- 'data_loader': <popper.utils.DiscoveryBenchDataLoader at 0x7c20793e9f70>,
+ 'data_loader': <volta.utils.DiscoveryBenchDataLoader at 0x7c20793e9f70>,
  'answer': True}
 ```
 
@@ -192,7 +192,7 @@ As each hypothesis in discoverybench has its own associated dataset, the example
 
 Bash scripts for reproducing the paper is provided in the `benchmark_scripts/run_targetval.sh` for `TargetVal` benchmark and `benchmark_scripts/run_discoverybench.sh` for `DiscoveryBench` benchmark.
 
-**Note:** the Popper agent can read or write files to your filesystem. We recommend running the benchmark scripts inside a containerized environments. We have provided a working `Dockerfile` and an example script to launch a Docker container and execute the scripts in `benchmark_scripts/run_discoverybench_docker.sh`.
+**Note:** the Volta agent can read or write files to your filesystem. We recommend running the benchmark scripts inside a containerized environments. We have provided a working `Dockerfile` and an example script to launch a Docker container and execute the scripts in `benchmark_scripts/run_discoverybench_docker.sh`.
 
 **To run paper benchmarks with locally-served models,** you can simply passed in the extra parameters to the benchmark script, e.g.,
 ```bash

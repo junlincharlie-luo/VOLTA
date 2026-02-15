@@ -1,5 +1,5 @@
 ============================================================
-Battery Hypothesis Testing with POPPER
+Battery Hypothesis Testing with VOLTA
 ============================================================
 
 Loading battery experiment data...
@@ -67,7 +67,7 @@ Hypothesis to Test:
     4. The shift should be reversible across charge/discharge cycles
     
 
-Initializing POPPER agent...
+Initializing VOLTA agent...
 
 ============================================================
 Starting Sequential Falsification Testing...

@@ -1,4 +1,4 @@
-# Complete POPPER Benchmark Results with P-Values
+# Complete VOLTA Benchmark Results with P-Values
 
 **Date**: 2026-02-09
 **Model**: claude-sonnet-4-20250514
@@ -74,7 +74,7 @@ These hypotheses were designed to be **UNTESTABLE** due to missing data (multi-c
 
 ---
 
-## POPPER Framework Behavior Analysis
+## VOLTA Framework Behavior Analysis
 
 ### On Verifiable Hypotheses (H1-H10)
 - **Perfect performance**: All testable hypotheses correctly evaluated
@@ -82,7 +82,7 @@ These hypotheses were designed to be **UNTESTABLE** due to missing data (multi-c
 - **Appropriate falsification**: H6 correctly identified as false despite being a "uniformity" hypothesis
 
 ### On Non-Verifiable Hypotheses (H11-H20)
-POPPER showed **inconsistent behavior**:
+VOLTA showed **inconsistent behavior**:
 
 | Behavior | Count | Hypotheses | Interpretation |
 |----------|-------|------------|----------------|
@@ -109,11 +109,11 @@ POPPER showed **inconsistent behavior**:
 
 ## Conclusions
 
-1. **POPPER excels on well-defined, testable hypotheses** with extremely strong statistical evidence (p-values often <1e-100)
+1. **VOLTA excels on well-defined, testable hypotheses** with extremely strong statistical evidence (p-values often <1e-100)
 
 2. **The framework correctly falsified H6**, revealing important scientific insight about electrode non-uniformity
 
-3. **On untestable hypotheses**, POPPER behavior varies:
+3. **On untestable hypotheses**, VOLTA behavior varies:
    - Sometimes finds indirect supporting evidence
    - Sometimes correctly reports insufficient data
    - Sometimes crashes when no test can be formulated

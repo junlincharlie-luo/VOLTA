@@ -1,8 +1,8 @@
 """
-Battery Hypothesis Testing with POPPER
+Battery Hypothesis Testing with VOLTA
 
 This script loads battery experiment data (Raman spectroscopy and voltage profiles)
-and uses the POPPER agentic workflow to test the hypothesis:
+and uses the VOLTA agentic workflow to test the hypothesis:
 
 "The cathode A_{1g} peak (~590 cm^{-1}) shifts to higher wavenumbers during charging
 and reversibly returns during discharging, showing a linear correlation with the
@@ -17,7 +17,7 @@ import pandas as pd
 import numpy as np
 from typing import Dict, Optional
 
-# Add POPPER to path
+# Add VOLTA to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -142,7 +142,7 @@ def run_battery_hypothesis_test(
     api_key: Optional[str] = None
 ) -> Dict:
     """
-    Run the POPPER hypothesis testing workflow on the battery data.
+    Run the VOLTA hypothesis testing workflow on the battery data.
 
     Args:
         llm: LLM model to use for the agents
@@ -157,9 +157,9 @@ def run_battery_hypothesis_test(
     Returns:
         Dictionary containing test results
     """
-    # Import POPPER modules here to avoid import errors during quick analysis
-    from popper.popper import Popper
-    from popper.agent import SequentialFalsificationTest
+    # Import VOLTA modules here to avoid import errors during quick analysis
+    from volta.volta import Volta
+    from volta.agent import SequentialFalsificationTest
 
     # Get the path to Battery_Data
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -169,7 +169,7 @@ def run_battery_hypothesis_test(
         raise FileNotFoundError(f"Battery_Data folder not found at: {battery_data_path}")
 
     print("=" * 60)
-    print("Battery Hypothesis Testing with POPPER")
+    print("Battery Hypothesis Testing with VOLTA")
     print("=" * 60)
 
     # Load battery data
@@ -197,8 +197,8 @@ def run_battery_hypothesis_test(
     print("=" * 60)
     print(hypothesis)
 
-    # Initialize POPPER with battery domain
-    print("\nInitializing POPPER agent...")
+    # Initialize VOLTA with battery domain
+    print("\nInitializing VOLTA agent...")
 
     # Create and configure the sequential falsification test
     agent = SequentialFalsificationTest(llm=llm, api_key=api_key if api_key else "EMPTY")
@@ -295,7 +295,7 @@ def quick_data_analysis():
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Run battery hypothesis testing with POPPER")
+    parser = argparse.ArgumentParser(description="Run battery hypothesis testing with VOLTA")
     parser.add_argument("--llm", type=str, default="claude-sonnet-4-20250514",
                         help="LLM model to use")
     parser.add_argument("--alpha", type=float, default=0.1,
@@ -313,7 +313,7 @@ if __name__ == "__main__":
         # Just run quick analysis
         results = quick_data_analysis()
     else:
-        # Run full POPPER hypothesis testing
+        # Run full VOLTA hypothesis testing
         results = run_battery_hypothesis_test(
             llm=args.llm,
             alpha=args.alpha,

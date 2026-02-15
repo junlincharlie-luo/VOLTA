@@ -7,10 +7,10 @@ from baseline_agents.react_agent import ReactAgent
 from baseline_agents.self_refine_agent import SelfRefineAgent
 from baseline_agents.coder_utils import load_data_to_coder_globals
 from baseline_agents.react_utils import load_data_to_react_globals
-from popper.benchmark import gene_perturb_hypothesis
-from popper.utils import ExperimentalDataLoader
+from volta.benchmark import gene_perturb_hypothesis
+from volta.utils import ExperimentalDataLoader
 from langchain_core.prompts import ChatPromptTemplate
-from popper.utils import get_llm
+from volta.utils import get_llm
 from sklearn.metrics import accuracy_score, average_precision_score
 from pydantic import BaseModel, Field
 from typing import (

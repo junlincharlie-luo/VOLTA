@@ -1,4 +1,4 @@
-# POPPER Full Benchmark Results (All 20 Hypotheses)
+# VOLTA Full Benchmark Results (All 20 Hypotheses)
 
 **Date**: 2026-02-09 00:33:10
 **Model**: gemini-3.0
@@ -46,7 +46,7 @@
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -55,7 +55,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -64,7 +64,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -73,7 +73,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -82,7 +82,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -91,7 +91,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -100,7 +100,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -109,7 +109,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -118,7 +118,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -127,7 +127,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -136,7 +136,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -145,7 +145,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -154,7 +154,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -163,7 +163,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -172,7 +172,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -181,7 +181,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -190,7 +190,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -199,7 +199,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -208,7 +208,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```
@@ -217,7 +217,7 @@ Traceback (most recent call last):
 ```
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                             
 ```

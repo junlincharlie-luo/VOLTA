@@ -35,7 +35,7 @@
       "status": "SUCCESS",
       "conclusion": true,
       "elapsed_time": 93.16479420661926,
-      "stdout": "which is exactly what the hypothesis predicted. The test statistic of 1.1e-177 provides overwhelming evidence against the null hypothesis of no redshift, thereby supporting the alternate hypothesis that redshift occurs. Since the falsification attempt was unsuccessful (the test PASSED), the main hypothesis remains supported by the experimental evidence.\n\nConclusion: True\nElapsed time: 90.7 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/benchmark_tests/H01_A1g_Voltage_Correlation/results\n",
+      "stdout": "which is exactly what the hypothesis predicted. The test statistic of 1.1e-177 provides overwhelming evidence against the null hypothesis of no redshift, thereby supporting the alternate hypothesis that redshift occurs. Since the falsification attempt was unsuccessful (the test PASSED), the main hypothesis remains supported by the experimental evidence.\n\nConclusion: True\nElapsed time: 90.7 seconds\nResults saved to: /Users/carrot/Desktop/VOLTA/benchmark_tests/H01_A1g_Voltage_Correlation/results\n",
       "stderr": "",
       "returncode": 0
     },

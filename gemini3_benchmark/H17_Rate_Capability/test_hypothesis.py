@@ -52,7 +52,7 @@ def run_test():
     os.makedirs(results_dir, exist_ok=True)
 
     try:
-        from popper.agent import SequentialFalsificationTest
+        from volta.agent import SequentialFalsificationTest
         data_loader = BatteryDataLoader(data_path)
         agent = SequentialFalsificationTest(llm="gemini-2.5-pro", api_key=api_key)
         agent.configure(data=data_loader, alpha=0.1, aggregate_test='E-value', max_num_of_tests=5, max_retry=3, time_limit=5, relevance_checker=True, use_react_agent=True)

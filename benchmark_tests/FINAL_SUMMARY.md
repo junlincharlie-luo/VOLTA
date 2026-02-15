@@ -1,4 +1,4 @@
-# POPPER Hypothesis Benchmark - Final Results
+# VOLTA Hypothesis Benchmark - Final Results
 
 **Date**: 2026-02-08
 **Model**: claude-sonnet-4-20250514
@@ -46,7 +46,7 @@
 
 ## Interpretation
 
-The POPPER framework successfully validated most battery Raman spectroscopy hypotheses:
+The VOLTA framework successfully validated most battery Raman spectroscopy hypotheses:
 
 1. **Structural changes during charging**: A1g peak behavior (position, width) strongly correlates with voltage, confirming delithiation-induced M-O bond changes.
 

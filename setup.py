@@ -5,7 +5,7 @@ from os import path
 from io import open  # for Python 2 and 3 compatibility
 
 # get __version__ from _version.py
-ver_file = path.join('popper', 'version.py')
+ver_file = path.join('volta', 'version.py')
 with open(ver_file) as f:
     exec(f.read())
 
@@ -23,14 +23,14 @@ with open(path.join(this_directory, 'requirements.txt'),
           encoding='utf-8') as f:
     requirements = f.read().splitlines()
 
-setup(name='popper_agent',
+setup(name='volta_agent',
       version=__version__,
       license='MIT',
-      description='POPPER',
+      description='VOLTA',
       long_description=readme(),
       long_description_content_type='text/markdown',
-      url='https://github.com/snap-stanford/POPPER',
-      author='POPPER Team',
+      url='https://github.com/snap-stanford/VOLTA',
+      author='VOLTA Team',
       author_email='kexinh@cs.stanford.edu',
       packages=find_packages(exclude=['test']),
       zip_safe=False,

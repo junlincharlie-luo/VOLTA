@@ -4,7 +4,7 @@ A strong project would be:
 
 
 
-## **“KG-Backed Popper Loop for Battery Mechanism Discovery”**
+## **“KG-Backed Volta Loop for Battery Mechanism Discovery”**
 
 
 
@@ -162,7 +162,7 @@ Each hypothesis should produce **forward predictions** (what must appear) and **
 
 
 
-## **3) Agentic Popper loop (falsification-first)**
+## **3) Agentic Volta loop (falsification-first)**
 
 
 

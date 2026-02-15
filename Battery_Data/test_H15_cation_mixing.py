@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 import os
 
-OUTPUT_DIR = "/Users/carrot/Desktop/POPPER/Battery_Data/hypothesis_test_outputs"
+OUTPUT_DIR = "/Users/carrot/Desktop/VOLTA/Battery_Data/hypothesis_test_outputs"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "H15_cation_mixing_results.txt")
 
 def main():
@@ -21,7 +21,7 @@ def main():
     results.append("=" * 70)
 
     # Load data
-    data_path = "/Users/carrot/Desktop/POPPER/Battery_Data/raman_peaks_decomposed.csv"
+    data_path = "/Users/carrot/Desktop/VOLTA/Battery_Data/raman_peaks_decomposed.csv"
     df = pd.read_csv(data_path)
 
     results.append("\n" + "-" * 50)

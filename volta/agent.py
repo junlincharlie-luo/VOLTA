@@ -33,7 +33,7 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 
 from .utils import get_llm, pretty_print, KnowledgeGraphLoader
 from .prompt_utils import *
-from popper.react_agent import ReactAgent
+from volta.react_agent import ReactAgent
 
 class TimeoutException(Exception):
     pass

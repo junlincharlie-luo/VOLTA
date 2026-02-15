@@ -1,5 +1,5 @@
 """
-Knowledge Graph module for POPPER.
+Knowledge Graph module for VOLTA.
 
 This module provides data structures and utilities for managing a unified knowledge graph
 that combines:

@@ -50,11 +50,11 @@ def run_hypothesis_test():
         print("ERROR: ANTHROPIC_API_KEY not set!")
         return None
 
-    from popper.agent import SequentialFalsificationTest
+    from volta.agent import SequentialFalsificationTest
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    popper_dir = os.path.dirname(os.path.dirname(script_dir))
-    data_path = os.path.join(popper_dir, "Battery_Data")
+    volta_dir = os.path.dirname(os.path.dirname(script_dir))
+    data_path = os.path.join(volta_dir, "Battery_Data")
     output_dir = os.path.join(script_dir, "results")
     os.makedirs(output_dir, exist_ok=True)
 

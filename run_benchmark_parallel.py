@@ -1,5 +1,5 @@
 """
-Parallel Hypothesis Benchmark Testing with POPPER
+Parallel Hypothesis Benchmark Testing with VOLTA
 
 Runs the first 10 verifiable hypotheses from hypothesis_benchmark.md in parallel,
 saving logs to separate folders and generating a summary.
@@ -14,7 +14,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Dict, List, Optional
 import pandas as pd
 
-# Add POPPER to path
+# Add VOLTA to path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Define the 10 verifiable hypotheses
@@ -146,7 +146,7 @@ def run_single_hypothesis(args) -> Dict:
         }
 
     try:
-        from popper.agent import SequentialFalsificationTest
+        from volta.agent import SequentialFalsificationTest
 
         # Create output directory for this hypothesis
         output_dir = os.path.join(config["output_base"], f"{hypothesis_id}_{hypothesis_data['name']}")
@@ -252,7 +252,7 @@ def run_parallel_benchmark(
         return {"status": "FAILED", "error": "API key not set"}
 
     print("=" * 70)
-    print("POPPER Parallel Hypothesis Benchmark")
+    print("VOLTA Parallel Hypothesis Benchmark")
     print("=" * 70)
     print(f"Model: {llm}")
     print(f"Alpha: {alpha}")
@@ -354,7 +354,7 @@ def run_parallel_benchmark(
     # Generate markdown summary
     md_summary_file = os.path.join(output_base, "SUMMARY.md")
     with open(md_summary_file, 'w') as f:
-        f.write("# POPPER Benchmark Results\n\n")
+        f.write("# VOLTA Benchmark Results\n\n")
         f.write(f"**Date**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"**Model**: {llm}\n")
         f.write(f"**Total Time**: {total_time:.1f} seconds\n\n")
@@ -388,7 +388,7 @@ def run_parallel_benchmark(
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Run parallel hypothesis benchmark with POPPER")
+    parser = argparse.ArgumentParser(description="Run parallel hypothesis benchmark with VOLTA")
     parser.add_argument("--llm", type=str, default="claude-sonnet-4-20250514",
                         help="LLM model to use (default: claude-sonnet-4-20250514)")
     parser.add_argument("--alpha", type=float, default=0.1,

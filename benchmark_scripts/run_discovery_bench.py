@@ -2,8 +2,8 @@ import sys
 import os
 sys.path.append(os.getcwd())
 
-from popper.benchmark import discovery_bench_hypothesis
-from popper.agent import SequentialFalsificationTest
+from volta.benchmark import discovery_bench_hypothesis
+from volta.agent import SequentialFalsificationTest
 from sklearn.metrics import accuracy_score, average_precision_score
 
 from tqdm import tqdm

@@ -1,4 +1,4 @@
-# POPPER Full Benchmark Results (All 20 Hypotheses)
+# VOLTA Full Benchmark Results (All 20 Hypotheses)
 
 **Date**: 2026-02-09 00:32:39
 **Model**: gemini-3.0
@@ -66,7 +66,7 @@ Traceback  | N/A |
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -76,7 +76,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -84,7 +84,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -94,7 +94,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -102,7 +102,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -112,7 +112,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -120,7 +120,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -130,7 +130,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -138,7 +138,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -148,7 +148,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -156,7 +156,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -166,7 +166,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -174,7 +174,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -184,7 +184,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -192,7 +192,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -202,7 +202,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -210,7 +210,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -220,7 +220,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -228,7 +228,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -238,7 +238,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -246,7 +246,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -256,7 +256,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -264,7 +264,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -274,7 +274,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -282,7 +282,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -292,7 +292,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -300,7 +300,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -310,7 +310,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -318,7 +318,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -328,7 +328,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -336,7 +336,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -346,7 +346,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -354,7 +354,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -364,7 +364,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -372,7 +372,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -382,7 +382,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -390,7 +390,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -400,7 +400,7 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```
 
@@ -408,7 +408,7 @@ Traceback (most recent call last):
 ```
 Port must be specified for local models
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
     agent.configure(
     ~~~~~~~~~~~~~~~^
         data=data_loader,
@@ -418,6 +418,6 @@ Traceback (most recent call last):
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 908, in configure
     self.test_coding_a
 ```

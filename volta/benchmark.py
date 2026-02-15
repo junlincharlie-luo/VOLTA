@@ -5,7 +5,7 @@ import traceback
 import pandas as pd
 import numpy as np
 
-from popper.utils import DiscoveryBenchDataLoader
+from volta.utils import DiscoveryBenchDataLoader
 
 class gene_perturb_hypothesis:
     def __init__(self, dataset='IL2',

@@ -9,7 +9,7 @@ import json
 import time
 from datetime import datetime
 
-# Add POPPER to path
+# Add VOLTA to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pandas as pd
@@ -62,14 +62,14 @@ This provides n=3 independent events for statistical analysis.
 
 
 def run_hypothesis_test(api_key: str):
-    """Run POPPER hypothesis test for H01."""
+    """Run VOLTA hypothesis test for H01."""
 
-    from popper.agent import SequentialFalsificationTest
+    from volta.agent import SequentialFalsificationTest
 
     # Paths
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    popper_dir = os.path.dirname(script_dir)
-    data_path = os.path.join(popper_dir, "Battery_Data")
+    volta_dir = os.path.dirname(script_dir)
+    data_path = os.path.join(volta_dir, "Battery_Data")
     output_dir = script_dir  # Save results in the same folder
 
     print("=" * 60)

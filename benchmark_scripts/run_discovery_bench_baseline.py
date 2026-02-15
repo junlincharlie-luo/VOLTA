@@ -7,7 +7,7 @@ from baseline_agents.react_agent import ReactAgent
 from baseline_agents.self_refine_agent import SelfRefineAgent
 from baseline_agents.coder_utils import load_data_to_coder_globals
 from baseline_agents.react_utils import load_data_to_react_globals
-from popper.benchmark import discovery_bench_hypothesis
+from volta.benchmark import discovery_bench_hypothesis
 
 from sklearn.metrics import accuracy_score, average_precision_score
 

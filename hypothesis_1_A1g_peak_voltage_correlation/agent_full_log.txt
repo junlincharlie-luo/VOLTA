@@ -1,5 +1,5 @@
 ============================================================
-Battery Hypothesis Testing with POPPER
+Battery Hypothesis Testing with VOLTA
 ============================================================
 
 Loading battery experiment data...

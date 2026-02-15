@@ -1,5 +1,5 @@
 """
-Generate figures for the POPPER paper.
+Generate figures for the VOLTA paper.
 
 This script creates all 6 figures for the paper:
 1. Agent Workflow Roadmap
@@ -44,13 +44,13 @@ COLORS = {
 def create_figure_1_workflow():
     """
     Figure 1: Agent System Roadmap
-    Horizontal flowchart showing the complete POPPER workflow.
+    Horizontal flowchart showing the complete VOLTA workflow.
     """
     fig, ax = plt.subplots(figsize=(14, 8))
     ax.set_xlim(0, 14)
     ax.set_ylim(0, 8)
     ax.axis('off')
-    ax.set_title('POPPER: Multi-Agent Sequential Falsification Testing Framework', fontsize=16, fontweight='bold', pad=20)
+    ax.set_title('VOLTA: Multi-Agent Sequential Falsification Testing Framework', fontsize=16, fontweight='bold', pad=20)
 
     # Define node positions
     nodes = {
@@ -210,7 +210,7 @@ def create_figure_2_agent_profiles():
     for i in range(1, len(data) + 1):
         table[(i, 0)].set_text_props(fontweight='bold')
 
-    ax.set_title('POPPER Agent Profiles', fontsize=14, fontweight='bold', pad=20)
+    ax.set_title('VOLTA Agent Profiles', fontsize=14, fontweight='bold', pad=20)
 
     plt.tight_layout()
     plt.savefig('figure2_agent_profiles.png', dpi=300, bbox_inches='tight', facecolor='white')
@@ -505,20 +505,20 @@ def create_figure_5_sequential_testing():
 def create_figure_6_benchmark_results():
     """
     Figure 6: Benchmark Results
-    Bar chart comparing POPPER vs baselines across domains.
+    Bar chart comparing VOLTA vs baselines across domains.
     """
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
 
     # Left plot: Accuracy by domain
     domains = ['Biology', 'Economics', 'Sociology', 'Chemistry', 'Psychology', 'Physics']
-    popper_acc = [0.90, 0.85, 0.82, 0.88, 0.80, 0.86]
+    volta_acc = [0.90, 0.85, 0.82, 0.88, 0.80, 0.86]
     baseline_codegen = [0.70, 0.65, 0.60, 0.72, 0.62, 0.68]
     baseline_react = [0.75, 0.72, 0.68, 0.75, 0.70, 0.73]
 
     x = np.arange(len(domains))
     width = 0.25
 
-    bars1 = ax1.bar(x - width, popper_acc, width, label='POPPER', color=COLORS['llm_agent'], alpha=0.9)
+    bars1 = ax1.bar(x - width, volta_acc, width, label='VOLTA', color=COLORS['llm_agent'], alpha=0.9)
     bars2 = ax1.bar(x, baseline_react, width, label='ReAct Baseline', color=COLORS['decision'], alpha=0.9)
     bars3 = ax1.bar(x + width, baseline_codegen, width, label='CodeGen Baseline', color=COLORS['human'], alpha=0.9)
 
@@ -533,18 +533,18 @@ def create_figure_6_benchmark_results():
     # Right plot: Overall metrics comparison
     metrics = ['Accuracy', 'Type-I\nError', 'Power', 'Avg.\nTests']
 
-    popper_metrics = [0.90, 0.08, 0.85, 3.2]
+    volta_metrics = [0.90, 0.08, 0.85, 3.2]
     react_metrics = [0.72, 0.15, 0.70, 4.5]
     codegen_metrics = [0.65, 0.18, 0.62, 5.1]
 
     # Normalize for visualization (tests scaled down)
-    popper_norm = [0.90, 0.08, 0.85, 0.64]  # 3.2/5
+    volta_norm = [0.90, 0.08, 0.85, 0.64]  # 3.2/5
     react_norm = [0.72, 0.15, 0.70, 0.90]   # 4.5/5
     codegen_norm = [0.65, 0.18, 0.62, 1.0]  # 5.1/5
 
     x2 = np.arange(len(metrics))
 
-    bars4 = ax2.bar(x2 - width, popper_norm, width, label='POPPER', color=COLORS['llm_agent'], alpha=0.9)
+    bars4 = ax2.bar(x2 - width, volta_norm, width, label='VOLTA', color=COLORS['llm_agent'], alpha=0.9)
     bars5 = ax2.bar(x2, react_norm, width, label='ReAct Baseline', color=COLORS['decision'], alpha=0.9)
     bars6 = ax2.bar(x2 + width, codegen_norm, width, label='CodeGen Baseline', color=COLORS['human'], alpha=0.9)
 
@@ -561,7 +561,7 @@ def create_figure_6_benchmark_results():
     ax2.text(1.3, 0.12, 'Target alpha=0.1', fontsize=8, color='green')
 
     # Summary text box
-    summary_text = "POPPER achieves 9/10 correct\nvalidations on verifiable hypotheses"
+    summary_text = "VOLTA achieves 9/10 correct\nvalidations on verifiable hypotheses"
     ax2.text(0.5, 1.1, summary_text, transform=ax2.transAxes, fontsize=10,
             verticalalignment='top', horizontalalignment='center',
             bbox=dict(boxstyle='round', facecolor=COLORS['light_green'], alpha=0.8))
@@ -575,7 +575,7 @@ def create_figure_6_benchmark_results():
 
 def main():
     """Generate all figures."""
-    print("Generating POPPER paper figures...")
+    print("Generating VOLTA paper figures...")
     print("=" * 50)
 
     # Change to figs directory

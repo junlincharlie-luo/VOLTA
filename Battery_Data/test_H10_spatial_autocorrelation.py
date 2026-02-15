@@ -11,7 +11,7 @@ from scipy import stats
 from scipy.spatial.distance import pdist, squareform
 import os
 
-OUTPUT_DIR = "/Users/carrot/Desktop/POPPER/Battery_Data/hypothesis_test_outputs"
+OUTPUT_DIR = "/Users/carrot/Desktop/VOLTA/Battery_Data/hypothesis_test_outputs"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "H10_spatial_autocorrelation_results.txt")
 
 def compute_morans_i(values, coords):
@@ -58,7 +58,7 @@ def main():
     results.append("=" * 70)
 
     # Load data
-    data_path = "/Users/carrot/Desktop/POPPER/Battery_Data/raman_peaks_decomposed.csv"
+    data_path = "/Users/carrot/Desktop/VOLTA/Battery_Data/raman_peaks_decomposed.csv"
     df = pd.read_csv(data_path)
 
     results.append(f"\nDataset loaded: {len(df)} rows")

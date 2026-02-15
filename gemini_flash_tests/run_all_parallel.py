@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Run all 20 POPPER hypothesis tests in parallel using Gemini 3 Flash Preview.
+Run all 20 VOLTA hypothesis tests in parallel using Gemini 3 Flash Preview.
 
 Usage:
     export GOOGLE_API_KEY='your-api-key'
@@ -49,7 +49,7 @@ def run_single_hypothesis(hypothesis_id: str) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Run all 20 POPPER hypothesis tests in parallel")
+    parser = argparse.ArgumentParser(description="Run all 20 VOLTA hypothesis tests in parallel")
     parser.add_argument("--max-workers", type=int, default=5,
                         help="Maximum number of parallel workers (default: 5)")
     parser.add_argument("--hypotheses", type=str, nargs="+", default=None,
@@ -66,7 +66,7 @@ def main():
     hypotheses_to_run = args.hypotheses if args.hypotheses else HYPOTHESIS_IDS
 
     print("=" * 70)
-    print("POPPER Benchmark: 20 Hypotheses with Gemini 2.0 Flash")
+    print("VOLTA Benchmark: 20 Hypotheses with Gemini 2.0 Flash")
     print("=" * 70)
     print(f"Running {len(hypotheses_to_run)} hypotheses with {args.max_workers} parallel workers")
     print(f"Hypotheses: {', '.join(hypotheses_to_run)}")

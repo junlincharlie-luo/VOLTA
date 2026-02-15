@@ -2,9 +2,9 @@ import sys
 import os
 sys.path.append('../')
 
-from popper.benchmark import gene_perturb_hypothesis
-from popper.agent import SequentialFalsificationTest
-from popper.utils import ExperimentalDataLoader
+from volta.benchmark import gene_perturb_hypothesis
+from volta.agent import SequentialFalsificationTest
+from volta.utils import ExperimentalDataLoader
 
 from tqdm import tqdm
 import argparse

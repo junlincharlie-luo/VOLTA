@@ -8,7 +8,7 @@ from glob import glob
 import numpy as np
 import pandas as pd
 
-from popper.llm.custom_model import CustomChatModel
+from volta.llm.custom_model import CustomChatModel
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
 from langchain_core.messages.base import get_msg_title_repr
@@ -247,7 +247,7 @@ class DiscoveryBenchDataLoader:
         #     self.table_dict[df_name] = permuted_df
 
 class KnowledgeGraphLoader:
-    """Loader and query interface for the POPPER knowledge graph."""
+    """Loader and query interface for the VOLTA knowledge graph."""
 
     def __init__(self, kg_path=None, create_sample=True):
         """Initialize the knowledge graph loader.
@@ -256,7 +256,7 @@ class KnowledgeGraphLoader:
             kg_path: Path to the knowledge graph JSON file. If None, uses default location.
             create_sample: Whether to create a sample KG if none exists.
         """
-        from popper.knowledge_graph import KnowledgeGraph, create_sample_biology_kg
+        from volta.knowledge_graph import KnowledgeGraph, create_sample_biology_kg
 
         self.kg_path = kg_path
         if kg_path and os.path.exists(kg_path):
@@ -339,7 +339,7 @@ class KnowledgeGraphLoader:
             doi: Digital object identifier
             findings: List of finding strings to add
         """
-        from popper.knowledge_graph import KGNode, KGEdge, NodeType, EdgeType
+        from volta.knowledge_graph import KGNode, KGEdge, NodeType, EdgeType
 
         paper = KGNode(
             id=paper_id,

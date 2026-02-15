@@ -1,9 +1,9 @@
 Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-3.0 is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]
 Traceback (most recent call last):
-  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
+  File "/Users/carrot/Desktop/VOLTA/run_all_20_hypotheses.py", line 244, in run_single_hypothesis
     log, last_message, parsed_result = agent.go(hypothesis_data["hypothesis"])
                                        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 1040, in go
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 1040, in go
     for s in self.graph.stream({"messages": ("user", prompt)}, stream_mode="values", config = config):
              ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/opt/miniconda3/lib/python3.13/site-packages/langgraph/pregel/__init__.py", line 1315, in stream
@@ -26,9 +26,9 @@ Traceback (most recent call last):
     input = context.run(step.invoke, input, config, **kwargs)
   File "/opt/miniconda3/lib/python3.13/site-packages/langgraph/utils/runnable.py", line 184, in invoke
     ret = context.run(self.func, input, **kwargs)
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 925, in design_falsification_test
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 925, in design_falsification_test
     proposal = self.test_proposal_agent.go(self.main_hypothesis, test_results, self.log)
-  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 789, in go
+  File "/Users/carrot/Desktop/VOLTA/volta/agent.py", line 789, in go
     for s in self.app.stream(inputs, stream_mode="values", config = config):
              ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/opt/miniconda3/lib/python3.13/site-packages/langgraph/pregel/__init__.py", line 1315, in stream

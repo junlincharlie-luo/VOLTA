@@ -98,7 +98,7 @@ def generate_summary(results: list, total_time: float, output_dir: str):
     summary_path = os.path.join(output_dir, "BENCHMARK_SUMMARY.md")
 
     with open(summary_path, 'w') as f:
-        f.write("# POPPER Hypothesis Benchmark Summary\n\n")
+        f.write("# VOLTA Hypothesis Benchmark Summary\n\n")
         f.write(f"**Date**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"**Model**: claude-sonnet-4-20250514\n")
         f.write(f"**Total Execution Time**: {total_time:.1f} seconds\n\n")
@@ -149,7 +149,7 @@ def main():
         sys.exit(1)
 
     print("=" * 70)
-    print("POPPER Parallel Hypothesis Benchmark")
+    print("VOLTA Parallel Hypothesis Benchmark")
     print("=" * 70)
     print(f"Running {len(TEST_DIRS)} hypothesis tests in parallel...")
     print(f"Model: claude-sonnet-4-20250514")
