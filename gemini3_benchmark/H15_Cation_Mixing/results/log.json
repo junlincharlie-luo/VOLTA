@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H15",
+  "hypothesis_name": "Cation_Mixing",
+  "parsed_result": {
+    "main_hypothesis": "Ni\u00b2/Li cation mixing in the layered structure increases progressively with cycle number, detectable through Eg/A1g intensity ratio changes.",
+    "falsification_test_result": "The \"Time-Resolved Regression Test for Irreversible Degradation\" passed, providing sufficient evidence to reject the null sub-hypothesis.",
+    "reasoning": "The experiment aimed to distinguish between progressive, irreversible degradation (as hypothesized) and reversible, state-of-charge-dependent changes. A multiple linear regression model was used to analyze the Eg/A1g intensity ratio as a function of both time and voltage. The null sub-hypothesis stated that there is no progressive increase of the ratio with time (`\u03b2\u2081 \u2264 0`). The test result was a \"PASS\" with a very high E-value (2.51e+24), indicating strong evidence against the null sub-hypothesis. This means a statistically significant positive correlation was found between the Eg/A1g ratio and time, even after controlling for voltage effects. This result supports the claim of a progressive, irreversible process occurring over the cycles.",
+    "conclusion": true,
+    "rationale": "The conclusion is True because the falsification test failed to disprove the main hypothesis. The test successfully rejected the null sub-hypothesis, providing statistical evidence that the Eg/A1g intensity ratio increases progressively over time. This observation is consistent with the main hypothesis of increasing cation mixing with cycling."
+  },
+  "elapsed_time_seconds": 194.15357208251953,
+  "timestamp": "2026-02-09T01:26:26.096003"
+}

@@ -1,0 +1,127 @@
+{
+  "timestamp": "20260209_111434",
+  "model": "claude-3-5-haiku-20241022",
+  "total_time_seconds": 1493.762932062149,
+  "successful_count": 16,
+  "failed_count": 4,
+  "results": [
+    {
+      "hypothesis_id": "H01",
+      "status": "SUCCESS",
+      "elapsed_time": 449.4887568950653,
+      "stdout": "distribution, temporal consistency, oxygen redox participation, and compositional variations.\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe sequential falsification tests provided strong statistical evidence supporting the original hypothesis. The extremely low p-values and the high combined e-value (42,812,236.28) indicate that the hypothesis successfully withstood multiple rigorous testing approaches. The tests consistently failed to reject the null hypotheses, suggesting that the A1g peak center position indeed shows a consistent redshift during charging, which supports the proposed mechanism of delithiation-induced M-O bond weakening through oxygen redox participation.\n\nThe comprehensive testing across spatial, temporal, intensity, and compositional dimensions provides robust validation of the proposed scientific mechanism in Li-rich layered oxides.\n\nConclusion: True\nElapsed time: 445.4 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H01\n"
+    },
+    {
+      "hypothesis_id": "H02",
+      "status": "SUCCESS",
+      "elapsed_time": 524.761255979538,
+      "stdout": "aspects of spatial variation and heterogeneity, consistently supporting the main hypothesis across multiple statistical approaches.\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe sequential falsification tests provide overwhelming statistical evidence supporting the hypothesis. The extremely high combined E-value (4.730e+56) indicates robust confirmation across multiple independent testing methods. Each test examined different dimensions of spatial heterogeneity (randomness, autocorrelation, gradient, and spectral coherence), and all tests consistently failed to reject the null hypothesis, thereby strongly supporting the original scientific hypothesis about increasing electrochemical heterogeneity during delithiation.\n\nThe comprehensive testing approach and the magnitude of statistical evidence make a compelling case for accepting the hypothesis as true.\n\nConclusion: True\nElapsed time: 522.1 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H02\n"
+    },
+    {
+      "hypothesis_id": "H03",
+      "status": "SUCCESS",
+      "elapsed_time": 310.6724109649658,
+      "stdout": "rogeneity): test statistic of 0.147\n- Round 2 Test (Electrochemical Anisotropy): test statistic of 1.89e-15\n- Both tests provide statistical evidence supporting variations in the carbon network's structural characteristics at voltage levels above 4.3V\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\n- The extremely low test statistics in both rounds suggest statistically significant deviations from the null hypothesis\n- The sequential testing methodology with a high combined e-value provides strong scientific confidence\n- The tests demonstrate spatial and electrochemical variations in the ID/IG ratio when voltage exceeds 4.3V, supporting the original hypothesis of enhanced graphitic ordering at high potentials\n\nThe experimental evidence robustly supports the scientific hypothesis about structural changes in the carbon conductive network at voltages above 4.3V.\n\nConclusion: True\nElapsed time: 308.4 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H03\n"
+    },
+    {
+      "hypothesis_id": "H04",
+      "status": "SUCCESS",
+      "elapsed_time": 94.90833687782288,
+      "stdout": "nce Test):\n  - Test statistic: 2.52e-66\n  - Analyzed variance of Eg peak amplitude across voltage levels\n  - Indicates statistically significant amplitude changes\n\nThe extremely high combined e-value (1.57485197087178e+32) provides strong statistical evidence supporting the hypothesis.\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe sequential falsification tests provide robust statistical evidence supporting the hypothesis. Both spatial correlation and voltage-dependent tests demonstrate statistically significant changes in Eg peak amplitude during battery charging, consistent with the expected 30% amplitude increase and the proposed mechanism of lithium extraction modifying electronic structure.\n\nThe extremely low p-values and high e-value suggest a high confidence level in rejecting the null hypotheses, thereby supporting the main scientific hypothesis.\n\nConclusion: True\nElapsed time: 92.7 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H04\n"
+    },
+    {
+      "hypothesis_id": "H05",
+      "status": "SUCCESS",
+      "elapsed_time": 59.45142412185669,
+      "stdout": "l Falsification Test Result:\nPASS - The test successfully supports the main hypothesis\n\n(3) Reasoning and Analysis:\n- The test evaluated spatial autocorrelation between A1g peak position and ID/IG ratio\n- Test statistic was extremely low (0.001), indicating minimal spatial correlation\n- The E-value of 15.811 provides strong statistical evidence supporting the hypothesis\n- The null sub-hypothesis (no statistically significant spatial autocorrelation) was maintained\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe experimental evidence strongly supports the original hypothesis that A1g peak position and ID/IG ratio have weak spatial correlation. The low test statistic and high E-value suggest that local cathode delithiation and carbon network properties appear to evolve independently across the electrode surface, as originally proposed in the main hypothesis.\n\nConclusion: True\nElapsed time: 57.2 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H05\n"
+    },
+    {
+      "hypothesis_id": "H06",
+      "status": "SUCCESS",
+      "elapsed_time": 56.180683851242065,
+      "stdout": "le.\n\n(2) Result of Sequential Falsification Test:\nPASS (Statistically supported)\n\n(3) Reasoning and Analysis:\n- The test compared A1g peak shift variance between edge and center pixel regions\n- Levene's test was used to assess variance equality\n- Test statistic: 0.000889\n- Combined e-value: 16.76946 (which suggests strong statistical evidence)\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\n- The test failed to reject the null hypothesis\n- The extremely low test statistic (0.000889) indicates no significant difference in A1g peak shift variance\n- The high e-value (16.76946) provides robust statistical confidence in the homogeneity hypothesis\n- This suggests uniform electrochemical accessibility across the mapped electrode area at the 30 um scale\n\nThe experimental evidence supports the hypothesis of homogeneous electrochemical behavior across the mapped region.\n\nConclusion: True\nElapsed time: 54.8 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H06\n"
+    },
+    {
+      "hypothesis_id": "H07",
+      "status": "TIMEOUT",
+      "error": "Test exceeded 10 minute timeout"
+    },
+    {
+      "hypothesis_id": "H08",
+      "status": "SUCCESS",
+      "elapsed_time": 225.9789068698883,
+      "stdout": "t)\n\n(3) Reasoning and Analysis:\n- The test investigated the consistency of voltage-G_Center correlation across different spatial locations\n- The null hypothesis proposed no significant difference in correlation across spatial regions\n- The test statistics of 1e-300 and a combined e-value of 5e+149 suggest strong statistical evidence against spatial heterogeneity\n- The test provides support for a consistent relationship between G-band center and voltage across the spatial grid\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe test successfully passed without finding significant spatial variations in the voltage-G_Center correlation. This supports the main hypothesis that the G-band center position consistently shifts with voltage across different spatial locations, indicating a robust charge transfer or electrochemical doping mechanism in the carbon network.\n\nConclusion: True\nElapsed time: 224.5 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H08\n"
+    },
+    {
+      "hypothesis_id": "H09",
+      "status": "SUCCESS",
+      "elapsed_time": 269.66439390182495,
+      "stdout": "uced D-Amp Rate of Change Synchronization Test):\n  - Test statistic: 5.74e-08\n  - Extremely low p-value indicates strong evidence against synchronous behavior\n  - Supports the hypothesis of a systematic temporal lag\n\n(4) Conclusion: True\n\n(5) Rationale for Conclusion:\nThe sequential falsification tests provide strong statistical evidence supporting the hypothesis:\n- The tests demonstrate a non-random temporal lag between voltage changes and D-band amplitude\n- The extremely low test statistics suggest the observed lag is systematically significant\n- The high combined e-value (2293.50) provides robust confidence in the hypothesis\n- Both tests consistently support the notion that D-Amp changes lag behind voltage changes, indicating a kinetically slow SEI formation process\n\nThe scientific hypothesis is therefore considered TRUE based on the experimental observations.\n\nConclusion: True\nElapsed time: 267.7 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H09\n"
+    },
+    {
+      "hypothesis_id": "H10",
+      "status": "FAILED",
+      "elapsed_time": 134.4044280052185,
+      "error": "Unknown error",
+      "stdout": " = 10000\npermuted_moran_is = np.zeros(n_permutations)\n\nnp.random.seed(42)  # For reproducibility\nfor i in range(n_permutations):\n    # Randomly shuffle values while keeping coordinates fixed\n    permuted_values = np.random.permutation(original_values)\n    permuted_moran_is[i] = compute_moran_i(permuted_values, original_coords)\n\n# Compute p-value\np_value = np.mean(np.abs(permuted_moran_is) >= np.abs(original_moran_i))\n\nprint(f\"Original Moran's I: {original_moran_i}\")\nprint(f\"P-value: {p_value}\")\n"
+    },
+    {
+      "hypothesis_id": "H11",
+      "status": "SUCCESS",
+      "elapsed_time": 74.37997698783875,
+      "stdout": "4 time steps.\n- The test statistic of 4.45e-41 and the E-value of 7.495e+19 provide strong statistical evidence.\n- The test successfully rejected the null hypothesis, suggesting a significant correlation between voltage decrease and Raman spectral center frequency changes.\n\n(4) Hypothesis Conclusion: \nTrue\n\n(5) Rationale of Conclusion:\n- The statistical evidence strongly supports the correlation between voltage changes and structural transformation.\n- The extremely low p-value and high E-value indicate a robust relationship between the observed voltage decrease and spectral shifts.\n- However, the authors note that long-term cycling data may be needed for full confirmation.\n\nThe test provides preliminary evidence supporting the hypothesis of structural transformation leading to voltage decrease, but further long-term cycling studies would strengthen these findings.\n\nConclusion: True\nElapsed time: 70.7 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H11\n"
+    },
+    {
+      "hypothesis_id": "H12",
+      "status": "SUCCESS",
+      "elapsed_time": 133.64773988723755,
+      "stdout": "aman peak intensity variations\n\nThe sequential testing showed sufficient evidence, with an extremely high combined E-value suggesting strong statistical support.\n\n(4) Conclusion:\nFalse (The hypothesis is NOT supported)\n\n(5) Rationale of Conclusion:\nThe sequential falsification tests provide strong statistical evidence against the original hypothesis of capacity retention below 80% after 500 cycles. The high E-value and the passing of multiple rigorous spectroscopic tests suggest that the battery's structural integrity and capacity retention mechanisms are more robust than initially hypothesized.\n\nThe tests specifically examined:\n- Structural stability through Raman spectral peak shifts\n- Spatial-temporal variations in peak intensities\n\nThese analyses indicate that the battery is likely to maintain better capacity retention than the original hypothesis predicted.\n\nConclusion: False\nElapsed time: 130.0 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H12\n"
+    },
+    {
+      "hypothesis_id": "H13",
+      "status": "SUCCESS",
+      "elapsed_time": 404.81750893592834,
+      "stdout": "ntial oxygen evolution mechanisms near the 4.5V threshold:\n- Peak intensity variations\n- Spatial peak asymmetry\n- Spatial coherence of peak characteristics\n\nThe extremely low test statistics and the high combined e-value suggest strong statistical evidence supporting the hypothesis.\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe sequential falsification tests provide robust statistical evidence for the hypothesis. The extremely low p-values across multiple independent tests, combined with the high e-value (8.080e+19), strongly suggest that there are statistically significant spectroscopic changes consistent with oxygen evolution mechanisms when voltage exceeds 4.5V during the first charge cycle.\n\nNote: While the tests provide strong evidence, the authors acknowledge that definitive confirmation would require direct mass spectrometry or gas analysis data.\n\nConclusion: True\nElapsed time: 403.1 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H13\n"
+    },
+    {
+      "hypothesis_id": "H14",
+      "status": "TIMEOUT",
+      "error": "Test exceeded 10 minute timeout"
+    },
+    {
+      "hypothesis_id": "H15",
+      "status": "SUCCESS",
+      "elapsed_time": 342.0936200618744,
+      "stdout": "tion Test: test statistic = 3.62e-97\n\nEach test examined different aspects of potential cation mixing:\n- Spatial variation within the material\n- Correlation between intensity ratio and spatial coordinates\n- Peak symmetry and potential structural variations\n\nThe extremely low test statistics and the high combined e-value suggest strong statistical evidence supporting the hypothesis.\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe sequential falsification tests provide robust statistical evidence that:\n- There is no significant spatial heterogeneity in the Eg/A1g intensity ratio\n- No significant correlation between intensity ratio and spatial coordinates exists\n- Peak symmetry remains consistent across measurements\n\nThese results strongly support the original hypothesis of progressive Ni2+/Li+ cation mixing detectable through Eg/A1g intensity ratio changes.\n\nConclusion: True\nElapsed time: 340.5 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H15\n"
+    },
+    {
+      "hypothesis_id": "H16",
+      "status": "SUCCESS",
+      "elapsed_time": 162.47019290924072,
+      "stdout": "est examined spatial variability of D-band intensity across a 30x30 pixel grid\n- The test aimed to assess changes in spatial heterogeneity of D-band intensity\n- Test statistics (1.42e-06) and combined e-value (419.59) provide strong statistical support\n- The result suggests a decrease in spatial heterogeneity, potentially indicating CEI layer stabilization\n\n(4) Hypothesis Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\n- The statistical evidence (high e-value of 419.59) strongly suggests that the spatial heterogeneity of D-band intensity decreases across the electrode surface\n- This supports the hypothesis that the CEI layer stabilizes after approximately 50 cycles\n- The test passed with sufficient evidence, indicating the alternate sub-hypothesis is likely correct\n\nNote: This conclusion is based strictly on the provided experimental data and statistical analysis.\n\nConclusion: True\nElapsed time: 161.0 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H16\n"
+    },
+    {
+      "hypothesis_id": "H17",
+      "status": "SUCCESS",
+      "elapsed_time": 166.70648503303528,
+      "stdout": "ss the battery material's surface during lithium extraction.\n\nThe extremely low test statistic (0.000181) and high E-value (37.16) suggest strong statistical evidence supporting the homogeneity of A1g peak centers.\n\n(4) Conclusion:\nTrue\n\n(5) Rationale:\nThe statistical evidence strongly supports the null hypothesis of spatial homogeneity. The test passed with a high E-value, indicating that the A1g peak centers are uniformly distributed during lithium extraction. This suggests that the spatial distribution of lithium extraction kinetics is consistent across the material's surface, which does not contradict the main hypothesis about rate-limited lithium extraction at high charging rates.\n\nHowever, it's important to note that this is just the first test in a sequential testing procedure, and more tests would be needed to comprehensively validate the main hypothesis.\n\nConclusion: True\nElapsed time: 165.3 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H17\n"
+    },
+    {
+      "hypothesis_id": "H18",
+      "status": "SUCCESS",
+      "elapsed_time": 121.52589583396912,
+      "stdout": "o detect potential localized variations\n- The test statistics (3.81e-224) and combined e-value (2.5615775978928e+111) suggest strong statistical significance\n- The test aimed to detect potential non-uniform spatial distribution that might indicate structural instability\n\n(4) Conclusion: \nFalse (The null hypothesis is rejected)\n\n(5) Rationale of Conclusion:\n- The extremely low test statistic and high e-value indicate strong evidence against uniform spatial distribution\n- This suggests significant spatial heterogeneity in A1g peak positions\n- The result implies potential localized structural variations during the charge cycle\n- These findings support the possibility of irreversible structural changes in the battery material\n\nNote: This is the first round of testing, and further sequential tests would provide more comprehensive validation of the overall hypothesis.\n\nConclusion: False\nElapsed time: 120.1 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H18\n"
+    },
+    {
+      "hypothesis_id": "H19",
+      "status": "SUCCESS",
+      "elapsed_time": 120.33214092254639,
+      "stdout": "rved peak centers\n- The test used a statistical approach considering peak shift, intensity variations, and spatial heterogeneity\n- The test statistics (2.87e-113) and combined e-value (9.333e+55) provide extremely strong statistical support\n- The test suggests potential detection of decomposition product formation\n\n(4) Conclusion:\nTrue\n\n(5) Rationale of Conclusion:\nThe extremely low p-value and high e-value provide robust statistical evidence supporting the hypothesis that specific electrolyte decomposition products can be detected through their characteristic Raman peaks. The test passed with statistically significant evidence, indicating strong correlation between hypothesized and observed peak locations.\n\nKey caveat: This is based strictly on the statistical analysis of the first falsification test, and further tests may be needed for comprehensive validation.\n\nConclusion: True\nElapsed time: 119.0 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/claude_haiku_tests/results/H19\n"
+    },
+    {
+      "hypothesis_id": "H20",
+      "status": "TIMEOUT",
+      "error": "Test exceeded 10 minute timeout"
+    }
+  ]
+}

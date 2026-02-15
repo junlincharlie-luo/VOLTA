@@ -1,0 +1,56 @@
+======================================================================
+HYPOTHESIS H8: G-band Voltage-Dependent Redshift
+======================================================================
+
+Dataset loaded: 102600 rows
+G_Center range: 1522.29 to 1650.00 cm^-1
+
+--------------------------------------------------
+G-band Center Statistics
+--------------------------------------------------
+Mean G_Center: 1590.46 cm^-1
+Std G_Center:  5.82 cm^-1
+Total range:   127.71 cm^-1
+
+--------------------------------------------------
+Time-Averaged G_Center Evolution
+--------------------------------------------------
+
+Initial state (V = 3.201V): G_Center = 1592.15 cm^-1
+Final state (V = 4.499V):   G_Center = 1589.63 cm^-1
+Total shift: -2.53 cm^-1
+Range of time-averaged G_Center: 6.82 cm^-1
+
+--------------------------------------------------
+Correlation: G_Center vs Voltage
+--------------------------------------------------
+Pearson (time-averaged):  r = -0.7420, p = 3.58e-21
+Spearman (time-averaged): rho = -0.7119, p = 6.77e-19
+
+Linear regression:
+  Slope: -3.4856 cm^-1 per Volt
+  R-squared: 0.5505
+
+--------------------------------------------------
+Voltage Bin Analysis
+--------------------------------------------------
+  (3.0, 3.5]: Mean = 1591.84, Std = 4.71
+  (3.5, 4.0]: Mean = 1591.53, Std = 5.23
+  (4.0, 4.3]: Mean = 1591.00, Std = 5.74
+  (4.3, 4.5]: Mean = 1589.45, Std = 6.02
+  (4.5, 5.0]: Mean = 1587.14, Std = 6.34
+
+--------------------------------------------------
+Stability Criterion Check
+--------------------------------------------------
+Threshold: |shift| < 5.0 cm^-1
+Observed total shift: 2.53 cm^-1
+Observed time-averaged range: 6.82 cm^-1
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H8: SUPPORTED
+G-band shows voltage-dependent redshift: r = -0.742, slope = -3.49 cm^-1/V.
+Total G-band shift: -2.53 cm^-1

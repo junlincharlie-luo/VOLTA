@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H17",
+  "hypothesis_name": "Rate_Capability",
+  "parsed_result": {
+    "main_hypothesis": "At charging rates above 2C, the A1g peak shift becomes incomplete, indicating rate-limited lithium extraction kinetics.",
+    "falsification_test_result": "The test passed, providing sufficient statistical evidence to reject the null sub-hypothesis.",
+    "reasoning": "The experiment was designed to falsify the main hypothesis by testing one of its key implications: that rate-limited kinetics should lead to increased spatial heterogeneity during charging. The test measured the correlation between the spatial variance of `A1g_Center` (a proxy for the local state of charge) and the battery voltage. The null sub-hypothesis stated that there would be no positive correlation, meaning heterogeneity would not increase with voltage. The experimental result, with a very large E-value, strongly refutes this null sub-hypothesis. This indicates that spatial heterogeneity does indeed increase as the battery charges, which is a finding consistent with the mechanism of rate-limited kinetics proposed in the main hypothesis.",
+    "conclusion": true,
+    "rationale": "The main hypothesis survived the falsification attempt. The experiment successfully rejected the null sub-hypothesis, which represented a scenario that would have contradicted the main hypothesis. The observed positive correlation between spatial heterogeneity and voltage directly supports the claim of rate-limited kinetics. Therefore, based on this test, the main hypothesis is not falsified."
+  },
+  "elapsed_time_seconds": 548.5771248340607,
+  "timestamp": "2026-02-09T01:35:36.527369"
+}

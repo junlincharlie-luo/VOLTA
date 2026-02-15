@@ -1,0 +1,65 @@
+======================================================================
+HYPOTHESIS H16: CEI Layer Steady State After 50 Cycles
+======================================================================
+
+--------------------------------------------------
+CEI Detection Methods in Raman
+--------------------------------------------------
+
+Potential CEI indicators in Raman spectroscopy:
+  1. D-band intensity changes (carbon disorder)
+  2. New peaks from CEI species (Li2CO3, LiF, etc.)
+  3. Background fluorescence changes
+  4. Peak broadening from surface layers
+
+Available in current dataset:
+  - D-band amplitude (D_Amp): Available
+  - CEI-specific peaks: NOT FITTED
+  - Direct thickness measurement: NOT AVAILABLE
+
+--------------------------------------------------
+Cycle Count Analysis
+--------------------------------------------------
+
+Experiment duration: 28.2 hours
+Detected: Single charging half-cycle
+Estimated complete cycles: 0.5
+Required cycles for H16: 50+
+Shortfall: 49.5 cycles
+
+--------------------------------------------------
+D-band Analysis (Single Cycle)
+--------------------------------------------------
+
+D-band amplitude range: 15.51 to 18.52
+D-band change within cycle: 0.32
+
+Note: This shows D-band evolution within ONE cycle.
+Cannot determine if CEI reaches steady state over 50 cycles.
+
+--------------------------------------------------
+Requirements for H16 Testing
+--------------------------------------------------
+
+To test CEI steady state hypothesis:
+  1. Raman data from 50+ cycles - NOT AVAILABLE
+  2. D-band (or CEI peak) intensity per cycle - NOT AVAILABLE
+  3. Cycle-indexed measurements - NOT AVAILABLE
+  4. Ideally: direct CEI thickness (XPS, TEM) - NOT AVAILABLE
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H16: NOT SUPPORTED (DATA INSUFFICIENT)
+
+Reason: Only single cycle data is available.
+Testing CEI steady state requires tracking D-band or CEI
+indicators across at least 50 complete cycles to observe
+saturation behavior.
+
+Missing data:
+  - Multi-cycle Raman data (50+ cycles)
+  - CEI-specific Raman peak fitting
+  - Direct CEI thickness measurements
+  - Cycle-resolved D-band intensity

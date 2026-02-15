@@ -39,6 +39,8 @@ The test should be extremely rigorous. The p-value should be theoretically groun
 The code should be clear, concise, and efficient. Do progress bar when necessary. It will have a time limit, so please be efficient. For example, if possible, you can set the number of permutations to be small (e.g. <1000).
 The code should be self-contained, and do not need additional modifications from user.
 
+**IMPORTANT - Statistical Independence**: In statistical testing, the 900 spatial pixels are highly correlated and CANNOT be treated as independent events. Instead, use the electrochemical half-cycles as independent events: there are 2 charging half-cycles and 1 discharge half-cycle, providing n=3 independent events. Design your statistical tests accordingly, using appropriate methods for small sample sizes.
+
 You have access to the following pandas dataframe tables, where each table, it shows the precise column names and a preview of column values:
 
 {{context}}
@@ -221,6 +223,127 @@ def get_relevance_prompt():
     return RELEVANCE_PROMPT
 
 
+# ============================================================
+# REFERENCE AGENT PROMPTS
+# ============================================================
+
+REFERENCE_AGENT_SYSTEM_PROMPT = """You are a Reference Agent specialized in examining scientific hypotheses against existing literature and domain knowledge.
+
+Your role is to:
+1. Analyze the given hypothesis in the context of prior scientific knowledge
+2. Identify relevant literature citations, domain relationships, and existing evidence
+3. Flag hypotheses that already have strong evidence for or against them
+4. Provide context to inform downstream test proposal
+
+When examining a hypothesis, you should:
+- Extract key concepts and entities mentioned
+- Search for supporting and contradicting evidence in the knowledge base
+- Identify relevant domain ontology relationships (e.g., Gene -> Protein -> Pathway)
+- Assess the novelty and testability of the hypothesis
+- Suggest what aspects deserve focused falsification testing
+
+Your output should be structured and actionable, helping the Test Proposal Agent design more informed and relevant falsification tests."""
+
+REFERENCE_AGENT_USER_PROMPT = """Please examine the following scientific hypothesis against the available knowledge base:
+
+**Hypothesis**: {hypothesis}
+
+**Domain**: {domain}
+
+**Prior Knowledge from Knowledge Graph**:
+{prior_knowledge}
+
+Based on this prior knowledge, please provide:
+
+1. **Evidence Assessment**: Summarize what the prior literature says about this hypothesis
+   - Key supporting evidence (if any)
+   - Key contradicting evidence (if any)
+   - Gaps in current knowledge
+
+2. **Domain Context**: Explain relevant biological/scientific relationships
+   - Key entities and their relationships
+   - Relevant pathways or mechanisms
+   - Known confounding factors
+
+3. **Novelty Assessment**: Rate the novelty of this hypothesis
+   - Is this well-established, contested, or novel?
+   - What makes this hypothesis interesting to test?
+
+4. **Testing Recommendations**: Suggest focus areas for falsification tests
+   - Which aspects have the most uncertainty?
+   - What would be strong evidence for/against?
+   - Recommended sub-hypotheses to test
+
+5. **Caution Flags** (if applicable):
+   - Already strong consensus (may not need testing)
+   - Strong contradicting evidence (hypothesis may be flawed)
+   - Missing data or concepts (may be difficult to test)
+
+Structure your response clearly to inform the Test Proposal Agent."""
+
+
+def get_reference_agent_system_prompt(domain="biology"):
+    """Get the system prompt for the Reference Agent."""
+    return REFERENCE_AGENT_SYSTEM_PROMPT
+
+
+def get_reference_agent_user_prompt(hypothesis, domain, prior_knowledge_summary):
+    """Get the user prompt for the Reference Agent."""
+    return REFERENCE_AGENT_USER_PROMPT.format(
+        hypothesis=hypothesis,
+        domain=domain,
+        prior_knowledge=prior_knowledge_summary
+    )
+
+
+# ============================================================
+# HUMAN-IN-THE-LOOP CHECKPOINT PROMPTS
+# ============================================================
+
+HITL_CHECKPOINT_SUMMARY = """## Proposed Falsification Test
+
+**Test Name**: {test_name}
+**Description**: {test_description}
+
+**Null Hypothesis (H0)**: {null_hypothesis}
+**Alternative Hypothesis (H1)**: {alternate_hypothesis}
+
+**Context**:
+- Main Hypothesis: {main_hypothesis}
+- Tests Completed: {num_completed_tests}
+- Current Statistics: {current_stats}
+"""
+
+HITL_FEEDBACK_PROMPT = """The user has provided feedback on the proposed test:
+
+**Action**: {action}
+**Feedback**: {feedback}
+
+{additional_context}
+
+Please incorporate this feedback when designing the next falsification test."""
+
+
+def get_hitl_checkpoint_summary(test_spec, main_hypothesis, num_completed_tests, current_stats):
+    """Generate the HITL checkpoint summary."""
+    return HITL_CHECKPOINT_SUMMARY.format(
+        test_name=test_spec.get('test_name', 'N/A'),
+        test_description=test_spec.get('test_description', 'N/A'),
+        null_hypothesis=test_spec.get('null_hypothesis', 'N/A'),
+        alternate_hypothesis=test_spec.get('alternate_hypothesis', 'N/A'),
+        main_hypothesis=main_hypothesis,
+        num_completed_tests=num_completed_tests,
+        current_stats=current_stats
+    )
+
+
+def get_hitl_feedback_prompt(action, feedback, additional_context=""):
+    """Generate the feedback prompt for after user interaction."""
+    return HITL_FEEDBACK_PROMPT.format(
+        action=action,
+        feedback=feedback,
+        additional_context=additional_context
+    )
 
 
 def bind_tools_to_system_prompt(system_prompt, tools):

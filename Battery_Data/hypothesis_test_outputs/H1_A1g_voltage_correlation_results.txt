@@ -1,0 +1,41 @@
+======================================================================
+HYPOTHESIS H1: A1g Peak Center NEGATIVE Correlation with Voltage
+======================================================================
+
+Dataset loaded: 102600 rows
+Unique time steps: 114
+Unique pixels: 900
+Voltage range: 3.057V to 4.679V
+
+--------------------------------------------------
+METHOD 1: Overall Pearson & Spearman Correlation
+--------------------------------------------------
+Pearson correlation:  r = nan, p-value = nan
+Spearman correlation: rho = nan, p-value = nan
+
+--------------------------------------------------
+METHOD 2: Mean A1g_Center per Time Step vs Voltage
+--------------------------------------------------
+Pearson correlation:  r = -0.8793, p-value = 7.01e-38
+Spearman correlation: rho = -0.8950, p-value = 4.45e-41
+
+--------------------------------------------------
+A1g Peak Shift Analysis
+--------------------------------------------------
+Initial mean A1g (t=0): 599.96 cm^-1
+Final mean A1g (t=max): 577.94 cm^-1
+Total shift: -22.02 cm^-1
+
+--------------------------------------------------
+Monotonicity Analysis
+--------------------------------------------------
+Positive shifts when voltage increases: 55/113
+Monotonicity ratio: 48.67%
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H1: SUPPORTED
+Strong negative correlation (r=-0.879) between A1g center and voltage.
+A1g peak shifted by -22.02 cm^-1 during charging.

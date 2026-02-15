@@ -1,0 +1,54 @@
+======================================================================
+HYPOTHESIS H6: Edge-Center Uniformity
+======================================================================
+
+Dataset loaded: 102600 rows
+Grid: 30x30 (X: 0-29, Y: 0-29)
+Edge pixels: 116, Center pixels: 784
+
+--------------------------------------------------
+A1g Center Comparison: Edge vs Center
+--------------------------------------------------
+
+Overall A1g_Center:
+  Edge:   Mean = 592.51, Std = 29.18
+  Center: Mean = 589.78, Std = 27.97
+
+T-test (Edge vs Center A1g_Center):
+  t-statistic = nan, p-value = nan
+
+--------------------------------------------------
+A1g Shift Analysis (Initial to Final)
+--------------------------------------------------
+
+A1g Shift (Final - Initial):
+  Edge:   Mean = -17.29 cm^-1, Std = 35.14
+  Center: Mean = -22.72 cm^-1, Std = 35.28
+
+T-test (Edge vs Center shift):
+  t-statistic = 1.5461, p-value = 1.22e-01
+  Cohen's d = 0.1540
+
+--------------------------------------------------
+Time-Resolved A1g Comparison
+--------------------------------------------------
+Mean A1g difference (Edge - Center) over time: 2.74 cm^-1
+Std of difference: 5.28 cm^-1
+
+One-sample t-test (diff != 0):
+  t-statistic = 5.5409, p-value = 1.99e-07
+
+--------------------------------------------------
+ID/IG Ratio Comparison
+--------------------------------------------------
+Edge ID/IG:   Mean = 0.9492
+Center ID/IG: Mean = 0.9425
+T-test: t = 3.7319, p = 1.90e-04
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H6: SUPPORTED
+No significant difference between edge and center pixels (p=0.122), confirming uniformity.
+Edge-Center A1g shift difference: 5.42 cm^-1

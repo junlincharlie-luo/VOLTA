@@ -1,0 +1,39 @@
+Port must be specified for local models
+Traceback (most recent call last):
+  File "/Users/carrot/Desktop/POPPER/run_all_20_hypotheses.py", line 231, in run_single_hypothesis
+    agent.configure(
+    ~~~~~~~~~~~~~~~^
+        data=data_loader,
+        ^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        use_react_agent=config["use_react_agent"]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 908, in configure
+    self.test_coding_agent = falsification_test_react_agent(self.data_loader, llm =self.llm_use, max_retry=max_retry, domain=self.domain, port=self.port, api_key=self.api_key)
+                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carrot/Desktop/POPPER/popper/agent.py", line 616, in __init__
+    self.agent = ReactAgent(
+                 ~~~~~~~~~~^
+        model_name=llm,
+        ^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        api_key=api_key,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/carrot/Desktop/POPPER/popper/react_agent.py", line 100, in __init__
+    self.llm = self.get_model(
+               ~~~~~~~~~~~~~~^
+        api=self.api,
+        ^^^^^^^^^^^^^
+    ...<2 lines>...
+        api_key=api_key
+        ^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/carrot/Desktop/POPPER/popper/react_agent.py", line 152, in get_model
+    assert port is not None, "Port must be specified for local models"
+           ^^^^^^^^^^^^^^^^
+AssertionError: Port must be specified for local models

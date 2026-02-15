@@ -1,0 +1,164 @@
+{
+  "timestamp": "2026-02-09T00:54:35.275983",
+  "total_time": 1046.029808998108,
+  "results": [
+    {
+      "test_dir": "H02_Spatial_Heterogeneity",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 115.88133406639099,
+      "stdout": "so increase with voltage. The null sub-hypothesis stated that the correlation between the standard deviation of `Eg_Center` and voltage would be zero or negative. The test passed, meaning there was sufficient evidence to reject this null sub-hypothesis. This result supports the alternative hypothesis that a positive correlation exists, which is consistent with the main hypothesis.\n\n(4) **Your conclusion on whether or not this hypothesis is true or false:** True\n\n(5) **Rationale of the conclusion:** The falsification test failed to disprove the main hypothesis. The test provided corroborative evidence by showing that a secondary indicator of the state of charge (`Eg_Center`) exhibits the same trend of increasing spatial standard deviation with voltage. This observation strengthens the claim that the underlying mechanism is a general increase in electrochemical heterogeneity. Therefore, the hypothesis is concluded to be true based on this test.\nH02 completed in 113.8s | Conclusion: True\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H01_A1g_Voltage_Correlation",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 145.9559211730957,
+      "stdout": "ion across different spatial regions is greater than or equal to zero (\u03bc\u1d63 \u2265 0). The test yielded a p-value of 8.38e-18, which is extremely small. This provides strong statistical evidence to reject the null sub-hypothesis in favor of the alternative, which posits a mean correlation less than zero (\u03bc\u1d63 < 0). This result indicates that the negative correlation is a systematic and spatially consistent effect across the material, which aligns with the conditions required by the main hypothesis.\n\n**(4) Your conclusion on whether or not this hypothesis is true or false**\nTrue\n\n**(5) Rationale of the conclusion**\nThe conclusion is True because the sequential falsification test passed. The experiment failed to falsify the main hypothesis. The observed data provided sufficient evidence to reject the null sub-hypothesis, thereby confirming that the A1g peak redshift is spatially consistent with increasing voltage, a key component of the main hypothesis.\nH01 completed in 143.9s | Conclusion: True\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H03_ID_IG_High_Voltage",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 150.4039821624756,
+      "stdout": "is provides strong statistical support for the alternative hypothesis (h_1: \u03b2_high < \u03b2_low), which posits that the slope of the ID/IG ratio becomes significantly more negative after the voltage surpasses 4.3V. This finding is directly consistent with the main hypothesis, as it confirms a distinct change in behavior at the specified voltage threshold, supporting the claim of an electrochemical activation event.\n\n(4) **Your conclusion on whether or not this hypothesis is true or false**\nTrue\n\n(5) **Rationale of the conclusion**\nThe conclusion is True because the falsification test successfully rejected its null sub-hypothesis. The null sub-hypothesis was constructed to directly challenge the main hypothesis. Its rejection provides affirmative evidence from this test that the ID/IG ratio's rate of change becomes significantly more negative above 4.3V, which corroborates the main hypothesis's claim of a unique activation event at high potentials.\nH03 completed in 148.3s | Conclusion: True\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H06_Edge_Center_Uniformity",
+      "status": "SUCCESS",
+      "conclusion": false,
+      "elapsed_time": 240.86014103889465,
+      "stdout": "ly low p-value provided sufficient statistical evidence (E-value > 12175) to reject the premise of homogeneity. The strong evidence of a different functional response to voltage in the second test directly contradicts and successfully falsifies the main hypothesis, despite the first test failing to do so.\n\n**(4) Your conclusion on whether or not this hypothesis is true or false**\nFalse\n\n**(5) Rationale of the conclusion**\nThe conclusion is False because the sequential testing procedure successfully falsified the main hypothesis. While the first test on Eg peak evolution did not find a significant difference between edge and center pixels, the second, more direct test on the correlation between A1g peak position and applied voltage revealed a highly significant difference (p = 8.99e-10). This result provides strong evidence that the electrochemical response is not homogeneous across the electrode surface, thereby refuting the main hypothesis.\nH06 completed in 239.3s | Conclusion: False\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H07_A1g_Width",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.1835970878601074,
+      "stdout": "H07 FAILED: No module named 'langchain_core.memory'\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H08_Gband_Redshift",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.5047328472137451,
+      "stdout": "H08 FAILED: No module named 'langchain_core.memory'\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H09_Dband_Time_Delay",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.10919189453125,
+      "stdout": "H09 FAILED: No module named 'langchain_core.memory'\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H10_Spatial_Autocorrelation",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.1094002723693848,
+      "stdout": "H10 FAILED: No module named 'langchain_core.memory'\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H11_Voltage_Fade",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.1145081520080566,
+      "stdout": "H11 FAILED: No module named 'langchain_core.memory'\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H12_Capacity_Retention",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.2136421203613281,
+      "stdout": "H12 FAILED: No module named 'langchain_core.memory'\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H13_Oxygen_Release",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.289504051208496,
+      "stdout": "H13 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H14_Temperature_Dependence",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.722574234008789,
+      "stdout": "H14 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H15_Cation_Mixing",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.182361125946045,
+      "stdout": "H15 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H16_CEI_Steady_State",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.242527961730957,
+      "stdout": "H16 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H17_Rate_Capability",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.2140421867370605,
+      "stdout": "H17 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H18_Discharge_Reversibility",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.1698648929595947,
+      "stdout": "H18 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H19_Electrolyte_Decomposition",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.1619999408721924,
+      "stdout": "H19 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H20_Mn_Dissolution",
+      "status": "FAILED",
+      "conclusion": "No result file",
+      "elapsed_time": 1.1531140804290771,
+      "stdout": "H20 FAILED: cannot import name 'create_react_agent' from 'langgraph.prebuilt' (unknown location)\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H04_Eg_Amplitude",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 599.4304192066193,
+      "stdout": ",\" which means this null sub-hypothesis was successfully rejected with very high confidence (test statistics: 5.87e-17). This indicates that a statistically significant majority of the pixels do indeed show a positive correlation between Eg amplitude and voltage. This spatial consistency supports the idea that the observed trend is a fundamental, bulk property of the material's response to charging, as claimed by the main hypothesis.\n\n**(4) Your conclusion on whether or not this hypothesis is true or false**\nTrue\n\n**(5) Rationale of the conclusion**\nThe conclusion is True because the main hypothesis has survived the initial falsification attempt. The \"Spatial Consistency Test\" successfully rejected its null sub-hypothesis, providing strong evidence that the positive correlation between Eg amplitude and voltage is a spatially dominant effect. This aligns with the main hypothesis's claim that this is a fundamental material response to charging.\nH04 completed in 597.5s | Conclusion: True\n",
+      "stderr": ""
+    },
+    {
+      "test_dir": "H05_Spatial_Decoupling",
+      "status": "TIMEOUT",
+      "conclusion": "Timed out",
+      "elapsed_time": 900
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H14",
+  "hypothesis_name": "Temperature_Dependence",
+  "parsed_result": {
+    "main_hypothesis": "The rate of A1g peak shift with voltage follows Arrhenius-type temperature dependence, with activation energy ~0.3 eV.",
+    "falsification_test_result": "The test passed. The experimental evidence was sufficient to reject the null sub-hypothesis, meaning the main hypothesis was not falsified by this test.",
+    "reasoning": "The \"Spatially-Resolved Rate Correlation Test\" was designed to falsify the main hypothesis by checking for its predicted temperature dependence. The test operated on the premise that higher electrochemical activity (measured by the total A1g peak shift, `Delta_A1g`) would lead to higher local temperatures. If the main hypothesis were true, these hotter regions should also exhibit a faster rate of A1g peak shift with voltage (`d(A1g_Center)/dV`).\n\nThe null sub-hypothesis stated that there would be no correlation between the rate of peak shift and the total peak shift. The experiment produced a test statistic of 7.49e-36, which is extremely small, providing very strong evidence against the null sub-hypothesis. Consequently, the null sub-hypothesis was rejected in favor of the alternate sub-hypothesis, which posits a positive correlation. This observed positive correlation is consistent with the main hypothesis.",
+    "conclusion": true,
+    "rationale": "The test was designed to falsify the main hypothesis by finding no correlation between local activity and the rate of peak shift. The result showed a statistically significant positive correlation, which directly supports the alternative sub-hypothesis and is consistent with the main hypothesis's claim of temperature dependence. Because the experimental observation successfully rejected the null sub-hypothesis and aligns with the predictions of the main hypothesis, the hypothesis has not been falsified."
+  },
+  "elapsed_time_seconds": 517.6461942195892,
+  "timestamp": "2026-02-09T01:31:34.477837"
+}

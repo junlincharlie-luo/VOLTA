@@ -1,0 +1,67 @@
+======================================================================
+HYPOTHESIS H18: Irreversible Phase Transformation in Discharge
+======================================================================
+
+--------------------------------------------------
+Voltage Profile Analysis
+--------------------------------------------------
+
+Voltage at start: 3.201 V
+Voltage at end:   4.499 V
+Voltage change:   1.297 V
+
+Detected cycle type: CHARGING (voltage increasing)
+
+--------------------------------------------------
+Discharge Data Availability
+--------------------------------------------------
+
+Time steps with voltage increase (charging): 77
+Time steps with voltage decrease (discharging): 36
+
+Some discharge data may be present.
+
+--------------------------------------------------
+Reversibility Analysis Requirements
+--------------------------------------------------
+
+To test A1g reversibility, we need:
+  1. Initial A1g position (before charge) - AVAILABLE
+  2. A1g position at top of charge - AVAILABLE
+  3. A1g position after full discharge - NOT AVAILABLE
+  4. Comparison: Initial vs Post-discharge - IMPOSSIBLE
+
+Current data:
+  A1g at start (low SOC): 599.96 cm^-1
+  A1g at end (high SOC):  577.94 cm^-1
+  Shift during charge:   -22.02 cm^-1
+
+  A1g after discharge:    ??? (NO DATA)
+  Irreversibility:        CANNOT DETERMINE
+
+--------------------------------------------------
+What Would Be Needed
+--------------------------------------------------
+
+To assess irreversibility:
+  - Complete charge-discharge cycle with Raman
+  - A1g peak position at same voltage during charge and discharge
+  - Comparison of initial and final A1g positions
+  - Hysteresis analysis if any
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H18: NOT SUPPORTED (DATA INSUFFICIENT)
+
+Reason: No discharge data is available in the dataset.
+The experiment captured only the charging portion of the cycle
+(voltage increasing from 3.20V to 4.50V).
+Testing reversibility requires A1g data during discharge.
+
+Missing data:
+  - Discharge cycle Raman data
+  - A1g position after re-lithiation
+  - Full cycle hysteresis data
+  - Post-cycle vs pre-cycle comparison

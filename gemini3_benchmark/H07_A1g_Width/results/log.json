@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H07",
+  "hypothesis_name": "A1g_Width",
+  "parsed_result": {
+    "main_hypothesis": "The A1g peak width (A1g_Sigma) decreases with voltage, indicating peak sharpening as lithium extraction creates a more uniform local bonding environment and reduces the distribution of M-O bond lengths.",
+    "falsification_test_result": "The first falsification test, \"Spatial Consistency of A1g Peak Sharpening,\" passed. The test provided sufficient evidence to reject its corresponding null sub-hypothesis.",
+    "reasoning": "The purpose of this test was to determine if the negative correlation between the A1g peak width and voltage is a consistent, material-wide phenomenon. The test evaluated the distribution of correlation coefficients calculated for each individual pixel over time. The null sub-hypothesis proposed that the mean of this distribution would be zero or positive, implying no consistent local negative correlation. The test result, with a very high e-value (3.04e+33), strongly rejected this null sub-hypothesis. This indicates that the observed negative correlation is not an artifact or driven by a few outlier regions but is a spatially consistent effect across the material.",
+    "conclusion": true,
+    "rationale": "The main hypothesis has survived the first round of falsification testing. The experimental evidence supports a key implication of the hypothesis\u2014that the physical mechanism causing peak sharpening is spatially uniform. By rejecting the null sub-hypothesis, the test provides evidence consistent with the main hypothesis."
+  },
+  "elapsed_time_seconds": 655.8511619567871,
+  "timestamp": "2026-02-09T01:14:23.182633"
+}

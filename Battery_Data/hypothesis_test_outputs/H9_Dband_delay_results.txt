@@ -1,0 +1,55 @@
+======================================================================
+HYPOTHESIS H9: D-band Amplitude Time-Delay Response
+======================================================================
+
+Dataset loaded: 102600 rows
+Time interval: ~15 minutes between measurements
+Time steps: 114
+
+--------------------------------------------------
+Rate of Change Analysis
+--------------------------------------------------
+Mean voltage change rate: 0.0115 V/step
+Mean D_Amp change rate: 0.0028 /step
+
+--------------------------------------------------
+Cross-Correlation Analysis
+--------------------------------------------------
+Zero-lag correlation: r = -0.6610
+Maximum correlation: r = -0.7498 at lag = 6 steps
+  (Positive lag = D_Amp lags behind Voltage)
+
+Correlations at different lags:
+  Lag  -5 steps: r = -0.5872
+  Lag  -3 steps: r = -0.6208
+  Lag  -1 steps: r = -0.6429
+  Lag  +0 steps: r = -0.6610
+  Lag  +1 steps: r = -0.6912
+  Lag  +3 steps: r = -0.7292
+  Lag  +5 steps: r = -0.7455
+  Lag +10 steps: r = -0.7345
+
+--------------------------------------------------
+Lagged Correlation Test
+--------------------------------------------------
+Correlation D_Amp(t) vs Voltage(t):   r = -0.6729, p = 3.27e-16
+Correlation D_Amp(t) vs Voltage(t-1): r = -0.6429, p = 1.63e-14
+Correlation D_Amp(t) vs Voltage(t-2): r = -0.6352, p = 5.36e-14
+
+Lag-1 improvement: -0.0300
+
+--------------------------------------------------
+Derivative Cross-Correlation
+--------------------------------------------------
+dD_Amp/dt vs dV/dt (lag 0): r = -0.2282
+dD_Amp/dt vs dV/dt (lag 1): r = -0.1304
+dD_Amp/dt vs dV/dt (lag 2): r = -0.0724
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H9: SUPPORTED
+D_Amp shows delayed response: max correlation at lag = 6 steps (90 min).
+Zero-lag correlation: -0.6610
+Max correlation: -0.7498 at lag 6

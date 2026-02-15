@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H01",
+  "hypothesis_name": "A1g_Voltage_Correlation",
+  "parsed_result": {
+    "main_hypothesis": "The main hypothesis is that the A1g peak center position (cm\u207b\u00b9) decreases (redshifts) with increasing voltage during charging. This is believed to reflect delithiation-induced M-O bond weakening in Li-rich layered oxides, caused by oxygen redox participation and structural distortion. The expected outcome is a strong negative correlation (r \u2248 -0.88) between the A1g peak and voltage.",
+    "falsification_test_result": "The falsification test named \"Spatial Consistency of A1g Redshift\" resulted in a PASS.",
+    "reasoning": "The experiment was designed to falsify the main hypothesis by testing if the negative correlation between the A1g peak center and voltage is spatially consistent across the material. The null sub-hypothesis stated that the mean correlation across different spatial regions is greater than or equal to zero (\u03bc\u1d63 \u2265 0). The test yielded a p-value of 8.38e-18, which is extremely small. This provides strong statistical evidence to reject the null sub-hypothesis in favor of the alternative, which posits a mean correlation less than zero (\u03bc\u1d63 < 0). This result indicates that the negative correlation is a systematic and spatially consistent effect across the material, which aligns with the conditions required by the main hypothesis.",
+    "conclusion": true,
+    "rationale": "The conclusion is True because the sequential falsification test passed. The experiment failed to falsify the main hypothesis. The observed data provided sufficient evidence to reject the null sub-hypothesis, thereby confirming that the A1g peak redshift is spatially consistent with increasing voltage, a key component of the main hypothesis."
+  },
+  "elapsed_time_seconds": 143.93630695343018,
+  "timestamp": "2026-02-09T00:39:35.025912"
+}

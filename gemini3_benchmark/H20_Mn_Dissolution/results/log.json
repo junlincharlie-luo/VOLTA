@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H20",
+  "hypothesis_name": "Mn_Dissolution",
+  "parsed_result": {
+    "main_hypothesis": "The main hypothesis is that manganese (Mn) dissolution from the cathode into the electrolyte correlates with changes in the ID/IG ratio, because the dissolved Mn acts as a catalyst for electrolyte decomposition.",
+    "falsification_test_result": "PASS",
+    "reasoning": "The experiment, named the \"Voltage-Gated Electrolyte Decomposition Rate Test,\" was designed to falsify the hypothesis by checking if the rate of electrolyte decomposition (measured by the rate of change of the ID/IG ratio) is higher at high voltages (> 4.2V) compared to low voltages (<= 4.2V). This is based on the premise that high voltage accelerates Mn dissolution.\n\nThe null sub-hypothesis stated that the rate of change of the ID/IG ratio at high voltage is less than or equal to the rate at low voltage. The test yielded a very low p-value (test statistics = 2.13e-10), which is significantly below the typical threshold of 0.05. This result provides strong statistical evidence to reject the null sub-hypothesis.\n\nBy rejecting the null, we accept the alternative sub-hypothesis: the rate of electrolyte decomposition is significantly greater in the high-voltage regime. This observation is consistent with the main hypothesis, as it supports the idea that a process accelerated by high voltage (like Mn dissolution) is responsible for increased electrolyte decomposition.",
+    "conclusion": true,
+    "rationale": "The conclusion is True because the experimental test failed to falsify the main hypothesis. The test results directly contradicted the null sub-hypothesis by showing that the rate of ID/IG ratio change is significantly higher at high voltages. This outcome provides supporting evidence for the proposed mechanism and, according to the rules of the sequential falsification procedure, allows the main hypothesis to be provisionally accepted as true pending further testing."
+  },
+  "elapsed_time_seconds": 121.12928199768066,
+  "timestamp": "2026-02-09T01:37:39.462338"
+}

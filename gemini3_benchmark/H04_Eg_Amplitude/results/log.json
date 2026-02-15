@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H04",
+  "hypothesis_name": "Eg_Amplitude",
+  "parsed_result": {
+    "main_hypothesis": "The main hypothesis is that the Eg peak amplitude, which is related to M-O bending in the material's layered structure, increases during the charging process. This increase is thought to be a result of enhanced Raman scattering from M-O bending modes as lithium extraction modifies the material's electronic structure.",
+    "falsification_test_result": "The first falsification test, the \"Spatial Consistency Test of Eg Amplitude Trend,\" resulted in a PASS. The test found sufficient evidence to reject the null sub-hypothesis, with a reported combined e-value of 65,260,583.68.",
+    "reasoning": "The purpose of this test was to verify that the hypothesized increase in Eg amplitude with charging voltage is a spatially consistent phenomenon across the material, rather than an artifact caused by a few outlier regions. The test analyzed 900 individual pixels to see if a majority exhibited the expected positive correlation. The null sub-hypothesis stated that 50% or more of the pixels would show a non-positive correlation. The test result was a \"PASS,\" which means this null sub-hypothesis was successfully rejected with very high confidence (test statistics: 5.87e-17). This indicates that a statistically significant majority of the pixels do indeed show a positive correlation between Eg amplitude and voltage. This spatial consistency supports the idea that the observed trend is a fundamental, bulk property of the material's response to charging, as claimed by the main hypothesis.",
+    "conclusion": true,
+    "rationale": "The conclusion is True because the main hypothesis has survived the initial falsification attempt. The \"Spatial Consistency Test\" successfully rejected its null sub-hypothesis, providing strong evidence that the positive correlation between Eg amplitude and voltage is a spatially dominant effect. This aligns with the main hypothesis's claim that this is a fundamental material response to charging."
+  },
+  "elapsed_time_seconds": 597.4782540798187,
+  "timestamp": "2026-02-09T00:49:04.338516"
+}

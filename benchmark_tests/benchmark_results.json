@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-02-08T23:53:13.352996",
+  "total_time": 770.9174029827118,
+  "results": [
+    {
+      "test_dir": "H04_Eg_Amplitude",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 78.46668982505798,
+      "stdout": "e-92). This means the data strongly supports the alternative hypothesis that there is a positive correlation between Eg peak amplitude and charging voltage. Since the main hypothesis predicted exactly this positive correlation due to enhanced M-O bending Raman scattering during lithium extraction, and the experimental evidence confirms this prediction, the main hypothesis is supported by the observed data and should be considered True based on this falsification test procedure.\nConclusion: True\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H04_Eg_Amplitude",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H02_Spatial_Heterogeneity",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 89.13571190834045,
+      "stdout": "pothesis that spatial heterogeneity increases with voltage. However, the results showed overwhelming statistical evidence (p \u2248 2.93e-20) that the high voltage stratum does indeed have significantly greater spatial heterogeneity than the low voltage stratum. Since the falsification attempt failed with such strong contradictory evidence, and no other tests were performed that successfully falsified the hypothesis, the main hypothesis remains supported and is concluded to be True.\nConclusion: True\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H02_Spatial_Heterogeneity",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H01_A1g_Voltage_Correlation",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 93.16479420661926,
+      "stdout": "which is exactly what the hypothesis predicted. The test statistic of 1.1e-177 provides overwhelming evidence against the null hypothesis of no redshift, thereby supporting the alternate hypothesis that redshift occurs. Since the falsification attempt was unsuccessful (the test PASSED), the main hypothesis remains supported by the experimental evidence.\n\nConclusion: True\nElapsed time: 90.7 seconds\nResults saved to: /Users/carrot/Desktop/POPPER/benchmark_tests/H01_A1g_Voltage_Correlation/results\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H01_A1g_Voltage_Correlation",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H03_ID_IG_High_Voltage",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 135.89215397834778,
+      "stdout": "ion test failed to falsify the main hypothesis. The statistical evidence strongly supports the predicted negative correlation between voltage and ID/IG ratio. With a p-value of 1e-300 and an E-value of 5e+149, there is overwhelming evidence that higher voltages are associated with lower ID/IG ratios, which aligns with the hypothesis that electrochemical activation at high potentials enhances graphitic ordering or preferential G-band enhancement in the carbon conductive network.\nConclusion: True\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H03_ID_IG_High_Voltage",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H07_A1g_Width",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 81.69604897499084,
+      "stdout": "to reject the main hypothesis if no significant negative correlation (or a weak correlation \u2265 -0.5) was found. Since the test resulted in a \"PASS\" with sufficient evidence and an extremely small p-value (6.26e-95), the null hypothesis was rejected. This means the data supports the alternate hypothesis, which is consistent with the main scientific hypothesis. The test failed to falsify the hypothesis, therefore supporting its validity based on the observed experimental evidence.\nConclusion: True\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H07_A1g_Width",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H06_Edge_Center_Uniformity",
+      "status": "SUCCESS",
+      "conclusion": false,
+      "elapsed_time": 100.86314296722412,
+      "stdout": "significant difference between edge and center pixels. However, the falsification test detected a highly significant correlation (p = 5.28e-61) between radial distance from center and A1g peak shift values. This correlation directly contradicts the hypothesis of homogeneous behavior, providing strong evidence that electrochemical accessibility varies systematically across the mapped region. Therefore, the hypothesis must be rejected as false based on the experimental evidence.\nConclusion: False\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H06_Edge_Center_Uniformity",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H08_Gband_Redshift",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 106.99249196052551,
+      "stdout": "ficant negative correlation between G-band center position and voltage. The sequential testing procedure passed with sufficient evidence, meaning the data supports the predicted charge transfer mechanism. Since the falsification attempt was unsuccessful - the null hypothesis of no negative correlation was decisively rejected - the main hypothesis regarding G-band redshift with increasing voltage due to charge transfer interactions remains supported by the experimental evidence.\nConclusion: True\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H08_Gband_Redshift",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H05_Spatial_Decoupling",
+      "status": "SUCCESS",
+      "conclusion": true,
+      "elapsed_time": 223.97631311416626,
+      "stdout": "ficance deviated from random expectation. Since both tests failed to provide evidence against the hypothesis, and the combined statistical evidence (E-value = 256.13) strongly supports it, the conclusion is that the hypothesis is True. The A1g peak position and ID/IG ratio do indeed show weak spatial correlation with inconsistent significance patterns, supporting the claim that cathode delithiation and carbon network properties evolve independently across the electrode surface.\nConclusion: True\n",
+      "stderr": "",
+      "returncode": 0
+    },
+    {
+      "test_dir": "H05_Spatial_Decoupling",
+      "status": "ERROR",
+      "error": "'bool' object is not subscriptable"
+    },
+    {
+      "test_dir": "H09_Dband_Time_Delay",
+      "status": "TIMEOUT",
+      "conclusion": "Test timed out after 10 minutes",
+      "elapsed_time": 600,
+      "error": "Timeout"
+    },
+    {
+      "test_dir": "H10_Spatial_Autocorrelation",
+      "status": "TIMEOUT",
+      "conclusion": "Test timed out after 10 minutes",
+      "elapsed_time": 600,
+      "error": "Timeout"
+    }
+  ]
+}

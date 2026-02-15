@@ -1,0 +1,57 @@
+======================================================================
+HYPOTHESIS H10: Spatial Autocorrelation of A1g
+======================================================================
+
+Dataset loaded: 102600 rows
+Grid: 30x30 = 900 pixels
+Time steps: 114
+
+--------------------------------------------------
+Correlation by Pixel Distance
+--------------------------------------------------
+
+Mean |A1g difference| by pixel distance:
+  Distance (0.0, 1.5]: Mean diff = 21.73 cm^-1, N = 17110
+  Distance (1.5, 3.0]: Mean diff = 25.04 cm^-1, N = 40580
+  Distance (3.0, 5.0]: Mean diff = 26.27 cm^-1, N = 97050
+  Distance (5.0, 10.0]: Mean diff = 26.67 cm^-1, N = 366160
+  Distance (10.0, 15.0]: Mean diff = 27.38 cm^-1, N = 457530
+  Distance (15.0, 20.0]: Mean diff = 28.54 cm^-1, N = 447120
+  Distance (20.0, 30.0]: Mean diff = 29.65 cm^-1, N = 547820
+  Distance (30.0, 50.0]: Mean diff = 30.20 cm^-1, N = 49380
+
+Correlation (distance vs |diff|): r = 0.0544, p = 0.00e+00
+
+--------------------------------------------------
+Moran's I Spatial Autocorrelation
+--------------------------------------------------
+  t=  0 (V=3.20V): Moran's I = 0.1771 (Expected: -0.0011)
+  t= 10 (V=3.94V): Moran's I = 0.1345 (Expected: -0.0011)
+  t= 20 (V=4.33V): Moran's I = 0.2625 (Expected: -0.0011)
+  t= 30 (V=4.53V): Moran's I = 0.3773 (Expected: -0.0011)
+  t= 40 (V=4.60V): Moran's I = 0.2849 (Expected: -0.0011)
+  t= 50 (V=4.18V): Moran's I = 0.1843 (Expected: -0.0011)
+  t= 60 (V=3.83V): Moran's I = 0.1464 (Expected: -0.0011)
+  t= 70 (V=3.59V): Moran's I = 0.1572 (Expected: -0.0011)
+  t= 80 (V=3.06V): Moran's I = 0.1270 (Expected: -0.0011)
+  t= 90 (V=3.79V): Moran's I = 0.1270 (Expected: -0.0011)
+  t=100 (V=4.03V): Moran's I = 0.1287 (Expected: -0.0011)
+  t=110 (V=4.39V): Moran's I = 0.2165 (Expected: -0.0011)
+
+Mean Moran's I: 0.1936
+(Positive values indicate positive spatial autocorrelation)
+
+--------------------------------------------------
+Adjacent vs Non-Adjacent Pixel Comparison
+--------------------------------------------------
+Adjacent pixels mean |diff|:     12.44 cm^-1 (N=3422)
+Non-adjacent pixels mean |diff|: 14.01 cm^-1
+T-test: t = -4.1431, p = 3.47e-05
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H10: SUPPORTED
+Positive spatial autocorrelation (Moran's I = 0.194), adjacent pixels are more similar.
+Adjacent vs distant difference: 1.57 cm^-1

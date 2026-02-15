@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H10",
+  "hypothesis_name": "Spatial_Autocorrelation",
+  "parsed_result": {
+    "main_hypothesis": "The A1g_Center values of spatially adjacent pixels are more correlated than distant pixels, indicating local electrochemical domains larger than 1 \u03bcm.",
+    "falsification_test_result": "The first falsification test, the \"Moran's I Test for Spatial Autocorrelation of Time-Averaged A1g_Center,\" passed, providing sufficient evidence to reject its null sub-hypothesis.",
+    "reasoning": "The purpose of this test was to determine if the time-averaged A1g_Center values are spatially clustered. The null sub-hypothesis proposed that these values are randomly distributed with no spatial correlation. The test result yielded a combined e-value of 15.81, which is considered sufficient evidence to reject the null sub-hypothesis. This outcome supports the alternate sub-hypothesis, which states that the A1g_Center values exhibit significant positive spatial autocorrelation. In other words, the test found that pixels with similar values are indeed spatially clustered together.",
+    "conclusion": true,
+    "rationale": "The hypothesis has not been falsified by this test. The successful rejection of the null sub-hypothesis (no spatial autocorrelation) provides direct support for the main hypothesis. The evidence indicates that the A1g_Center values are not randomly distributed but are spatially correlated, which is the core claim of the main hypothesis."
+  },
+  "elapsed_time_seconds": 120.84064984321594,
+  "timestamp": "2026-02-09T11:09:07.793826"
+}

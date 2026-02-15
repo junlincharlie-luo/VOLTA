@@ -1,0 +1,85 @@
+======================================================================
+HYPOTHESIS H19: Electrolyte Decomposition Raman Signatures
+======================================================================
+
+--------------------------------------------------
+Fitted Peaks in Dataset
+--------------------------------------------------
+
+Peaks included in dataset:
+  1. Eg peak   (~475 cm^-1)  - Cathode M-O bending
+  2. A1g peak  (~590 cm^-1)  - Cathode M-O stretching
+  3. D-band    (~1350 cm^-1) - Disordered carbon
+  4. G-band    (~1585 cm^-1) - Graphitic carbon
+
+--------------------------------------------------
+Expected Electrolyte Decomposition Raman Peaks
+--------------------------------------------------
+
+Common electrolyte decomposition products and their Raman signatures:
+
+  Li2CO3 (Lithium carbonate):
+    - ~1090 cm^-1 (symmetric CO3 stretch) - NOT FITTED
+    - ~155 cm^-1 (lattice mode) - NOT FITTED
+
+  LiF (Lithium fluoride):
+    - ~280 cm^-1 - NOT FITTED
+    - Weak Raman scatterer
+
+  Li2O (Lithium oxide):
+    - ~525 cm^-1 - NOT FITTED (overlaps with Eg region)
+
+  Organic carbonates (EC, DMC decomposition):
+    - ~900 cm^-1 (C-O stretch) - NOT FITTED
+    - ~1750 cm^-1 (C=O stretch) - NOT FITTED
+
+  LixPFy species:
+    - ~740 cm^-1 (P-F stretch) - NOT FITTED
+
+--------------------------------------------------
+Spectral Coverage Analysis
+--------------------------------------------------
+
+Fitted peak center ranges in dataset:
+  Eg:     400 - 550 cm^-1
+  A1g:    550 - 650 cm^-1
+  D-band: 1250 - 1450 cm^-1
+  G-band: 1522 - 1650 cm^-1
+
+Spectral regions NOT covered:
+  - 100-400 cm^-1 (LiF, Li2CO3 lattice modes)
+  - 700-1000 cm^-1 (P-F, C-O stretches)
+  - 1050-1150 cm^-1 (Li2CO3 symmetric stretch)
+  - 1700-1800 cm^-1 (C=O stretches)
+
+--------------------------------------------------
+Data Availability Summary
+--------------------------------------------------
+
+Required for H19 testing:
+  1. Full Raman spectra (raw data) - NOT AVAILABLE
+  2. Peak fitting for Li2CO3 (~1090 cm^-1) - NOT DONE
+  3. Peak fitting for LiF (~280 cm^-1) - NOT DONE
+  4. Peak fitting for organic species - NOT DONE
+
+Provided in dataset:
+  - Only 4 pre-selected peak regions
+  - No raw spectra for additional analysis
+  - No electrolyte-specific peak parameters
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H19: NOT SUPPORTED (DATA INSUFFICIENT)
+
+Reason: The dataset only contains 4 fitted peak regions
+(Eg, A1g, D-band, G-band). Electrolyte decomposition products
+like Li2CO3, LiF, and organic carbonates have Raman signatures
+in spectral regions that were not fitted or provided.
+
+Missing data:
+  - Raw Raman spectra
+  - Peak fitting for electrolyte decomposition products
+  - Spectral coverage below 400 cm^-1 and 700-1100 cm^-1
+  - Li2CO3, LiF, LixPFy specific peak analysis

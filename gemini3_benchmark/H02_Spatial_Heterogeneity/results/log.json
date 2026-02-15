@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H02",
+  "hypothesis_name": "Spatial_Heterogeneity",
+  "parsed_result": {
+    "main_hypothesis": "The standard deviation of A1g_Center across the 900 spatial pixels increases as voltage increases, indicating growing electrochemical heterogeneity during delithiation.",
+    "falsification_test_result": "PASS",
+    "reasoning": "The main hypothesis attributes the observed increase in the standard deviation of the `A1g_Center` peak to growing electrochemical heterogeneity. To verify this, a corroborative test was performed using another spectral feature sensitive to the state of charge, the `Eg_Center` peak. The rationale was that if the underlying cause is indeed growing heterogeneity, the spatial standard deviation of `Eg_Center` should also increase with voltage. The null sub-hypothesis stated that the correlation between the standard deviation of `Eg_Center` and voltage would be zero or negative. The test passed, meaning there was sufficient evidence to reject this null sub-hypothesis. This result supports the alternative hypothesis that a positive correlation exists, which is consistent with the main hypothesis.",
+    "conclusion": true,
+    "rationale": "The falsification test failed to disprove the main hypothesis. The test provided corroborative evidence by showing that a secondary indicator of the state of charge (`Eg_Center`) exhibits the same trend of increasing spatial standard deviation with voltage. This observation strengthens the claim that the underlying mechanism is a general increase in electrochemical heterogeneity. Therefore, the hypothesis is concluded to be true based on this test."
+  },
+  "elapsed_time_seconds": 113.82877278327942,
+  "timestamp": "2026-02-09T00:39:04.921876"
+}

@@ -1,0 +1,87 @@
+======================================================================
+HYPOTHESIS H20: Mn Dissolution Correlation with ID/IG
+======================================================================
+
+--------------------------------------------------
+Manganese Data Search
+--------------------------------------------------
+
+Dataset columns: ['pixel_id', 'time_idx', 'Eg_Center', 'Eg_Amp', 'Eg_Sigma', 'A1g_Center', 'A1g_Amp', 'A1g_Sigma', 'D_Center', 'D_Amp', 'D_Sigma', 'G_Center', 'G_Amp', 'G_Sigma', 'ID_IG_Ratio', 'X', 'Y', 'Time_Min', 'Voltage']
+
+Mn-related columns: NONE
+
+--------------------------------------------------
+Methods to Measure Mn Dissolution
+--------------------------------------------------
+
+Standard methods for Mn dissolution measurement:
+  1. ICP-OES (Inductively Coupled Plasma Optical Emission)
+     - Measures Mn concentration in electrolyte
+     - STATUS: NOT AVAILABLE
+
+  2. ICP-MS (Mass Spectrometry)
+     - High sensitivity Mn quantification
+     - STATUS: NOT AVAILABLE
+
+  3. AAS (Atomic Absorption Spectroscopy)
+     - Alternative Mn quantification method
+     - STATUS: NOT AVAILABLE
+
+  4. Post-mortem electrode analysis
+     - XPS, EDS for surface Mn content
+     - STATUS: NOT AVAILABLE
+
+--------------------------------------------------
+ID/IG Ratio Data (Available)
+--------------------------------------------------
+
+ID/IG ratio range: 0.7963 to 1.0127
+ID/IG change over time: -0.0114
+
+ID/IG vs Voltage correlation: r = -0.6962, p = 8.10e-18
+
+Note: ID/IG changes are observed, but cannot be linked
+to Mn dissolution without Mn concentration data.
+
+--------------------------------------------------
+Hypothesis Testing Requirements
+--------------------------------------------------
+
+To test Mn dissolution ↔ ID/IG correlation:
+  1. Mn concentration vs time - NOT AVAILABLE
+  2. ID/IG ratio vs time - AVAILABLE
+  3. Correlation analysis - IMPOSSIBLE (missing Mn data)
+  4. Causation mechanism verification - IMPOSSIBLE
+
+Alternative approaches (also not available):
+  - Mn content in cycled electrolyte samples
+  - Electrode Mn content before/after cycling
+  - Operando XAS for Mn oxidation state
+
+--------------------------------------------------
+Material Context
+--------------------------------------------------
+
+Cathode material: Li1.13Ni0.3Mn0.57O2 (Li-rich NMC)
+  - High Mn content (57% of transition metals)
+  - Known to have Mn dissolution issues at high voltage
+  - Mn3+ → Mn2+ disproportionation can occur
+
+But: No direct Mn measurements in this Raman dataset.
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H20: NOT SUPPORTED (DATA INSUFFICIENT)
+
+Reason: No manganese dissolution data is available.
+This Raman dataset provides ID/IG ratio evolution, but
+correlating with Mn dissolution requires ICP-MS/OES or
+similar elemental analysis of the electrolyte.
+
+Missing data:
+  - Mn concentration in electrolyte (ICP-OES/MS)
+  - Time-resolved Mn dissolution measurements
+  - Electrode Mn content analysis
+  - Any elemental quantification data

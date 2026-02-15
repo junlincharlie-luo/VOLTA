@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H09",
+  "hypothesis_name": "Dband_Time_Delay",
+  "parsed_result": {
+    "main_hypothesis": "Changes in D-band amplitude (D_Amp) lag behind voltage changes by at least one measurement interval (15 min), suggesting SEI formation is a kinetically slow process.",
+    "falsification_test_result": "PASS. The main hypothesis was not falsified by the series of tests.",
+    "reasoning": "The sequential procedure consisted of two falsification tests designed to challenge the main hypothesis from different perspectives.\n\n*   **Test 1 (Pixel-wise Instantaneous Response Test):** This test compared the strength of the instantaneous (lag=0) versus the lagged (lag=1, 15 min) correlation between voltage and D-band amplitude changes across all pixels. The resulting test statistic of 0.999 failed to reject the null sub-hypothesis. This indicates that there was no significant evidence that the lagged response was stronger than the instantaneous one, a result that individually contradicts the main hypothesis.\n\n*   **Test 2 (Asymmetric Granger Causality Test):** This test evaluated the directional, predictive relationship between voltage and D-band amplitude. It tested whether past voltage changes were more predictive of current D-band amplitude changes than the reverse. The test yielded an extremely small statistic (1.67e-28), providing very strong evidence to reject its null sub-hypothesis. This result strongly supports the main hypothesis by demonstrating a clear, directional influence where voltage changes precede D-band amplitude changes.\n\nThe final sequential testing result of \"PASS\" indicates that the combined evidence, particularly the overwhelmingly strong statistical support from the second test, was sufficient to overcome the contradictory findings of the first test and successfully withstand the falsification attempts.",
+    "conclusion": true,
+    "rationale": "The conclusion is True because the main hypothesis survived the sequential falsification procedure. Although the initial test on instantaneous vs. lagged correlation was inconclusive, the subsequent Asymmetric Granger Causality test provided exceptionally strong statistical evidence (p-value \u2248 1.67e-28) for the proposed lagged relationship. The cumulative evidence was deemed sufficient to pass the hypothesis."
+  },
+  "elapsed_time_seconds": 327.4501118659973,
+  "timestamp": "2026-02-09T11:12:34.403238"
+}

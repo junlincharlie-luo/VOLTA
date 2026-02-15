@@ -1,0 +1,60 @@
+======================================================================
+HYPOTHESIS H17: Rate Capability at Different C-rates
+======================================================================
+
+--------------------------------------------------
+C-rate Information Search
+--------------------------------------------------
+
+Dataset columns: ['pixel_id', 'time_idx', 'Eg_Center', 'Eg_Amp', 'Eg_Sigma', 'A1g_Center', 'A1g_Amp', 'A1g_Sigma', 'D_Center', 'D_Amp', 'D_Sigma', 'G_Center', 'G_Amp', 'G_Sigma', 'ID_IG_Ratio', 'X', 'Y', 'Time_Min', 'Voltage']
+
+C-rate related columns: ['Eg_Amp', 'Eg_Sigma', 'A1g_Center', 'A1g_Amp', 'A1g_Sigma', 'D_Amp', 'D_Sigma', 'G_Amp', 'G_Sigma', 'ID_IG_Ratio', 'Voltage']
+
+--------------------------------------------------
+C-rate Estimation from Voltage Profile
+--------------------------------------------------
+
+Charging time: 28.2 hours
+Voltage range: 1.62 V
+Rough C-rate estimate: ~0.04C
+(Based on total charging time, actual may vary)
+
+--------------------------------------------------
+Multiple C-rate Data Check
+--------------------------------------------------
+
+To test rate capability, we need:
+  1. Raman data at C/10 rate - NOT AVAILABLE
+  2. Raman data at C/2 rate - NOT AVAILABLE
+  3. Raman data at 1C rate - NOT AVAILABLE
+  4. Raman data at 2C rate - NOT AVAILABLE
+  5. Raman data at 5C rate - NOT AVAILABLE
+
+Current dataset:
+  - Single C-rate only (estimated ~0.04C)
+  - No rate comparison possible
+  - Cannot assess rate-dependent A1g shift behavior
+
+--------------------------------------------------
+A1g Shift at Current Rate
+--------------------------------------------------
+
+A1g shift at current rate: -22.02 cm^-1
+This is a single data point - cannot compare to other rates.
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H17: NOT SUPPORTED (DATA INSUFFICIENT)
+
+Reason: Only single C-rate data is available.
+Testing rate capability requires Raman measurements at
+multiple charging rates (e.g., C/10, C/2, 1C, 2C, 5C)
+to compare A1g shift completeness.
+
+Missing data:
+  - Raman data at multiple C-rates
+  - Current measurements during experiment
+  - Rate-dependent A1g shift comparison
+  - Kinetic analysis at different rates

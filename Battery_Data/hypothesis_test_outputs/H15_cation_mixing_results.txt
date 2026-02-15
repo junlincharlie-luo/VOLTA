@@ -1,0 +1,58 @@
+======================================================================
+HYPOTHESIS H15: Cation Mixing vs Cycle Number
+======================================================================
+
+--------------------------------------------------
+Cycle Number Analysis
+--------------------------------------------------
+
+Time steps in dataset: 114
+Time range: 0 to 1695 minutes (28.2 hours)
+
+Voltage range: 3.057V to 4.679V
+Voltage trajectory: Predominantly increasing
+
+Estimated complete cycles: 1.0
+(Testing cation mixing vs cycle number requires many cycles)
+
+--------------------------------------------------
+Eg/A1g Ratio Analysis (Current Data)
+--------------------------------------------------
+
+Eg/A1g ratio range (single cycle): 45592498832736176892876423168.000 to 23195267807126422756926367087984640.000
+Mean Eg/A1g ratio: 1127391957132655703578276452630528.000
+
+Note: We can track Eg/A1g within a single cycle,
+but CANNOT assess cycle-to-cycle evolution of cation mixing.
+
+--------------------------------------------------
+Requirements for H15 Testing
+--------------------------------------------------
+
+To test cation mixing vs cycle number:
+  1. Raman data from multiple complete cycles - NOT AVAILABLE
+  2. Cycle number tracking - NOT AVAILABLE
+  3. Eg/A1g ratio at same SOC across cycles - NOT AVAILABLE
+  4. Ideally 50-100+ cycles for trend analysis - NOT AVAILABLE
+
+Current dataset provides:
+  - 1.0 cycle(s) only
+  - Eg/A1g ratio evolution WITHIN single cycle
+  - No cycle-indexed data
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H15: NOT SUPPORTED (DATA INSUFFICIENT)
+
+Reason: Only single cycle data is available.
+Testing cation mixing evolution requires tracking the
+Eg/A1g ratio (or other cation mixing indicators) across
+multiple complete charge-discharge cycles.
+
+Missing data:
+  - Multi-cycle Raman spectroscopy data
+  - Cycle number indexing
+  - Eg/A1g ratio at consistent SOC points per cycle
+  - Long-term cycling Raman data (50-100+ cycles)

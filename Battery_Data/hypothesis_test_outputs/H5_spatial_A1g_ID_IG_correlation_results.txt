@@ -1,0 +1,66 @@
+======================================================================
+HYPOTHESIS H5: Cathode-Carbon Spatial Decoupling
+======================================================================
+
+Dataset loaded: 102600 rows
+Unique pixels: 900
+Time steps: 114
+
+--------------------------------------------------
+METHOD 1: Spatial Correlation at Each Time Step
+--------------------------------------------------
+
+Summary of spatial correlations across 114 time steps:
+  Mean Pearson r: 0.0125
+  Std Pearson r:  0.0543
+  Min r: -0.0747
+  Max r: 0.1924
+
+  Time steps with significant positive correlation: 16
+  Time steps with significant negative correlation: 4
+  Time steps with no significant correlation: 94
+
+--------------------------------------------------
+METHOD 2: Per-Pixel A1g Shift vs ID/IG Change
+--------------------------------------------------
+
+A1g shift statistics:
+  Mean: -22.02 cm^-1
+  Std:  35.29 cm^-1
+  Range: -100.00 to 100.00
+
+ID/IG change statistics:
+  Mean: -0.0114
+  Std:  0.2363
+
+Correlation (A1g_shift vs ID/IG_change):
+  Pearson:  r = -0.0171, p = 6.08e-01
+  Spearman: rho = -0.0116, p = 7.29e-01
+
+--------------------------------------------------
+METHOD 3: Overall Correlation (All Data)
+--------------------------------------------------
+Pearson (all data):  r = nan, p = nan
+Spearman (all data): rho = nan, p = nan
+
+--------------------------------------------------
+METHOD 4: Correlation at Different Voltage Levels
+--------------------------------------------------
+  (3.0, 3.5]: r = -0.0250, p = 1.77e-02, n = 9000
+  (3.5, 4.0]: r = nan, p = nan, n = 42300
+  (4.0, 4.3]: r = 0.0025, p = 7.23e-01, n = 20700
+  (4.3, 4.5]: r = 0.0262, p = 1.66e-03, n = 14400
+  (4.5, 5.0]: r = nan, p = nan, n = 16200
+
+--------------------------------------------------
+Does Correlation Strength Change with Voltage?
+--------------------------------------------------
+Correlation between |r| and Voltage: r = nan, p = nan
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H5: SUPPORTED
+Weak/no spatial correlation (mean |r|=0.012), confirming decoupled behavior.
+Time steps with no significant correlation: 94/114 (82.5%)

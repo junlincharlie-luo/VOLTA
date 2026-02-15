@@ -69,16 +69,20 @@ class Popper:
             raise ValueError(f"Unknown loader_type: {loader_type}")
 
 
-    def configure(self, 
+    def configure(self,
                  alpha: float = 0.1,
                  aggregate_test: str = 'E-value',
                  max_num_of_tests: int = 5,
                  max_retry: int = 5,
                  time_limit: int = 2,
                  relevance_checker: bool = True,
-                 use_react_agent: bool = True):
+                 use_react_agent: bool = True,
+                 use_reference_agent: bool = False,
+                 kg_path: str = None,
+                 use_hitl: bool = False,
+                 hitl_callback = None):
         """Configure the sequential falsification test parameters.
-        
+
         Args:
             alpha (float): Significance level
             aggregate_test (str): Test aggregation method
@@ -87,10 +91,17 @@ class Popper:
             time_limit (int): Time limit in hours
             relevance_checker (bool): Whether to use relevance checker
             use_react_agent (bool): Whether to use ReAct agent
+            use_reference_agent (bool): Whether to use Reference Agent for prior knowledge
+            kg_path (str): Path to knowledge graph JSON file
+            use_hitl (bool): Whether to enable human-in-the-loop checkpoints
+            hitl_callback: Callback function for HITL decisions
         """
         if self.data_loader is None:
             raise ValueError("Please register data first using register_data()")
-            
+
+        self.use_reference_agent = use_reference_agent
+        self.use_hitl = use_hitl
+
         self.agent = SequentialFalsificationTest(llm=self.llm, is_local=self.is_local, port=self.port, api_key=self.api_key)
         self.agent.configure(
             data=self.data_loader,
@@ -101,6 +112,10 @@ class Popper:
             time_limit=time_limit,
             relevance_checker=relevance_checker,
             use_react_agent=use_react_agent,
+            use_reference_agent=use_reference_agent,
+            kg_path=kg_path,
+            use_hitl=use_hitl,
+            hitl_callback=hitl_callback,
             **self.kwargs
         )
 
@@ -124,8 +139,13 @@ class Popper:
             "parsed_result": parsed_result
         }
 
-    def _setup_default_agent(self):
-        """Set up agent with default configuration if not already configured."""
+    def _setup_default_agent(self, use_reference_agent=False, use_hitl=False):
+        """Set up agent with default configuration if not already configured.
+
+        Args:
+            use_reference_agent (bool): Whether to enable Reference Agent
+            use_hitl (bool): Whether to enable Human-in-the-Loop checkpoints
+        """
         self.configure(
             alpha=0.1,
             aggregate_test='E-value',
@@ -133,25 +153,34 @@ class Popper:
             max_retry=5,
             time_limit=2,
             relevance_checker=True,
-            use_react_agent=True
+            use_react_agent=True,
+            use_reference_agent=use_reference_agent,
+            use_hitl=use_hitl
         )
     
-    def launch_UI(self):
+    def launch_UI(self, enable_hitl_ui: bool = False):
+        """Launch the Gradio UI for hypothesis validation.
+
+        Args:
+            enable_hitl_ui (bool): Whether to enable HITL approval UI (requires use_hitl=True in configure)
+        """
         import gradio as gr
         from gradio import ChatMessage
         from time import time
         import asyncio
         import copy
 
-        async def generate_response(prompt, 
+        # State for HITL
+        hitl_state = {"pending_decision": None, "decision_made": False}
+
+        async def generate_response(prompt,
+                                    reference_agent_history=[],
                                     designer_history=[],
                                     executor_history=[],
                                     relevance_checker_history=[],
                                     error_control_history=[],
-                                    summarizer_history=[]):
-
-            #designer_history.append(ChatMessage(role="user", content=prompt))
-            #yield designer_history, executor_history, relevance_checker_history, error_control_history, summarizer_history
+                                    summarizer_history=[],
+                                    hitl_history=[]):
 
             # Initialize log tracking
             prev_log = copy.deepcopy(self.agent.log)  # Store initial log state
@@ -160,7 +189,6 @@ class Popper:
             task = asyncio.create_task(asyncio.to_thread(self.agent.go, prompt))
 
             while not task.done():  # Check while the agent is still running
-                #print("Checking for new log messages...")
                 await asyncio.sleep(1)  # Wait for 1 second
 
                 # Check if log has changed
@@ -168,25 +196,29 @@ class Popper:
                     prev_log = copy.deepcopy(self.agent.log)  # Update previous log state
 
                     # Convert new log messages to ChatMessage format
+                    reference_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log.get('reference_agent', [])]
                     designer_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['designer']]
                     executor_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['executor']]
                     relevance_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['relevance_checker']]
                     sequential_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['sequential_testing']]
                     summarizer_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['summarizer']]
+                    hitl_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log.get('hitl', [])]
 
-                    yield designer_msgs, executor_msgs, relevance_msgs, sequential_msgs, summarizer_msgs
+                    yield reference_msgs, designer_msgs, executor_msgs, relevance_msgs, sequential_msgs, summarizer_msgs, hitl_msgs
 
             # Ensure final result is captured
             result = await task
 
             # Convert final logs to ChatMessage format before yielding
+            reference_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log.get('reference_agent', [])]
             designer_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['designer']]
             executor_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['executor']]
             relevance_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['relevance_checker']]
             sequential_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['sequential_testing']]
             summarizer_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log['summarizer']]
+            hitl_msgs = [ChatMessage(role="assistant", content=msg) for msg in self.agent.log.get('hitl', [])]
 
-            yield designer_msgs, executor_msgs, relevance_msgs, sequential_msgs, summarizer_msgs
+            yield reference_msgs, designer_msgs, executor_msgs, relevance_msgs, sequential_msgs, summarizer_msgs, hitl_msgs
 
 
         def like(evt: gr.LikeData):
@@ -194,17 +226,31 @@ class Popper:
             print(evt.index, evt.liked, evt.value)
 
         with gr.Blocks() as demo:
+            gr.Markdown("# POPPER - Sequential Hypothesis Falsification")
+
+            # Reference Agent panel (only show if enabled)
+            with gr.Row():
+                reference_agent_chatbot = gr.Chatbot(
+                    label="Reference Agent (Prior Knowledge)",
+                    type="messages", height=200,
+                    show_copy_button=True,
+                    show_share_button=True,
+                    group_consecutive_messages=False,
+                    show_copy_all_button=True,
+                    visible=getattr(self, 'use_reference_agent', False)
+                )
+
             with gr.Row():
                 with gr.Column(scale=1):
-                    designer_chatbot = gr.Chatbot(label="Popper Experiment Designer", 
-                                        type="messages", height=600, 
-                                        show_copy_button=True, 
-                                        show_share_button = True, 
+                    designer_chatbot = gr.Chatbot(label="Popper Experiment Designer",
+                                        type="messages", height=500,
+                                        show_copy_button=True,
+                                        show_share_button = True,
                                         group_consecutive_messages = False,
                                         show_copy_all_button = True,
                     )
                     relevance_checker_chatbot = gr.Chatbot(label="Relevance Checker",
-                                                type="messages", height=300,
+                                                type="messages", height=250,
                                                 show_copy_button=True,
                                                 show_share_button = True,
                                                 group_consecutive_messages = False,
@@ -212,37 +258,58 @@ class Popper:
                     )
 
                 with gr.Column(scale=1):
-                    executor_chatbot = gr.Chatbot(label="Popper Experiment Executor", 
-                                                type="messages", height=600, 
-                                                show_copy_button=True, 
-                                                show_share_button = True, 
-                                                group_consecutive_messages = False, 
+                    executor_chatbot = gr.Chatbot(label="Popper Experiment Executor",
+                                                type="messages", height=500,
+                                                show_copy_button=True,
+                                                show_share_button = True,
+                                                group_consecutive_messages = False,
                                                 show_copy_all_button = True,
                                                 )
                     error_control_chatbot = gr.Chatbot(label="Sequential Error Control",
-                                                type="messages", height=300,
+                                                type="messages", height=250,
                                                 show_copy_button=True,
                                                 show_share_button = True,
                                                 group_consecutive_messages = False,
                                                 show_copy_all_button = True
                     )
 
+            # HITL Checkpoint panel (only show if enabled)
+            with gr.Row(visible=getattr(self, 'use_hitl', False) and enable_hitl_ui):
+                hitl_chatbot = gr.Chatbot(label="Human-in-the-Loop Checkpoint",
+                                         type="messages", height=150,
+                                         show_copy_button=True,
+                                         group_consecutive_messages=False)
+                with gr.Column(scale=1):
+                    gr.Markdown("### Test Approval")
+                    with gr.Row():
+                        approve_btn = gr.Button("Approve", variant="primary")
+                        reject_btn = gr.Button("Reject", variant="stop")
+                        edit_btn = gr.Button("Edit")
+                    feedback_input = gr.Textbox(label="Feedback (for reject/edit)", placeholder="Enter your feedback...")
+
             with gr.Row():
-                summarizer = gr.Chatbot(label="Popper Summarizer", 
-                                                type="messages", height=300, 
-                                                show_copy_button=True, 
-                                                show_share_button = True, 
-                                                group_consecutive_messages = False, 
+                summarizer = gr.Chatbot(label="Popper Summarizer",
+                                                type="messages", height=250,
+                                                show_copy_button=True,
+                                                show_share_button = True,
+                                                group_consecutive_messages = False,
                                                 show_copy_all_button = True,
                                                 )
+
             with gr.Row():
                 # Textbox on the left, and Button with an icon on the right
                 prompt_input = gr.Textbox(show_label = False, placeholder="What is your hypothesis?", scale=8)
-                button = gr.Button("Validate")
+                button = gr.Button("Validate", variant="primary")
 
             button.click(lambda: gr.update(value=""), inputs=None, outputs=prompt_input)
-            # Bind button click to generate_response function, feeding results to both chatbots
-            button.click(generate_response, inputs=[prompt_input, designer_chatbot, executor_chatbot, relevance_checker_chatbot, error_control_chatbot, summarizer], outputs=[designer_chatbot, executor_chatbot, relevance_checker_chatbot, error_control_chatbot, summarizer])
+
+            # Bind button click to generate_response function
+            all_outputs = [reference_agent_chatbot, designer_chatbot, executor_chatbot,
+                          relevance_checker_chatbot, error_control_chatbot, summarizer, hitl_chatbot]
+            all_inputs = [prompt_input, reference_agent_chatbot, designer_chatbot, executor_chatbot,
+                         relevance_checker_chatbot, error_control_chatbot, summarizer, hitl_chatbot]
+
+            button.click(generate_response, inputs=all_inputs, outputs=all_outputs)
 
         demo.launch(share = True)
 

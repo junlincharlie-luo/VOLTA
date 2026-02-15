@@ -1,0 +1,13 @@
+{
+  "hypothesis_id": "H11",
+  "hypothesis_name": "Voltage_Fade",
+  "parsed_result": {
+    "main_hypothesis": "The average discharge voltage decreases by >50 mV after 100 charge-discharge cycles due to structural transformation from layered to spinel phase.",
+    "falsification_test_result": "The \"Structural Transformation Impact on Voltage Test\" resulted in a \"PASS\" with sufficient evidence against the null sub-hypothesis, yielding a combined E-value of 1.58e+49.",
+    "reasoning": "The experiment aimed to falsify the causal link proposed by the main hypothesis: that a structural transformation from a layered to a spinel-like phase causes a decrease in voltage. To do this, a multiple linear regression model was employed to determine if a proxy for the structural state (`R_phase`) could explain voltage variations after controlling for time-based degradation.\n\nThe null sub-hypothesis stated that the coefficient for this structural proxy (`\u03b2_2`) would be less than or equal to zero (\u03b2_2 \u2264 0). This would imply that a more spinel-like structure does not lead to a lower voltage, thereby contradicting the mechanism proposed in the main hypothesis.\n\nThe test passed, meaning it found sufficient evidence to reject this null sub-hypothesis. The result strongly supports the alternative sub-hypothesis (\u03b2_2 > 0), indicating a significant positive correlation between the structural proxy (`R_phase`) and voltage. This aligns with the main hypothesis's claim that a more ordered layered structure (higher `R_phase`) is associated with a higher voltage, and conversely, a more spinel-like structure (lower `R_phase`) is associated with a lower voltage.",
+    "conclusion": true,
+    "rationale": "The falsification test failed to disprove the main hypothesis. Instead, the test provided strong statistical evidence (E-value of 1.58e+49) to reject the null sub-hypothesis, which was constructed to directly challenge the core mechanism of the main hypothesis. The successful rejection of the null supports the alternative hypothesis, which is consistent with the proposed relationship between structural transformation and voltage decrease. Therefore, based on the outcome of this test, the main hypothesis is considered true."
+  },
+  "elapsed_time_seconds": 141.64901685714722,
+  "timestamp": "2026-02-09T01:16:46.872992"
+}

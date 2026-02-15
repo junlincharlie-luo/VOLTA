@@ -1,0 +1,52 @@
+======================================================================
+HYPOTHESIS H7: A1g Peak Width Decreases with Voltage
+======================================================================
+
+Dataset loaded: 102600 rows
+A1g_Sigma range: 5.00 to 100.00
+
+--------------------------------------------------
+Overall Correlation: A1g_Sigma vs Voltage
+--------------------------------------------------
+Pearson:  r = nan, p = nan
+Spearman: rho = nan, p = nan
+
+--------------------------------------------------
+Time-Averaged A1g_Sigma Evolution
+--------------------------------------------------
+
+Initial state (V = 3.201V):
+  Mean A1g_Sigma = 21.93 cm^-1
+
+Final state (V = 4.499V):
+  Mean A1g_Sigma = 14.62 cm^-1
+
+Change: -7.31 cm^-1 (-33.3%)
+
+--------------------------------------------------
+Time-Averaged Correlation
+--------------------------------------------------
+Pearson (time-averaged):  r = -0.6307, p = 5.47e-14
+Spearman (time-averaged): rho = -0.5799, p = 1.36e-11
+
+Linear regression:
+  Slope: -2.6968 cm^-1 per Volt
+  R-squared: 0.3978
+  P-value: 5.47e-14
+
+--------------------------------------------------
+Voltage Bin Analysis
+--------------------------------------------------
+  (3.0, 3.5]: Mean = 20.74, Std = 13.80
+  (3.5, 4.0]: Mean = 18.23, Std = 15.35
+  (4.0, 4.3]: Mean = 17.39, Std = 18.18
+  (4.3, 4.5]: Mean = 17.37, Std = 17.73
+  (4.5, 5.0]: Mean = 16.77, Std = 16.30
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H7: SUPPORTED
+Strong negative correlation (r=-0.631): A1g width decreases with charging.
+A1g_Sigma changed by -33.3% during charging.

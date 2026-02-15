@@ -84,6 +84,8 @@ class ReactAgent():
             self.api = 'anthropic'
         elif model_name[:4] == 'gpt-':
             self.api = 'openai'
+        elif model_name.startswith('gemini'):
+            self.api = 'google'
         else:
             self.api = 'local'
         
@@ -121,15 +123,34 @@ class ReactAgent():
     ):
         llm = None
         if (api == "anthropic"):
+            # Use provided api_key if available, otherwise fall back to environment variable
+            anthropic_key = api_key if api_key and api_key != "EMPTY" else os.environ.get("ANTHROPIC_API_KEY")
+            if not anthropic_key:
+                raise ValueError("ANTHROPIC_API_KEY not set. Please set the environment variable or provide --api-key argument.")
             llm = ChatAnthropic(
                 model=model,
-                api_key=os.environ["ANTHROPIC_API_KEY"],
+                api_key=anthropic_key,
                 **kwargs
             )
         elif (api == "openai"):
+            # Use provided api_key if available, otherwise fall back to environment variable
+            openai_key = api_key if api_key and api_key != "EMPTY" else os.environ.get("OPENAI_API_KEY")
+            if not openai_key:
+                raise ValueError("OPENAI_API_KEY not set. Please set the environment variable or provide --api-key argument.")
             llm = ChatOpenAI(
                 model=model,
-                api_key=os.environ["OPENAI_API_KEY"],
+                api_key=openai_key,
+                **kwargs
+            )
+        elif (api == "google"):
+            # Use Google Gemini via OpenAI-compatible endpoint
+            google_key = api_key if api_key and api_key != "EMPTY" else os.environ.get("GOOGLE_API_KEY")
+            if not google_key:
+                raise ValueError("GOOGLE_API_KEY not set. Please set the environment variable or provide --api-key argument.")
+            llm = ChatOpenAI(
+                model=model,
+                api_key=google_key,
+                base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
                 **kwargs
             )
         # elif (api == 'llama'):

@@ -31,7 +31,7 @@ from langgraph.graph.message import add_messages
 # Logging Configuration
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
-from .utils import get_llm, pretty_print
+from .utils import get_llm, pretty_print, KnowledgeGraphLoader
 from .prompt_utils import *
 from popper.react_agent import ReactAgent
 
@@ -119,6 +119,28 @@ class OutputSpecification(BaseModel):
     reasoning: Optional[str] = Field(description="Reasoning, summarizing, and analyzing these results")
     conclusion: Optional[bool] = Field(description="Conclusion on whether the hypothesis is true or false (True/False)")
     rationale: Optional[str] = Field(description="Rationale behind the conclusion")
+
+
+class reference_check_result(BaseModel):
+    """Output from Reference Agent's examination of hypothesis against prior knowledge."""
+
+    prior_evidence_summary: Optional[str] = Field(description="Summary of supporting and contradicting evidence from literature")
+    novelty_score: Optional[float] = Field(description="Novelty score from 0.0 (well-established) to 1.0 (completely novel)")
+    confidence_assessment: Optional[str] = Field(description="Assessment of confidence based on prior evidence")
+    suggested_focus_areas: Optional[List[str]] = Field(description="Suggested areas to focus falsification tests")
+    caution_flags: Optional[List[str]] = Field(description="Any caution flags (e.g., strong consensus, contradicting evidence)")
+    should_proceed: Optional[bool] = Field(description="Whether to proceed with testing or flag for review")
+
+
+class HITLDecision(BaseModel):
+    """Human-in-the-loop decision on a proposed test."""
+
+    action: str = Field(description="User action: 'approve', 'reject', or 'edit'")
+    feedback: Optional[str] = Field(description="User feedback or reason for rejection")
+    edited_test_name: Optional[str] = Field(description="Edited test name if action is 'edit'")
+    edited_test_description: Optional[str] = Field(description="Edited test description if action is 'edit'")
+    edited_null_hypothesis: Optional[str] = Field(description="Edited null hypothesis if action is 'edit'")
+    edited_alternate_hypothesis: Optional[str] = Field(description="Edited alternate hypothesis if action is 'edit'")
 
 def likelihood_ratio_e_value(likelihood_ratio, alpha=0.1):
     likelihood_ratio = np.array(likelihood_ratio)
@@ -764,6 +786,104 @@ class likelihood_estimation_agent:
         return result
 
 
+class reference_agent:
+    """
+    Reference Agent that examines hypotheses against existing literature and domain knowledge
+    before testing begins. Queries the knowledge graph to extract relevant prior knowledge
+    and inform the Test Proposal Agent.
+    """
+
+    def __init__(self, llm='claude-3-5-sonnet-20241022', domain="biology", kg_path=None, port=None, api_key="EMPTY"):
+        self.llm = get_llm(llm, port=port, api_key=api_key)
+        self.domain = domain
+        self.kg_loader = KnowledgeGraphLoader(kg_path=kg_path, create_sample=True)
+
+        self.system_prompt = ChatPromptTemplate.from_messages([
+            ("system", get_reference_agent_system_prompt(self.domain)),
+            ("human", "{input}")
+        ])
+        self.output_parser = self.llm.with_structured_output(reference_check_result)
+
+    def go(self, hypothesis, log=None):
+        """
+        Examine the hypothesis against the knowledge graph and prior literature.
+
+        Args:
+            hypothesis: The scientific hypothesis to examine
+            log: Dictionary to append log messages to
+
+        Returns:
+            Dictionary containing:
+            - prior_knowledge_summary: Text summary for downstream agents
+            - reference_check: Structured analysis from the LLM
+            - should_proceed: Whether to proceed with testing
+        """
+        if log is None:
+            log = {'reference_agent': []}
+
+        to_print = [get_msg_title_repr("Reference Agent", bold=is_interactive_env())]
+        print(to_print[0])
+
+        # Query knowledge graph for prior knowledge
+        prior_knowledge = self.kg_loader.query_hypothesis(hypothesis, self.domain)
+        prior_knowledge_summary = prior_knowledge.to_summary()
+
+        log_msg = f"Queried knowledge graph for hypothesis: {hypothesis[:100]}..."
+        print(log_msg)
+        if 'reference_agent' in log:
+            log['reference_agent'].append(log_msg)
+
+        # Log the prior knowledge summary
+        if 'reference_agent' in log:
+            log['reference_agent'].append(f"Prior Knowledge Summary:\n{prior_knowledge_summary}")
+
+        # Generate the user prompt with prior knowledge
+        user_prompt = get_reference_agent_user_prompt(hypothesis, self.domain, prior_knowledge_summary)
+
+        # Get structured analysis from LLM
+        self.app = create_react_agent(self.llm, [])
+        config = {"recursion_limit": 500}
+        inputs = {"messages": [("user", user_prompt)]}
+
+        for s in self.app.stream(inputs, stream_mode="values", config=config):
+            message = s["messages"][-1]
+            out = pretty_print(message)
+            pattern = r"={32}\x1b\[1m (Ai|Human) Message \x1b\[0m={32}"
+            clean_out = re.sub(pattern, '', out)
+            if 'reference_agent' in log:
+                log['reference_agent'].append(clean_out)
+
+        # Parse the structured output
+        reference_check = None
+        for _ in range(10):
+            try:
+                reference_check = self.output_parser.invoke(s["messages"][-1].content)
+                if reference_check:
+                    break
+            except Exception as e:
+                print(f"Error parsing reference check output: {e}")
+
+        result = {
+            'prior_knowledge_summary': prior_knowledge_summary,
+            'prior_knowledge': prior_knowledge,
+            'reference_check': reference_check.dict() if reference_check else None,
+            'should_proceed': reference_check.should_proceed if reference_check else True,
+            'suggested_focus_areas': reference_check.suggested_focus_areas if reference_check else [],
+            'caution_flags': reference_check.caution_flags if reference_check else []
+        }
+
+        # Log the summary
+        summary_log = f"Reference Check Complete:\n"
+        summary_log += f"- Novelty Score: {reference_check.novelty_score if reference_check else 'N/A'}\n"
+        summary_log += f"- Should Proceed: {result['should_proceed']}\n"
+        summary_log += f"- Caution Flags: {', '.join(result['caution_flags']) if result['caution_flags'] else 'None'}"
+        print(summary_log)
+        if 'reference_agent' in log:
+            log['reference_agent'].append(summary_log)
+
+        return result
+
+
 class falsification_test_proposal_agent:
     def __init__(self, data, llm = 'claude-3-5-sonnet-20241022', domain = "biology", port=None, api_key="EMPTY"):
         self.data = data
@@ -827,14 +947,24 @@ class SequentialFalsificationTest:
             ]
         )
         self.proposal_relevance_checker = self.proposal_relevance_checker_prompt | self.llm.with_structured_output(relevance_subhypothesis)
-        
+
         self.log = {
+            'reference_agent': [],
             'designer': [],
             'executor': [],
             'relevance_checker': [],
             'summarizer': [],
-            'sequential_testing': []
+            'sequential_testing': [],
+            'hitl': []
         }
+
+        # Reference Agent and HITL settings (configured in configure())
+        self.use_reference_agent = False
+        self.reference_agent_instance = None
+        self.use_hitl = False
+        self.hitl_callback = None
+        self.prior_knowledge_context = ""
+        self.pending_hitl_decision = None
 
     def summarize(self):
         to_print = [get_msg_title_repr("Summarizer", bold=is_interactive_env())]
@@ -882,7 +1012,10 @@ class SequentialFalsificationTest:
 
     def configure(self, data, alpha = 0.1, beta = 0.1, aggregate_test = 'E-value', llm_approx = False,
                     max_num_of_tests = 10, plot_agent_architecture = True,
-                    time_limit = 10, max_retry = 10, domain="biology", max_failed_tests = 10, relevance_checker = False, use_react_agent = False, **kwargs):
+                    time_limit = 10, max_retry = 10, domain="biology", max_failed_tests = 10,
+                    relevance_checker = False, use_react_agent = False,
+                    use_reference_agent = False, kg_path = None,
+                    use_hitl = False, hitl_callback = None, **kwargs):
         self.relevance_checker = relevance_checker
         self.max_num_of_tests = max_num_of_tests
         for name, df in data.table_dict.items():
@@ -897,13 +1030,29 @@ class SequentialFalsificationTest:
         self.domain = domain
         self.max_failed_tests = max_failed_tests
 
+        # Reference Agent configuration
+        self.use_reference_agent = use_reference_agent
+        if use_reference_agent:
+            self.reference_agent_instance = reference_agent(
+                llm=self.llm_use,
+                domain=domain,
+                kg_path=kg_path,
+                port=self.port,
+                api_key=self.api_key
+            )
+
+        # Human-in-the-Loop configuration
+        self.use_hitl = use_hitl
+        self.hitl_callback = hitl_callback
+        self.pending_hitl_decision = None
+
         if self.llm_approx:
             self.aggregate_test = 'LLM_approx'
             self.likelihood_estimation_agent = likelihood_estimation_agent(llm = self.llm_use, port=self.port, api_key=self.api_key)
 
         if use_react_agent and llm_approx:
             raise ValueError("React Falsitication Test Agent does not yet support llm approx")
-        
+
         if use_react_agent:
             self.test_coding_agent = falsification_test_react_agent(self.data_loader, llm =self.llm_use, max_retry=max_retry, domain=self.domain, port=self.port, api_key=self.api_key)
         else:
@@ -917,6 +1066,8 @@ class SequentialFalsificationTest:
         class State(TypedDict):
             messages: Annotated[list, add_messages]
             cur_test_proposal: str
+            prior_knowledge_context: str
+            hitl_approved: bool
 
         def design_falsification_test(state: State):
             test_results = '\n'.join([f"------- Round {i+1} ------- \n Falsification Test: {self.tracked_tests[i]} \n test statistics: {self.tracked_stat[i]}" for i in range(len(self.tracked_tests))]) if len(self.tracked_tests) > 0 else "No Implemented Falsification Test Yet."
@@ -1011,15 +1162,110 @@ class SequentialFalsificationTest:
         def summarizer(state: State):
             return self.summarize()
 
-        
+        def reference_agent_check(state: State):
+            """Query the knowledge graph and examine prior knowledge about the hypothesis."""
+            if not self.use_reference_agent or self.reference_agent_instance is None:
+                return {"prior_knowledge_context": "", "messages": [('assistant', "Reference Agent skipped (not enabled).")]}
+
+            to_print = [get_msg_title_repr("Reference Agent", bold=is_interactive_env())]
+            print(to_print[0])
+
+            result = self.reference_agent_instance.go(self.main_hypothesis, self.log)
+
+            self.prior_knowledge_context = result['prior_knowledge_summary']
+
+            # Check for caution flags
+            if result['caution_flags']:
+                caution_msg = f"Caution Flags: {', '.join(result['caution_flags'])}"
+                print(caution_msg)
+                self.log['reference_agent'].append(caution_msg)
+
+            return {
+                "prior_knowledge_context": result['prior_knowledge_summary'],
+                "messages": [('assistant', f"Reference Agent Analysis Complete.\n{result['prior_knowledge_summary']}")]
+            }
+
+        def hitl_checkpoint(state: State):
+            """Human-in-the-loop checkpoint for approving/rejecting/editing proposed tests."""
+            if not self.use_hitl:
+                return {"hitl_approved": True, "messages": [('assistant', "HITL checkpoint skipped (not enabled).")]}
+
+            to_print = [get_msg_title_repr("Human-in-the-Loop Checkpoint", bold=is_interactive_env())]
+            print(to_print[0])
+
+            # Parse the current test proposal to get structured info
+            proposal = state.get("cur_test_proposal", "")
+
+            # Generate checkpoint summary
+            current_stats = f"Tests completed: {len(self.tracked_tests)}, E-value: {self.res_stat if self.res_stat else 'N/A'}"
+            checkpoint_info = get_hitl_checkpoint_summary(
+                test_spec={'test_name': 'Proposed Test', 'test_description': proposal,
+                          'null_hypothesis': 'See proposal', 'alternate_hypothesis': 'See proposal'},
+                main_hypothesis=self.main_hypothesis,
+                num_completed_tests=len(self.tracked_tests),
+                current_stats=current_stats
+            )
+
+            print(checkpoint_info)
+            self.log['hitl'].append(checkpoint_info)
+
+            # If callback is provided, use it to get user decision
+            if self.hitl_callback:
+                decision = self.hitl_callback(proposal, self.main_hypothesis, len(self.tracked_tests), current_stats)
+
+                if decision.get('action') == 'reject':
+                    feedback = decision.get('feedback', 'User rejected the proposed test.')
+                    self.log['hitl'].append(f"User REJECTED: {feedback}")
+                    self.test_proposal_agent.add_to_failed_tests(proposal)
+                    return {"hitl_approved": False, "messages": [('assistant', f"Test rejected by user: {feedback}")]}
+
+                elif decision.get('action') == 'edit':
+                    edited_proposal = decision.get('edited_proposal', proposal)
+                    self.log['hitl'].append(f"User EDITED proposal")
+                    return {"hitl_approved": True, "cur_test_proposal": edited_proposal,
+                            "messages": [('assistant', f"Test edited by user. New proposal: {edited_proposal}")]}
+
+                else:  # approve
+                    self.log['hitl'].append("User APPROVED the proposed test")
+                    return {"hitl_approved": True, "messages": [('assistant', "Test approved by user.")]}
+
+            # Default: auto-approve if no callback
+            self.log['hitl'].append("Auto-approved (no callback provided)")
+            return {"hitl_approved": True, "messages": [('assistant', "Test auto-approved.")]}
+
+        def hitl_decision(state: State) -> Literal["implement_falsification_test", "design_falsification_test"]:
+            """Route based on HITL decision."""
+            if state.get("hitl_approved", True):
+                return "implement_falsification_test"
+            else:
+                return "design_falsification_test"
+
+        # Build the graph
         graph_builder = StateGraph(State)
+
+        # Add all nodes
+        if self.use_reference_agent:
+            graph_builder.add_node("reference_agent_check", reference_agent_check)
         graph_builder.add_node("design_falsification_test", design_falsification_test)
+        if self.use_hitl:
+            graph_builder.add_node("hitl_checkpoint", hitl_checkpoint)
         graph_builder.add_node("implement_falsification_test", implement_falsification_test)
         graph_builder.add_node("sequential_testing", sequential_testing)
-        graph_builder.add_node("summarizer", summarizer)        
-        
-        graph_builder.add_edge(START, "design_falsification_test")
-        graph_builder.add_edge("design_falsification_test", "implement_falsification_test")
+        graph_builder.add_node("summarizer", summarizer)
+
+        # Build edges based on configuration
+        if self.use_reference_agent:
+            graph_builder.add_edge(START, "reference_agent_check")
+            graph_builder.add_edge("reference_agent_check", "design_falsification_test")
+        else:
+            graph_builder.add_edge(START, "design_falsification_test")
+
+        if self.use_hitl:
+            graph_builder.add_edge("design_falsification_test", "hitl_checkpoint")
+            graph_builder.add_conditional_edges("hitl_checkpoint", hitl_decision)
+        else:
+            graph_builder.add_edge("design_falsification_test", "implement_falsification_test")
+
         graph_builder.add_conditional_edges("implement_falsification_test", implementation_status)
         graph_builder.add_conditional_edges("sequential_testing", test_decision)
         graph_builder.add_edge('summarizer', END)
@@ -1029,15 +1275,25 @@ class SequentialFalsificationTest:
 
     def go(self, prompt):
         self.log = {
+            'reference_agent': [],
             'designer': [],
             'executor': [],
             'relevance_checker': [],
             'summarizer': [],
-            'sequential_testing': []
+            'sequential_testing': [],
+            'hitl': []
         }
         self.main_hypothesis = prompt
         config = {"recursion_limit": 500}
-        for s in self.graph.stream({"messages": ("user", prompt)}, stream_mode="values", config = config):
+
+        # Initialize state with new fields
+        initial_state = {
+            "messages": ("user", prompt),
+            "prior_knowledge_context": "",
+            "hitl_approved": True
+        }
+
+        for s in self.graph.stream(initial_state, stream_mode="values", config = config):
             message = s["messages"][-1]
             out = message.content
             if self.num_of_tests + 1 > self.max_num_of_tests or self.max_failed_tests <= len(self.test_proposal_agent.failed_tests):

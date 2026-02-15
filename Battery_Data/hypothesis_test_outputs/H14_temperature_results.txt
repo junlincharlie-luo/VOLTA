@@ -1,0 +1,80 @@
+======================================================================
+HYPOTHESIS H14: Temperature-Dependent Arrhenius Behavior
+======================================================================
+
+--------------------------------------------------
+Temperature Data Search
+--------------------------------------------------
+
+All columns in dataset:
+  - pixel_id
+  - time_idx
+  - Eg_Center
+  - Eg_Amp
+  - Eg_Sigma
+  - A1g_Center
+  - A1g_Amp
+  - A1g_Sigma
+  - D_Center
+  - D_Amp
+  - D_Sigma
+  - G_Center
+  - G_Amp
+  - G_Sigma
+  - ID_IG_Ratio
+  - X
+  - Y
+  - Time_Min
+  - Voltage
+
+Temperature-related columns found: NONE
+
+--------------------------------------------------
+Arrhenius Analysis Requirements
+--------------------------------------------------
+
+To test Arrhenius behavior, we need:
+  1. Multiple temperature measurements - NOT AVAILABLE
+  2. Rate constants at each temperature - CANNOT CALCULATE
+  3. Temperature range (typically 3+ temperatures) - NOT AVAILABLE
+  4. ln(k) vs 1/T plot capability - IMPOSSIBLE
+
+Arrhenius equation: k = A * exp(-Ea/RT)
+  where:
+    k = rate constant
+    A = pre-exponential factor
+    Ea = activation energy
+    R = gas constant
+    T = temperature (Kelvin)
+
+--------------------------------------------------
+Experimental Conditions Assessment
+--------------------------------------------------
+
+No temperature information in experimental setup.
+Assumed to be room temperature (~25°C) throughout.
+
+--------------------------------------------------
+What We Can Analyze (Without Temperature)
+--------------------------------------------------
+
+A1g shift rate (at constant T): -0.0130 cm^-1/min
+This represents a SINGLE temperature point.
+Arrhenius analysis requires MULTIPLE temperatures.
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H14: NOT SUPPORTED (DATA INSUFFICIENT)
+
+Reason: No temperature variation data is available.
+The experiment was conducted at a single (likely ambient)
+temperature. Arrhenius analysis requires measurements at
+multiple temperatures to extract activation energy.
+
+Missing data:
+  - Temperature measurements during experiment
+  - Data at multiple controlled temperatures
+  - Rate constants at each temperature
+  - Minimum 3 temperature points for reliable Ea extraction

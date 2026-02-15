@@ -246,6 +246,139 @@ class DiscoveryBenchDataLoader:
         #         random_seed = random_seed * 2 % (2 ** 31)
         #     self.table_dict[df_name] = permuted_df
 
+class KnowledgeGraphLoader:
+    """Loader and query interface for the POPPER knowledge graph."""
+
+    def __init__(self, kg_path=None, create_sample=True):
+        """Initialize the knowledge graph loader.
+
+        Args:
+            kg_path: Path to the knowledge graph JSON file. If None, uses default location.
+            create_sample: Whether to create a sample KG if none exists.
+        """
+        from popper.knowledge_graph import KnowledgeGraph, create_sample_biology_kg
+
+        self.kg_path = kg_path
+        if kg_path and os.path.exists(kg_path):
+            self.kg = KnowledgeGraph.load(kg_path)
+        elif create_sample:
+            self.kg = create_sample_biology_kg()
+            if kg_path:
+                self.kg.save(kg_path)
+        else:
+            self.kg = KnowledgeGraph()
+
+    def query_hypothesis(self, hypothesis, domain="biology"):
+        """Query the knowledge graph for information relevant to a hypothesis.
+
+        Args:
+            hypothesis: The scientific hypothesis to examine
+            domain: The scientific domain (e.g., "biology", "battery")
+
+        Returns:
+            PriorKnowledge object with relevant information
+        """
+        return self.kg.query_hypothesis(hypothesis, domain)
+
+    def get_prior_knowledge_summary(self, hypothesis, domain="biology"):
+        """Get a formatted summary of prior knowledge for a hypothesis.
+
+        Args:
+            hypothesis: The scientific hypothesis to examine
+            domain: The scientific domain
+
+        Returns:
+            Formatted string summary of prior knowledge
+        """
+        prior_knowledge = self.query_hypothesis(hypothesis, domain)
+        return prior_knowledge.to_summary()
+
+    def find_related_entities(self, entity_name):
+        """Find entities related to a given entity name.
+
+        Args:
+            entity_name: Name of the entity to search for
+
+        Returns:
+            List of related nodes and their relationships
+        """
+        nodes = self.kg.find_nodes_by_name(entity_name)
+        related = []
+
+        for node in nodes:
+            neighbors = self.kg.get_neighbors(node.id)
+            for neighbor, edge in neighbors:
+                related.append({
+                    'source': node.name,
+                    'target': neighbor.name,
+                    'relationship': edge.edge_type.value,
+                    'confidence': edge.confidence
+                })
+
+        return related
+
+    def get_pathway_info(self, gene_name):
+        """Get pathway information for a gene.
+
+        Args:
+            gene_name: Name of the gene
+
+        Returns:
+            List of pathway information dictionaries
+        """
+        return self.kg.get_pathway_for_gene(gene_name)
+
+    def add_literature(self, paper_id, title, abstract=None, year=None, doi=None, findings=None):
+        """Add a paper and its findings to the knowledge graph.
+
+        Args:
+            paper_id: Unique identifier for the paper
+            title: Paper title
+            abstract: Paper abstract
+            year: Publication year
+            doi: Digital object identifier
+            findings: List of finding strings to add
+        """
+        from popper.knowledge_graph import KGNode, KGEdge, NodeType, EdgeType
+
+        paper = KGNode(
+            id=paper_id,
+            node_type=NodeType.PAPER,
+            name=title,
+            abstract=abstract,
+            year=year,
+            doi=doi
+        )
+        self.kg.add_node(paper)
+
+        if findings:
+            for i, finding_text in enumerate(findings):
+                finding = KGNode(
+                    id=f"{paper_id}_finding_{i}",
+                    node_type=NodeType.FINDING,
+                    name=finding_text
+                )
+                self.kg.add_node(finding)
+
+                self.kg.add_edge(KGEdge(
+                    source_id=paper_id,
+                    target_id=f"{paper_id}_finding_{i}",
+                    edge_type=EdgeType.REPORTS
+                ))
+
+    def save(self, filepath=None):
+        """Save the knowledge graph to file."""
+        save_path = filepath or self.kg_path
+        if save_path:
+            self.kg.save(save_path)
+        else:
+            raise ValueError("No filepath provided and no default path set")
+
+    def stats(self):
+        """Get statistics about the knowledge graph."""
+        return self.kg.stats()
+
+
 def pretty_print(message, printout = True):
     if isinstance(message, tuple):
         title = message

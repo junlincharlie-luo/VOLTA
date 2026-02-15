@@ -1,0 +1,64 @@
+======================================================================
+HYPOTHESIS H4: Eg Peak Amplitude Increases with Charging
+======================================================================
+
+Dataset loaded: 102600 rows
+Voltage range: 3.057V to 4.679V
+Eg_Amp range: 0.000 to 185.742
+
+--------------------------------------------------
+Overall Correlation: Eg_Amp vs Voltage
+--------------------------------------------------
+Pearson:  r = nan, p = nan
+Spearman: rho = nan, p = nan
+
+--------------------------------------------------
+Time-Averaged Eg_Amp Evolution
+--------------------------------------------------
+
+Initial state (V = 3.201V):
+  Mean Eg_Amp = 4.4027
+  Std = 4.5571
+
+Final state (V = 4.499V):
+  Mean Eg_Amp = 5.7268
+  Std = 5.0939
+
+Change: 1.3241 (+30.07%)
+
+--------------------------------------------------
+Time-Averaged Correlation
+--------------------------------------------------
+Pearson (time-averaged):  r = 0.2754, p = 3.02e-03
+Spearman (time-averaged): rho = 0.3194, p = 5.32e-04
+
+--------------------------------------------------
+Linear Regression: Eg_Amp vs Voltage
+--------------------------------------------------
+Slope: 0.5461 per Volt
+Intercept: 2.3259
+R-squared: 0.0758
+P-value: 3.02e-03
+
+--------------------------------------------------
+Voltage Bin Analysis
+--------------------------------------------------
+  (3.0, 3.5]: Mean = 4.6000, Std = 3.2695
+  (3.5, 4.0]: Mean = 4.2945, Std = 3.2163
+  (4.0, 4.3]: Mean = 4.2677, Std = 3.1476
+  (4.3, 4.5]: Mean = 4.7309, Std = 3.4864
+  (4.5, 5.0]: Mean = 5.2319, Std = 3.8507
+
+--------------------------------------------------
+Monotonicity Analysis
+--------------------------------------------------
+Negative changes (decreasing): 52/113
+Monotonicity ratio: 46.02%
+
+======================================================================
+CONCLUSION
+======================================================================
+
+Hypothesis H4: SUPPORTED
+Positive correlation (r=0.275): Eg amplitude increases with charging.
+Eg amplitude changed by +30.07% during charging.
