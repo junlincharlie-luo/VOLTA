@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Circle, Rectangle
 import matplotlib.lines as mlines
+import matplotlib.image as mpimg
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import numpy as np
 import os
 
@@ -45,25 +47,73 @@ def create_figure_1_workflow():
     """
     Figure 1: Agent System Roadmap
     Horizontal flowchart showing the complete VOLTA workflow.
+    Enhanced with multimodal data visualization at Test Coding phase.
+    Four phases: Input, Pre-analysis, Validation Execution, Summary
     """
-    fig, ax = plt.subplots(figsize=(14, 8))
-    ax.set_xlim(0, 14)
-    ax.set_ylim(0, 8)
+    fig, ax = plt.subplots(figsize=(18.5, 10))
+    ax.set_xlim(0, 20)
+    ax.set_ylim(-3.8, 9)
     ax.axis('off')
     ax.set_title('VOLTA: Multi-Agent Sequential Falsification Testing Framework', fontsize=16, fontweight='bold', pad=20)
 
     # Define node positions
     nodes = {
-        'hypothesis': (1, 4),
-        'reference_agent': (3, 6),
-        'test_proposal': (3, 4),
-        'hitl_checkpoint': (5, 4),
-        'relevance_check': (7, 4),
-        'test_coding': (9, 4),
-        'sequential_test': (11, 4),
-        'summarizer': (13, 4),
-        'loop_decision': (11, 2),
+        'hypothesis': (2.0, 4.5),
+        'reference_agent': (5.5, 6.5),
+        'test_proposal': (7.5, 4.5),
+        'hitl_checkpoint': (9.5, 4.5),
+        'relevance_check': (11.3, 4.5),
+        'test_coding': (13.1, 4.5),
+        'sequential_test': (14.9, 4.5),
+        'summarizer': (17.6, 4.5),
+        'loop_decision': (14.6, 2.5),
     }
+
+    # =========================================================================
+    # PHASE BOXES - Four phases separated by dashed rectangles
+    # =========================================================================
+    phase_colors = {
+        'input': '#E8F5E9',       # Light green
+        'preanalysis': '#E3F2FD', # Light blue
+        'execution': '#FFF3E0',   # Light orange
+        'summary': '#F3E5F5',     # Light purple
+    }
+
+    # Phase 1: Hypothesis Input
+    phase1_box = FancyBboxPatch((0.4, 3.5), 2.4, 2.0,
+                                 boxstyle="round,pad=0.05",
+                                 facecolor=phase_colors['input'], edgecolor='#4CAF50',
+                                 linewidth=2, linestyle='--')
+    ax.add_patch(phase1_box)
+    ax.text(1.6, 5.6, 'Phase 1:\nHypothesis Input', ha='center', va='bottom',
+           fontsize=9, fontweight='bold', color='#2E7D32')
+
+    # Phase 2: Hypothesis Pre-analysis
+    phase2_box = FancyBboxPatch((3.6, 5.2), 3.8, 3.4,
+                                 boxstyle="round,pad=0.05",
+                                 facecolor=phase_colors['preanalysis'], edgecolor='#1976D2',
+                                 linewidth=2, linestyle='--')
+    ax.add_patch(phase2_box)
+    ax.text(5.5, 8.7, 'Phase 2:\nHypothesis Pre-analysis', ha='center', va='bottom',
+           fontsize=9, fontweight='bold', color='#1565C0')
+
+    # Phase 3: Hypothesis Validation Execution
+    phase3_box = FancyBboxPatch((6.6, 2.2), 9.4, 3.4,
+                                 boxstyle="round,pad=0.05",
+                                 facecolor=phase_colors['execution'], edgecolor='#FF9800',
+                                 linewidth=2, linestyle='--')
+    ax.add_patch(phase3_box)
+    ax.text(11.3, 5.8, 'Phase 3: Hypothesis Validation Execution', ha='center', va='bottom',
+           fontsize=9, fontweight='bold', color='#E65100')
+
+    # Phase 4: Hypothesis Summary
+    phase4_box = FancyBboxPatch((16.3, 3.6), 2.8, 1.8,
+                                 boxstyle="round,pad=0.05",
+                                 facecolor=phase_colors['summary'], edgecolor='#7B1FA2',
+                                 linewidth=2, linestyle='--')
+    ax.add_patch(phase4_box)
+    ax.text(17.7, 5.6, 'Phase 4:\nHypothesis Summary', ha='center', va='bottom',
+           fontsize=9, fontweight='bold', color='#6A1B9A')
 
     def draw_node(ax, pos, label, color, shape='rect', width=1.8, height=0.8):
         x, y = pos
@@ -117,34 +167,34 @@ def create_figure_1_workflow():
             mid_x, mid_y = (x1 + x2) / 2, (y1 + y2) / 2
             ax.text(mid_x, mid_y + 0.3, label, ha='center', va='bottom', fontsize=8, style='italic')
 
-    # Main flow arrows
-    draw_arrow((1.9, 4), (2.1, 4))  # hypothesis -> test_proposal
-    draw_arrow((1.9, 4.3), (2.1, 5.7))  # hypothesis -> reference_agent (diagonal)
-    draw_arrow((3.9, 5.7), (3.1, 4.4))  # reference_agent -> test_proposal (diagonal)
-    draw_arrow((3.9, 4), (4.1, 4))  # test_proposal -> hitl
-    draw_arrow((5.9, 4), (6.1, 4))  # hitl -> relevance
-    draw_arrow((7.9, 4), (8.1, 4))  # relevance -> coding
-    draw_arrow((9.9, 4), (10.1, 4))  # coding -> sequential
-    draw_arrow((11, 3.6), (11, 2.6))  # sequential -> decision
-    draw_arrow((12.5, 4), (12.1, 4))  # summarizer (from decision)
+    # Main flow arrows (updated for new positions)
+    draw_arrow((3.0, 4.5), (4.7, 6.3))  # hypothesis -> reference_agent
+    draw_arrow((5.5, 6.1), (6.8, 4.9))  # reference_agent -> test_proposal
+    draw_arrow((8.4, 4.5), (8.6, 4.5))  # test_proposal -> hitl
+    draw_arrow((10.4, 4.5), (10.6, 4.5))  # hitl -> relevance
+    draw_arrow((12.2, 4.5), (12.4, 4.5))  # relevance -> coding
+    draw_arrow((13.9, 4.5), (14.1, 4.5))  # coding -> sequential
+    draw_arrow((15.1, 4.1), (15.1, 3.0))  # sequential -> decision
+    draw_arrow((16.0, 4.5), (16.6, 4.5))  # decision -> summarizer
 
-    # Loop back arrow
-    ax.annotate('', xy=(3, 3.5), xytext=(10.4, 2),
-               arrowprops=dict(arrowstyle='->', color='#333', lw=1.5,
-                              connectionstyle="arc3,rad=-0.3"))
+    # Loop back path (orthogonal, reduced overlap)
+    ax.plot([14.6, 14.6], [2.1, 1.4], color='#333', lw=1.5)
+    ax.plot([14.6, 7.5], [1.4, 1.4], color='#333', lw=1.5)
+    ax.annotate('', xy=(7.5, 4.0), xytext=(7.5, 1.4),
+               arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
 
-    # Decision labels
-    ax.text(11.8, 2.8, 'No (E < 1/alpha)', fontsize=8, ha='left')
-    ax.text(9.8, 2.3, 'Yes (E >= 1/alpha)', fontsize=8, ha='right')
+    # Decision labels (updated positions)
+    ax.text(16.9, 5.0, 'No (E < 1/α)', fontsize=8, ha='left')
+    ax.text(11.0, 1.6, 'Yes (E ≥ 1/α)', fontsize=8, ha='center')
 
-    # Knowledge Graph box
-    kg_box = FancyBboxPatch((2, 6.8), 2, 0.8, boxstyle="round,pad=0.05",
-                            facecolor=COLORS['light_blue'], edgecolor=COLORS['data'], linewidth=1, linestyle='--')
+    # Knowledge Graph box (updated position)
+    kg_box = FancyBboxPatch((4.5, 7.6), 2, 0.8, boxstyle="round,pad=0.05",
+                            facecolor='white', edgecolor=COLORS['data'], linewidth=1.5, linestyle='-')
     ax.add_patch(kg_box)
-    ax.text(3, 7.2, 'Knowledge Graph', ha='center', va='center', fontsize=9, color=COLORS['data'])
-    draw_arrow((3, 6.8), (3, 6.4))
+    ax.text(5.5, 8.0, 'Knowledge Graph', ha='center', va='center', fontsize=9, fontweight='bold', color=COLORS['data'])
+    draw_arrow((5.5, 7.6), (5.5, 7.1))
 
-    # Legend
+    # Legend (moved to upper left to avoid overlap with phases)
     legend_elements = [
         mpatches.Patch(facecolor=COLORS['llm_agent'], edgecolor='#333', label='LLM Agent'),
         mpatches.Patch(facecolor=COLORS['statistical'], edgecolor='#333', label='Statistical Module'),
@@ -152,12 +202,103 @@ def create_figure_1_workflow():
         mpatches.Patch(facecolor=COLORS['human'], edgecolor='#333', label='Human Interaction'),
         mpatches.Patch(facecolor=COLORS['data'], edgecolor='#333', label='Data/Knowledge'),
     ]
-    ax.legend(handles=legend_elements, loc='lower right', fontsize=9)
+    ax.legend(handles=legend_elements, loc='upper right', fontsize=9, framealpha=0.95)
 
-    # Stopping conditions annotation
-    ax.text(7, 0.5, 'Stopping Conditions: (a) E-value >= 1/alpha  (b) Max tests exceeded',
-           ha='center', va='center', fontsize=10, style='italic',
-           bbox=dict(boxstyle='round', facecolor=COLORS['light_orange'], alpha=0.8))
+    # Stopping conditions annotation - moved to bottom center
+    ax.text(9.0, 0.7, 'Stopping Conditions: (a) E-value ≥ 1/α  (b) Max tests exceeded',
+           ha='center', va='center', fontsize=9, style='italic',
+           bbox=dict(boxstyle='round', facecolor='white', edgecolor='#AAA', alpha=0.9))
+
+    # =========================================================================
+    # MULTIMODAL DATA VISUALIZATION SECTION - Below Test Coding
+    # =========================================================================
+
+    # Main container box for multimodal data
+    multimodal_box = FancyBboxPatch((6.8, -3.4), 9.6, 4.2, boxstyle="round,pad=0.1",
+                                     facecolor='#FAFAFA', edgecolor='#666', linewidth=1.5, linestyle='-')
+    ax.add_patch(multimodal_box)
+    ax.text(11.2, 0.55, 'Multimodal Data for Hypothesis Validation', ha='center', va='center',
+           fontsize=11, fontweight='bold', color='#333')
+
+    # Arrow from Test Coding to multimodal section (routed to avoid overlaps)
+    ax.plot([13.1, 13.1], [4.1, 1.95], color='#555', lw=2, linestyle='--')
+    ax.plot([13.1, 16.2], [1.95, 1.95], color='#555', lw=2, linestyle='--')
+    ax.annotate('', xy=(16.2, 0.2), xytext=(16.2, 1.95),
+               arrowprops=dict(arrowstyle='->', color='#555', lw=2, linestyle='--'))
+
+    # --- Raman Waveshape Section (Microscale) ---
+    raman_box = FancyBboxPatch((7.0, -0.9), 3.8, 1.7, boxstyle="round,pad=0.05",
+                                facecolor='#E3F2FD', edgecolor=COLORS['llm_agent'], linewidth=1.5)
+    ax.add_patch(raman_box)
+    ax.text(8.9, 0.35, 'Raman Waveshape', ha='center', va='center',
+           fontsize=10, fontweight='bold', color=COLORS['llm_agent'])
+    ax.text(8.9, 0.1, '(Microscale)', ha='center', va='center',
+           fontsize=8, style='italic', color='#666')
+
+    # Raman Tools Sidebar - positioned to the left of the image
+    raman_tools_box = FancyBboxPatch((7.1, -0.75), 1.3, 1.1, boxstyle="round,pad=0.03",
+                                      facecolor='#C8E6C9', edgecolor='#4CAF50', linewidth=1.2)
+    ax.add_patch(raman_tools_box)
+    ax.text(7.75, 0.05, 'Tools', ha='center', va='center', fontsize=8, fontweight='bold', color='#2E7D32')
+    ax.text(7.75, -0.12, 'smoothing.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+    ax.text(7.75, -0.29, 'decomposing_peaks.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+    ax.text(7.75, -0.46, 'particle_identification.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+    ax.text(7.75, -0.63, 'baseline_correction.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+
+    # Load and display actual Raman image - positioned to the right of tools
+    try:
+        raman_img = mpimg.imread('../paper/paper_figs/Raman_waveshape.png')
+        # Create inset axes for the Raman image
+        ax_raman = ax.inset_axes([0.53, 0.16, 0.12, 0.12], transform=ax.transAxes)
+        ax_raman.imshow(raman_img)
+        ax_raman.axis('off')
+    except Exception as e:
+        # Fallback to schematic if image not found
+        np.random.seed(42)
+        raman_x = np.linspace(7.5, 9.3, 60)
+        raman_y = -0.6 + 0.25 * np.exp(-((raman_x - 8.0)**2) / 0.08) + 0.18 * np.exp(-((raman_x - 8.7)**2) / 0.05)
+        raman_y += 0.015 * np.random.randn(len(raman_x))
+        ax.plot(raman_x, raman_y, color=COLORS['llm_agent'], linewidth=1.8)
+        ax.fill_between(raman_x, -0.95, raman_y, alpha=0.2, color=COLORS['llm_agent'])
+
+    # --- Voltage Profile Section (Macroscale) ---
+    voltage_box = FancyBboxPatch((11.2, -3.0), 3.8, 1.7, boxstyle="round,pad=0.05",
+                                  facecolor='#FFF3E0', edgecolor='#FF9800', linewidth=1.5)
+    ax.add_patch(voltage_box)
+    ax.text(13.1, -1.55, 'Voltage Profile', ha='center', va='center',
+           fontsize=10, fontweight='bold', color='#E65100')
+    ax.text(13.1, -1.8, '(Macroscale)', ha='center', va='center',
+           fontsize=8, style='italic', color='#666')
+
+    # Load and display actual Voltage profile image - positioned to the left
+    try:
+        voltage_img = mpimg.imread('../paper/paper_figs/voltage_profile.png')
+        # Create inset axes for the Voltage image
+        ax_voltage = ax.inset_axes([0.66, 0.04, 0.12, 0.12], transform=ax.transAxes)
+        ax_voltage.imshow(voltage_img)
+        ax_voltage.axis('off')
+    except Exception as e:
+        # Fallback to schematic if image not found
+        voltage_x = np.linspace(10.0, 11.8, 60)
+        voltage_y = -0.5 + 0.2 * np.sin((voltage_x - 10.0) * 1.5) + 0.08 * (voltage_x - 10.0) / 2
+        ax.plot(voltage_x, voltage_y, color='#E65100', linewidth=1.8)
+        voltage_y2 = -0.65 + 0.15 * np.sin((voltage_x - 10.0) * 1.5 + 0.3) + 0.05 * (voltage_x - 10.0) / 2
+        ax.plot(voltage_x, voltage_y2, color='#1976D2', linewidth=1.5, linestyle='--')
+
+    # Voltage Tools Sidebar - positioned to the right of the image
+    voltage_tools_box = FancyBboxPatch((13.9, -2.85), 1.3, 1.1, boxstyle="round,pad=0.03",
+                                        facecolor='#C8E6C9', edgecolor='#4CAF50', linewidth=1.2)
+    ax.add_patch(voltage_tools_box)
+    ax.text(14.55, -2.05, 'Tools', ha='center', va='center', fontsize=8, fontweight='bold', color='#2E7D32')
+    ax.text(14.55, -2.22, 'smoothing.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+    ax.text(14.55, -2.39, 'extract_features.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+    ax.text(14.55, -2.56, 'correlation_analysis.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+    ax.text(14.55, -2.73, 'capacity_fade.py', ha='center', va='center', fontsize=5.5, color='#333', family='monospace')
+
+    # Annotation explaining the multimodal approach
+    ax.text(11.6, -3.45, 'Domain-specific tools enhance systematic & robust multimodal data analysis',
+           ha='center', va='center', fontsize=9, style='italic', color='#444',
+           bbox=dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.9, edgecolor='#AAA'))
 
     plt.tight_layout()
     plt.savefig('figure1_workflow_roadmap.png', dpi=300, bbox_inches='tight', facecolor='white')
@@ -224,9 +365,9 @@ def create_figure_3_hitl_interaction():
     Figure 3: User-Planner Interaction (HITL Checkpoint)
     Shows the approve/reject/edit workflow.
     """
-    fig, ax = plt.subplots(figsize=(10, 7))
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 7)
+    fig, ax = plt.subplots(figsize=(11, 7.5))
+    ax.set_xlim(0, 11)
+    ax.set_ylim(0, 7.5)
     ax.axis('off')
     ax.set_title('Human-in-the-Loop Checkpoint', fontsize=14, fontweight='bold', pad=20)
 
@@ -240,18 +381,18 @@ def create_figure_3_hitl_interaction():
                color='white' if color not in [COLORS['decision'], COLORS['light_blue']] else 'black')
 
     # Proposed Test Box (large)
-    proposed_box = FancyBboxPatch((0.5, 4), 4, 2.5,
+    proposed_box = FancyBboxPatch((0.6, 4.1), 4.6, 2.6,
                                    boxstyle="round,pad=0.1",
                                    facecolor=COLORS['light_blue'], edgecolor=COLORS['llm_agent'], linewidth=2)
     ax.add_patch(proposed_box)
-    ax.text(2.5, 5.8, 'Proposed Falsification Test', ha='center', va='center',
+    ax.text(2.9, 6.05, 'Proposed Falsification Test', ha='center', va='center',
            fontsize=11, fontweight='bold', color=COLORS['llm_agent'])
-    ax.text(2.5, 5.3, 'Name: Correlation Test #3', ha='center', va='center', fontsize=9)
-    ax.text(2.5, 4.9, 'H0: No correlation between\ngene expression and phenotype', ha='center', va='center', fontsize=9)
-    ax.text(2.5, 4.3, 'H1: Significant correlation exists', ha='center', va='center', fontsize=9)
+    ax.text(2.9, 5.55, 'Name: Correlation Test #3', ha='center', va='center', fontsize=9)
+    ax.text(2.9, 5.05, 'H0: No correlation between\ngene expression and phenotype', ha='center', va='center', fontsize=9)
+    ax.text(2.9, 4.45, 'H1: Significant correlation exists', ha='center', va='center', fontsize=9)
 
     # User Decision Diamond
-    diamond_x, diamond_y = 7, 5.25
+    diamond_x, diamond_y = 6.8, 5.1
     diamond = plt.Polygon([(diamond_x, diamond_y + 0.8), (diamond_x + 1, diamond_y),
                            (diamond_x, diamond_y - 0.8), (diamond_x - 1, diamond_y)],
                           facecolor=COLORS['human'], edgecolor='#333', linewidth=1.5)
@@ -260,37 +401,38 @@ def create_figure_3_hitl_interaction():
            fontsize=10, fontweight='bold', color='white')
 
     # Arrow from proposed to decision
-    ax.annotate('', xy=(6, 5.25), xytext=(4.5, 5.25),
+    ax.annotate('', xy=(5.9, 5.1), xytext=(5.3, 5.1),
                arrowprops=dict(arrowstyle='->', color='#333', lw=2))
 
     # Action buttons
-    draw_box(9, 6.2, 1.4, 0.6, 'Approve', '#5CB85C')
-    draw_box(9, 5.25, 1.2, 0.6, 'Edit', COLORS['decision'])
-    draw_box(9, 4.3, 1.4, 0.6, 'Reject', '#D9534F')
+    draw_box(9.2, 6.2, 1.6, 0.7, 'Approve', '#5CB85C')
+    draw_box(9.2, 5.1, 1.4, 0.7, 'Edit', COLORS['decision'])
+    draw_box(9.2, 4.0, 1.6, 0.7, 'Reject', '#D9534F')
 
     # Arrows from decision to actions
-    ax.annotate('', xy=(8.3, 6.2), xytext=(8, 5.6), arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
-    ax.annotate('', xy=(8.3, 5.25), xytext=(8, 5.25), arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
-    ax.annotate('', xy=(8.3, 4.3), xytext=(8, 4.9), arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
+    ax.annotate('', xy=(8.3, 6.2), xytext=(7.6, 5.7), arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
+    ax.annotate('', xy=(8.3, 5.1), xytext=(7.6, 5.1), arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
+    ax.annotate('', xy=(8.3, 4.0), xytext=(7.6, 4.5), arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
 
     # Outcomes
-    ax.text(9, 5.7, 'Proceed to\nTest Coding', ha='center', va='top', fontsize=8, style='italic')
-    ax.text(9.8, 4.95, 'Modify test\nspec', ha='left', va='center', fontsize=8, style='italic')
-    ax.text(9, 3.9, 'Request new\nproposal', ha='center', va='top', fontsize=8, style='italic')
+    ax.text(10.3, 5.9, 'Proceed to\nTest Coding', ha='left', va='center', fontsize=8, style='italic')
+    ax.text(10.1, 4.9, 'Modify test\nspec', ha='left', va='center', fontsize=8, style='italic')
+    ax.text(10.3, 3.8, 'Request new\nproposal', ha='left', va='center', fontsize=8, style='italic')
 
-    # Feedback loop for reject
-    ax.annotate('', xy=(2.5, 3.9), xytext=(9, 3.7),
-               arrowprops=dict(arrowstyle='->', color='#333', lw=1.5,
-                              connectionstyle="arc3,rad=0.3"))
-    ax.text(5.5, 2.8, 'with feedback', ha='center', va='center', fontsize=9, style='italic')
+    # Feedback loop for reject (orthogonal, reduced overlap)
+    ax.plot([8.4, 8.4], [3.6, 2.2], color='#333', lw=1.5)
+    ax.plot([8.4, 2.3], [2.2, 2.2], color='#333', lw=1.5)
+    ax.annotate('', xy=(2.3, 4.1), xytext=(2.3, 2.2),
+               arrowprops=dict(arrowstyle='->', color='#333', lw=1.5))
+    ax.text(5.2, 2.35, 'with feedback', ha='center', va='center', fontsize=9, style='italic')
 
     # Context info box
-    context_box = FancyBboxPatch((0.5, 0.5), 9, 1.5,
+    context_box = FancyBboxPatch((0.6, 0.2), 9.6, 1.4,
                                   boxstyle="round,pad=0.1",
                                   facecolor='#F5F5F5', edgecolor='#999', linewidth=1, linestyle='--')
     ax.add_patch(context_box)
-    ax.text(5, 1.7, 'Context Information', ha='center', va='center', fontsize=10, fontweight='bold')
-    ax.text(5, 1.2, 'Main Hypothesis: Gene X regulates pathway Y  |  Tests Completed: 2  |  Current E-value: 3.45',
+    ax.text(5.4, 1.35, 'Context Information', ha='center', va='center', fontsize=10, fontweight='bold')
+    ax.text(5.4, 0.9, 'Main Hypothesis: Gene X regulates pathway Y  |  Tests Completed: 2  |  Current E-value: 3.45',
            ha='center', va='center', fontsize=9)
 
     plt.tight_layout()

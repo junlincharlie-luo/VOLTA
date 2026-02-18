@@ -39,7 +39,29 @@ The test should be extremely rigorous. The p-value should be theoretically groun
 The code should be clear, concise, and efficient. Do progress bar when necessary. It will have a time limit, so please be efficient. For example, if possible, you can set the number of permutations to be small (e.g. <1000).
 The code should be self-contained, and do not need additional modifications from user.
 
-**IMPORTANT - Statistical Independence**: In statistical testing, the 900 spatial pixels are highly correlated and CANNOT be treated as independent events. Instead, use the electrochemical half-cycles as independent events: there are 2 charging half-cycles and 1 discharge half-cycle, providing n=3 independent events. Design your statistical tests accordingly, using appropriate methods for small sample sizes.
+**CRITICAL - Statistical Independence**:
+
+The 900 spatial pixels (30x30 grid) are HIGHLY CORRELATED and CANNOT be treated as independent events.
+Arbitrarily dividing the grid into regions is WRONG - adjacent pixels are still spatially correlated.
+
+**ONLY TWO VALID SOURCES OF INDEPENDENT EVENTS:**
+
+1. **Spatially Isolated Particles (REQUIRED)**:
+   - You MUST use the `identify_particles` tool to segment spatially isolated particles
+   - Each particle (typically 5-20) is a separate physical entity = INDEPENDENT EVENT
+   - Example: identify_particles with {{"time_idx": 0, "min_particle_size": 4, "return_timeseries": true}}
+
+2. **Electrochemical Half-Cycles (LIMITED)**:
+   - 3 half-cycles (2 charging + 1 discharge) = only n=3 independent events
+   - Very limited statistical power
+
+**REQUIRED WORKFLOW:**
+1. FIRST call `identify_particles` tool to segment particles
+2. Use the returned `particle_timeseries` for analysis
+3. Calculate statistics PER PARTICLE (correlation, shift magnitude, etc.)
+4. Statistical test sample size n = number of particles (NOT 900 pixels)
+
+**DO NOT:** Treat pixels as independent, or arbitrarily divide the grid into regions.
 
 You have access to the following pandas dataframe tables, where each table, it shows the precise column names and a preview of column values:
 
@@ -74,11 +96,54 @@ PROMPT_REVISION = """
 For querying biological IDs, write code to look directly at raw datasets to map the exact ID, avoiding the use of LLMs to generate or infer gene names or IDs. Additionally, if the dataset includes p-values in its columns, refrain from using them as direct outputs of the falsification test; instead, process or contextualize them appropriately to maintain analytical rigor.
 """
 
+PROMPT_REVISION_BATTERY = """
+**CRITICAL - Statistical Independence for Battery Data**:
+
+The 900 spatial pixels (30x30 grid) are HIGHLY CORRELATED and CANNOT be treated as independent events.
+Arbitrarily dividing the grid into regions (e.g., 9 regions of 10x10) is WRONG because adjacent pixels within and across regions are still spatially correlated.
+
+**ONLY TWO SOURCES OF INDEPENDENT EVENTS ARE VALID:**
+
+1. **Spatially Isolated Particles (RECOMMENDED)**:
+   - You MUST use the `identify_particles` tool to segment spatially isolated particles based on A1g intensity
+   - Each identified particle (typically 5-20 particles) is a separate physical entity and can be treated as INDEPENDENT
+   - This is the preferred approach as it provides more independent events (n ≈ 5-20)
+
+2. **Electrochemical Half-Cycles (LIMITED)**:
+   - The voltage profile contains 3 half-cycles: 2 charging + 1 discharge
+   - These provide only n=3 independent events
+   - Limited statistical power (minimum p-value = 0.125 for sign test)
+
+**REQUIRED WORKFLOW FOR BATTERY HYPOTHESIS TESTING:**
+1. FIRST, call the `identify_particles` tool to segment particles at a reference time (e.g., time_idx=0)
+   Example: Action: identify_particles
+            Action Input: {{"time_idx": 0, "min_particle_size": 4, "return_timeseries": true, "column": "A1g_Center"}}
+2. The tool will return particle statistics and store `particle_timeseries` in your namespace
+3. Use the per-particle timeseries data for your statistical analysis
+4. Calculate statistics FOR EACH PARTICLE (e.g., correlation with voltage, mean shift)
+5. Perform statistical tests with n = number of particles (NOT 900 pixels, NOT arbitrary grid divisions)
+
+**DO NOT:**
+- Treat individual pixels as independent events
+- Arbitrarily divide the 30x30 grid into regions and treat them as independent
+- Use all 900 pixels in correlation calculations as if they were independent samples
+
+**ALWAYS:**
+- Use the `identify_particles` tool FIRST before any statistical analysis
+- Base your sample size (n) on the number of identified particles
+- Report how many independent particles were used in your statistical test
+"""
+
 def get_react_coding_agent_system_prompt(domain="biology", prompt_revision=False):
-    if prompt_revision:
-        return REACT_CODING_AGENT_SYSTEM_PROMPT.format(domain) + PROMPT_REVISION
+    base_prompt = REACT_CODING_AGENT_SYSTEM_PROMPT.format(domain=domain)
+
+    if domain == "battery":
+        # Always add battery-specific guidance for battery domain
+        return base_prompt + PROMPT_REVISION_BATTERY
+    elif prompt_revision:
+        return base_prompt + PROMPT_REVISION
     else:
-        return REACT_CODING_AGENT_SYSTEM_PROMPT.format(domain=domain)
+        return base_prompt
 
 
 LIKELIHOOD_ESTIMATION_AGENT_PROMPT = """Given a scientific hypothesis H, you have designed a sub-hypothesis test h to falsify the main hypothesis. You have also collected evidence from data for the null hypothesis (h0) and the alternative hypothesis (h1).
@@ -129,12 +194,42 @@ def get_likelihood_estimation_agent_prompt(main_hypothesis, falsification_test, 
 
 TEST_PROPOSAL_AGENT_SYSTEM_PROMPT = """You are an expert statistician specialized in the field of {domain}."""
 
+TEST_PROPOSAL_AGENT_SYSTEM_PROMPT_BATTERY = """You are an expert statistician specialized in the field of battery electrochemistry and Raman spectroscopy.
+
+**CRITICAL - Statistical Independence for Battery Hypothesis Testing:**
+
+The 900 spatial pixels (30x30 grid) are HIGHLY CORRELATED and CANNOT be treated as independent events.
+DO NOT propose tests that arbitrarily divide the grid into regions - this is STATISTICALLY INVALID.
+
+**ONLY TWO VALID SOURCES OF INDEPENDENT EVENTS:**
+
+1. **Spatially Isolated Particles (REQUIRED for most tests)**:
+   - The `identify_particles` tool segments spatially isolated cathode particles based on A1g intensity
+   - Each particle (typically 5-20) is a separate physical entity = INDEPENDENT EVENT
+   - Your proposed test MUST specify using the `identify_particles` tool first
+   - Sample size n = number of identified particles
+
+2. **Electrochemical Half-Cycles (LIMITED)**:
+   - 3 half-cycles provide only n=3 independent events
+   - Very limited statistical power (minimum p-value = 0.125)
+
+**Your proposed falsification test MUST:**
+- Explicitly state that the `identify_particles` tool will be used to identify independent particles
+- Base statistical analysis on per-particle statistics (not per-pixel)
+- Use appropriate statistical tests for the sample size (n = number of particles, typically 5-20)
+
+**DO NOT propose tests that:**
+- Treat 900 pixels as independent samples
+- Divide the grid arbitrarily into regions and treat them as independent
+- Use pixel-level correlations without particle-based aggregation
+"""
+
 TEST_PROPOSAL_AGENT_USER_PROMPT = '''
-Given a {domain} hypothesis "{main_hypothesis}", your goal is to propose a novel falsification test given the available {domain} data sources. 
-A falsification test is a test that can potentially falsify the main hypothesis. 
+Given a {domain} hypothesis "{main_hypothesis}", your goal is to propose a novel falsification test given the available {domain} data sources.
+A falsification test is a test that can potentially falsify the main hypothesis.
 The outcome of the falsification test is to return a p-value that measures the evidence to falsify the main hypothesis.
 
-Notably, the falsification test should satisfy the following property: if the main hypotheiss is null, then the falsification sub-hypothesis should also be null. 
+Notably, the falsification test should satisfy the following property: if the main hypotheiss is null, then the falsification sub-hypothesis should also be null.
 
 Here are the list of available data sources, and you can directly call the dataframe as it has already been loaded; no need to load from file path. Each is a pandas dataframe with columns and example rows:
 
@@ -163,22 +258,91 @@ The proposed test should also avoid these failed falsification tests in the prev
 A good falsification test should serve as a strong evidence for the main hypothesis. However, make sure it is answerable with the given available data sources.
 You should aim to maximize the implication strength of the proposed falsification test using the relevant parts of the provided data.
 
----- 
+----
 First produce an initial falsification test proposal.
 
 Then, in each round i, you will do the following:
-(1) critic: ask if the main hypothesis is null, is this test also null? be rigorous. this is super important, otherwise, the test is invalid. Is it redundant on capabilities with existing tests? Is it overlapping with failed tests? Can this be answered and implemented based on the given data? 
-(2) reflect: how to improve this test definition. 
+(1) critic: ask if the main hypothesis is null, is this test also null? be rigorous. this is super important, otherwise, the test is invalid. Is it redundant on capabilities with existing tests? Is it overlapping with failed tests? Can this be answered and implemented based on the given data?
+(2) reflect: how to improve this test definition.
 
-If you think the test definition is good enough, return the final test definition to the user. 
+If you think the test definition is good enough, return the final test definition to the user.
+If not, either refine the test definition that is better than the previous one or propose a new test definition, then go to the next round.
+'''
+
+TEST_PROPOSAL_AGENT_USER_PROMPT_BATTERY = '''
+Given a battery hypothesis "{main_hypothesis}", your goal is to propose a novel falsification test given the available battery data sources.
+A falsification test is a test that can potentially falsify the main hypothesis.
+The outcome of the falsification test is to return a p-value that measures the evidence to falsify the main hypothesis.
+
+**CRITICAL REQUIREMENT - Statistical Independence:**
+The 900 pixels are spatially correlated and CANNOT be used as independent events.
+Your test MUST use the `identify_particles` tool to segment spatially isolated particles first.
+Each identified particle (typically 5-20) can be treated as an INDEPENDENT EVENT.
+Your statistical test sample size n = number of particles (NOT 900 pixels).
+
+Notably, the falsification test should satisfy the following property: if the main hypotheiss is null, then the falsification sub-hypothesis should also be null.
+
+Here are the list of available data sources, and you can directly call the dataframe as it has already been loaded; no need to load from file path. Each is a pandas dataframe with columns and example rows:
+
+{data}
+
+**Available Tools:**
+- `identify_particles`: Segments spatially isolated particles from A1g intensity data. Returns particle statistics and per-particle timeseries. MUST be called before statistical analysis.
+
+For the final test, return
+(1) Name: name of the test
+(2) Test description: be clear and concise. MUST include that `identify_particles` tool will be used first. Describe the falsification outcomes.
+(3) Null sub-hypothesis h_0: what is the statistical null sub-hypothesis does this falsification test aim to test?
+(4) Alternate sub-hypothesis h_1: what is the statistical alternative sub-hypothesis does this falsification test aim to test?
+
+Here are the falsification tests that you've created in the previous rounds and their corresponding test results:
+
+"""
+{existing_falsification_test}
+"""
+
+You may use these information to formulate your next subhypothesis and falsification test, but make sure the proposed falsification test is non-redundant with any of the existing tests.
+
+The proposed test should also avoid these failed falsification tests in the previous rounds:
+
+"""
+{failed_falsification_test}
+"""
+
+A good falsification test should serve as a strong evidence for the main hypothesis. However, make sure it is answerable with the given available data sources.
+You should aim to maximize the implication strength of the proposed falsification test using the relevant parts of the provided data.
+
+----
+First produce an initial falsification test proposal.
+
+Then, in each round i, you will do the following:
+(1) critic: ask if the main hypothesis is null, is this test also null? be rigorous. this is super important, otherwise, the test is invalid. Is it redundant on capabilities with existing tests? Is it overlapping with failed tests? Can this be answered and implemented based on the given data? Does it use the `identify_particles` tool to ensure statistical independence?
+(2) reflect: how to improve this test definition.
+
+If you think the test definition is good enough, return the final test definition to the user.
 If not, either refine the test definition that is better than the previous one or propose a new test definition, then go to the next round.
 '''
 
 def get_test_proposal_agent_system_prompt(domain):
+    if domain == "battery":
+        return TEST_PROPOSAL_AGENT_SYSTEM_PROMPT_BATTERY
     return TEST_PROPOSAL_AGENT_SYSTEM_PROMPT.format(domain=domain)
 
 def get_test_proposal_agent_user_prompt(domain, main_hypothesis, data, existing_tests, failed_tests):
-    return TEST_PROPOSAL_AGENT_USER_PROMPT.format(domain = domain, main_hypothesis = main_hypothesis, data = data, existing_falsification_test = existing_tests, failed_falsification_test = failed_tests)
+    if domain == "battery":
+        return TEST_PROPOSAL_AGENT_USER_PROMPT_BATTERY.format(
+            main_hypothesis=main_hypothesis,
+            data=data,
+            existing_falsification_test=existing_tests,
+            failed_falsification_test=failed_tests
+        )
+    return TEST_PROPOSAL_AGENT_USER_PROMPT.format(
+        domain=domain,
+        main_hypothesis=main_hypothesis,
+        data=data,
+        existing_falsification_test=existing_tests,
+        failed_falsification_test=failed_tests
+    )
 
 
 SUMMARIZER_SYSTEM_PROMPT = """You are a helpful assistant trained to help scientists summarize their experiment observations. 

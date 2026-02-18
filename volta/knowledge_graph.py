@@ -33,6 +33,12 @@ class NodeType(Enum):
     TISSUE = "tissue"
     ORGANISM = "organism"
 
+    # Battery/Raman domain nodes
+    MATERIAL = "material"  # LiCoO2, NCM811, NCA, etc.
+    RAMAN_PEAK = "raman_peak"  # Eg mode, A1g mode, D-band, G-band (features embedded as properties)
+    ELECTROCHEMICAL_PARAM = "electrochemical_param"  # Voltage, SOC
+    STRUCTURAL_PROPERTY = "structural_property"  # M-O bond, cation ordering
+
     # Generic nodes
     CONCEPT = "concept"
     HYPOTHESIS = "hypothesis"
@@ -62,6 +68,15 @@ class EdgeType(Enum):
     INTERACTS_WITH = "interacts_with"
     CAUSES = "causes"
     TREATS = "treats"
+
+    # Battery/Raman relationships
+    SHIFTS_WITH = "shifts_with"  # Peak -> electrochemical param (position change)
+    CORRELATES_WITH = "correlates_with"  # Feature -> parameter
+    OBSERVED_IN = "observed_in"  # Peak -> material
+    HAS_PEAK_AT = "has_peak_at"  # Material -> peak
+    INDICATES = "indicates"  # Feature -> property
+    INCREASES_WITH = "increases_with"  # Feature increases with parameter
+    DECREASES_WITH = "decreases_with"  # Feature decreases with parameter
 
     # Generic relationships
     RELATED_TO = "related_to"
@@ -635,4 +650,540 @@ def get_or_create_kg(filepath: str, create_sample: bool = True) -> KnowledgeGrap
             kg.save(filepath)
         else:
             kg = KnowledgeGraph()
+    return kg
+
+
+def create_raman_battery_kg() -> KnowledgeGraph:
+    """
+    Create knowledge graph for Raman battery analysis from literature.
+
+    This KG captures relationships between:
+    - Raman peak features (position, width, intensity for Eg, A1g, D-band, G-band)
+    - Electrochemical parameters (voltage, SOC)
+    - Structural properties (M-O bond, cation ordering, oxygen redox)
+
+    Each Raman peak has 3 separate feature nodes (position, width, intensity).
+    All relationships cite their source literature.
+    """
+    kg = KnowledgeGraph()
+
+    # =========================================================================
+    # RAMAN PEAK FEATURE NODES (12 nodes: 4 peaks × 3 features)
+    # =========================================================================
+
+    # Eg mode features
+    kg.add_node(KGNode(
+        id="eg_position",
+        node_type=NodeType.RAMAN_PEAK,
+        name="Eg position",
+        properties={
+            "peak": "Eg",
+            "feature_type": "position",
+            "wavenumber_range": [475, 488],
+            "unit": "cm⁻¹",
+            "description": "Eg peak center wavenumber, sensitive to M-O bond angle"
+        },
+        aliases=["Eg peak position", "Eg center"]
+    ))
+
+    kg.add_node(KGNode(
+        id="eg_width",
+        node_type=NodeType.RAMAN_PEAK,
+        name="Eg width",
+        properties={
+            "peak": "Eg",
+            "feature_type": "width",
+            "unit": "cm⁻¹",
+            "description": "Eg FWHM, indicates structural disorder"
+        },
+        aliases=["Eg FWHM", "Eg sigma"]
+    ))
+
+    kg.add_node(KGNode(
+        id="eg_intensity",
+        node_type=NodeType.RAMAN_PEAK,
+        name="Eg intensity",
+        properties={
+            "peak": "Eg",
+            "feature_type": "intensity",
+            "unit": "a.u.",
+            "description": "Eg amplitude, reflects M-O bond population"
+        },
+        aliases=["Eg amplitude", "Eg area"]
+    ))
+
+    # A1g mode features
+    kg.add_node(KGNode(
+        id="a1g_position",
+        node_type=NodeType.RAMAN_PEAK,
+        name="A1g position",
+        properties={
+            "peak": "A1g",
+            "feature_type": "position",
+            "wavenumber_range": [545, 610],
+            "unit": "cm⁻¹",
+            "description": "A1g peak center wavenumber, sensitive to M-O bond length"
+        },
+        aliases=["A1g peak position", "A1g center"]
+    ))
+
+    kg.add_node(KGNode(
+        id="a1g_width",
+        node_type=NodeType.RAMAN_PEAK,
+        name="A1g width",
+        properties={
+            "peak": "A1g",
+            "feature_type": "width",
+            "unit": "cm⁻¹",
+            "description": "A1g FWHM, indicates cation ordering/disorder"
+        },
+        aliases=["A1g FWHM", "A1g sigma"]
+    ))
+
+    kg.add_node(KGNode(
+        id="a1g_intensity",
+        node_type=NodeType.RAMAN_PEAK,
+        name="A1g intensity",
+        properties={
+            "peak": "A1g",
+            "feature_type": "intensity",
+            "unit": "a.u.",
+            "description": "A1g amplitude, reflects oxygen participation in bonding"
+        },
+        aliases=["A1g amplitude", "A1g area"]
+    ))
+
+    # D-band features
+    kg.add_node(KGNode(
+        id="dband_position",
+        node_type=NodeType.RAMAN_PEAK,
+        name="D-band position",
+        properties={
+            "peak": "D-band",
+            "feature_type": "position",
+            "wavenumber_range": [1340, 1360],
+            "unit": "cm⁻¹",
+            "description": "D-band peak center (~1350 cm⁻¹)"
+        },
+        aliases=["D peak position", "D center"]
+    ))
+
+    kg.add_node(KGNode(
+        id="dband_width",
+        node_type=NodeType.RAMAN_PEAK,
+        name="D-band width",
+        properties={
+            "peak": "D-band",
+            "feature_type": "width",
+            "unit": "cm⁻¹",
+            "description": "D-band FWHM, indicates defect distribution"
+        },
+        aliases=["D FWHM", "D sigma"]
+    ))
+
+    kg.add_node(KGNode(
+        id="dband_intensity",
+        node_type=NodeType.RAMAN_PEAK,
+        name="D-band intensity",
+        properties={
+            "peak": "D-band",
+            "feature_type": "intensity",
+            "unit": "a.u.",
+            "description": "ID, used in ID/IG ratio for disorder quantification"
+        },
+        aliases=["ID", "D amplitude"]
+    ))
+
+    # G-band features
+    kg.add_node(KGNode(
+        id="gband_position",
+        node_type=NodeType.RAMAN_PEAK,
+        name="G-band position",
+        properties={
+            "peak": "G-band",
+            "feature_type": "position",
+            "wavenumber_range": [1580, 1600],
+            "unit": "cm⁻¹",
+            "description": "G-band peak center (~1585 cm⁻¹), shifts with charge transfer"
+        },
+        aliases=["G peak position", "G center"]
+    ))
+
+    kg.add_node(KGNode(
+        id="gband_width",
+        node_type=NodeType.RAMAN_PEAK,
+        name="G-band width",
+        properties={
+            "peak": "G-band",
+            "feature_type": "width",
+            "unit": "cm⁻¹",
+            "description": "G-band FWHM, indicates graphitic order"
+        },
+        aliases=["G FWHM", "G sigma"]
+    ))
+
+    kg.add_node(KGNode(
+        id="gband_intensity",
+        node_type=NodeType.RAMAN_PEAK,
+        name="G-band intensity",
+        properties={
+            "peak": "G-band",
+            "feature_type": "intensity",
+            "unit": "a.u.",
+            "description": "IG, reference for ID/IG ratio"
+        },
+        aliases=["IG", "G amplitude"]
+    ))
+
+    # =========================================================================
+    # ELECTROCHEMICAL PARAMETER NODES
+    # =========================================================================
+    kg.add_node(KGNode(
+        id="param_voltage",
+        node_type=NodeType.ELECTROCHEMICAL_PARAM,
+        name="Voltage",
+        properties={
+            "unit": "V",
+            "typical_range": [2.5, 4.5],
+            "description": "Cell potential vs Li/Li+"
+        },
+        aliases=["potential", "cell voltage", "V"]
+    ))
+
+    kg.add_node(KGNode(
+        id="param_soc",
+        node_type=NodeType.ELECTROCHEMICAL_PARAM,
+        name="SOC",
+        properties={
+            "unit": "%",
+            "range": [0, 100],
+            "description": "State of charge - fraction of Li remaining in cathode"
+        },
+        aliases=["state of charge", "lithiation state", "x in LixMO2"]
+    ))
+
+    # =========================================================================
+    # STRUCTURAL PROPERTY NODES
+    # =========================================================================
+    kg.add_node(KGNode(
+        id="prop_mo_bond",
+        node_type=NodeType.STRUCTURAL_PROPERTY,
+        name="M-O bond length",
+        properties={
+            "unit": "Å",
+            "description": "Metal-oxygen bond distance in MO6 octahedra"
+        },
+        aliases=["metal-oxygen bond", "M-O distance"]
+    ))
+
+    kg.add_node(KGNode(
+        id="prop_cation_order",
+        node_type=NodeType.STRUCTURAL_PROPERTY,
+        name="Cation ordering",
+        properties={
+            "description": "Li/vacancy ordering in the lithium layer"
+        },
+        aliases=["Li ordering", "vacancy ordering", "cation arrangement"]
+    ))
+
+    kg.add_node(KGNode(
+        id="prop_ox_redox",
+        node_type=NodeType.STRUCTURAL_PROPERTY,
+        name="Oxygen redox",
+        properties={
+            "description": "Lattice oxygen participation in charge compensation"
+        },
+        aliases=["anionic redox", "O2-/O- redox", "lattice oxygen oxidation"]
+    ))
+
+    # =========================================================================
+    # EDGES: Peak Features -> Electrochemical Parameters
+    # =========================================================================
+
+    # A1g position -> Voltage (redshift during charge)
+    kg.add_edge(KGEdge(
+        source_id="a1g_position",
+        target_id="param_voltage",
+        edge_type=EdgeType.SHIFTS_WITH,
+        properties={
+            "direction": "redshift",
+            "magnitude": "~22 cm⁻¹ during charge",
+            "details": "A1g position redshifts during delithiation"
+        },
+        confidence=0.92,
+        source_papers=["Cation Ordering and Redox Chemistry of Layered Ni-Rich LixNi1−2yCoyMnyO2..."]
+    ))
+
+    # A1g position -> SOC (strong negative correlation)
+    kg.add_edge(KGEdge(
+        source_id="a1g_position",
+        target_id="param_soc",
+        edge_type=EdgeType.CORRELATES_WITH,
+        properties={
+            "correlation": "r ≈ -0.88",
+            "details": "Strong negative correlation between A1g position and SOC"
+        },
+        confidence=0.90,
+        source_papers=["In situ and Operando Raman Spectroscopy of Layered Transition Metal Oxides..."]
+    ))
+
+    # A1g width -> Voltage (decreases during charge)
+    kg.add_edge(KGEdge(
+        source_id="a1g_width",
+        target_id="param_voltage",
+        edge_type=EdgeType.DECREASES_WITH,
+        properties={
+            "magnitude": "-33% during charge",
+            "details": "A1g FWHM decreases as voltage increases (better ordering)"
+        },
+        confidence=0.85,
+        source_papers=["Cation Ordering and Redox Chemistry of Layered Ni-Rich LixNi1−2yCoyMnyO2..."]
+    ))
+
+    # A1g intensity -> Voltage (increases during charge)
+    kg.add_edge(KGEdge(
+        source_id="a1g_intensity",
+        target_id="param_voltage",
+        edge_type=EdgeType.INCREASES_WITH,
+        properties={
+            "magnitude": "+30% during charge",
+            "details": "A1g intensity increases during charge"
+        },
+        confidence=0.82,
+        source_papers=["Advanced Raman spectroscopy for battery applications..."]
+    ))
+
+    # Eg position -> SOC (blueshift with decreasing SOC)
+    kg.add_edge(KGEdge(
+        source_id="eg_position",
+        target_id="param_soc",
+        edge_type=EdgeType.SHIFTS_WITH,
+        properties={
+            "direction": "blueshift",
+            "details": "Eg position shifts to higher wavenumber with decreasing SOC"
+        },
+        confidence=0.80,
+        source_papers=["In situ and Operando Raman Spectroscopy of Layered Transition Metal Oxides..."]
+    ))
+
+    # Eg intensity -> Voltage (increases during charge)
+    kg.add_edge(KGEdge(
+        source_id="eg_intensity",
+        target_id="param_voltage",
+        edge_type=EdgeType.INCREASES_WITH,
+        properties={
+            "magnitude": "+28% during charge",
+            "details": "Eg intensity increases during delithiation"
+        },
+        confidence=0.85,
+        source_papers=["Cation Ordering and Redox Chemistry of Layered Ni-Rich LixNi1−2yCoyMnyO2..."]
+    ))
+
+    # G-band position -> Voltage (redshift)
+    kg.add_edge(KGEdge(
+        source_id="gband_position",
+        target_id="param_voltage",
+        edge_type=EdgeType.SHIFTS_WITH,
+        properties={
+            "direction": "redshift",
+            "magnitude": "~3.5 cm⁻¹/V",
+            "details": "G-band position redshifts with voltage (charge transfer)"
+        },
+        confidence=0.78,
+        source_papers=["In-operando Raman study of lithium plating on graphite electrodes..."]
+    ))
+
+    # =========================================================================
+    # EDGES: Peak Features -> Structural Properties
+    # =========================================================================
+
+    # A1g position -> M-O bond length
+    kg.add_edge(KGEdge(
+        source_id="a1g_position",
+        target_id="prop_mo_bond",
+        edge_type=EdgeType.INDICATES,
+        properties={
+            "details": "A1g position reflects M-O bond length - redshift indicates weakening"
+        },
+        confidence=0.90,
+        source_papers=["In situ and Operando Raman Spectroscopy of Layered Transition Metal Oxides..."]
+    ))
+
+    # A1g width -> Cation ordering
+    kg.add_edge(KGEdge(
+        source_id="a1g_width",
+        target_id="prop_cation_order",
+        edge_type=EdgeType.INDICATES,
+        properties={
+            "details": "A1g FWHM sensitive to Li/vacancy ordering in Li layer"
+        },
+        confidence=0.88,
+        source_papers=["Cation Ordering and Redox Chemistry of Layered Ni-Rich LixNi1−2yCoyMnyO2..."]
+    ))
+
+    # A1g intensity -> Oxygen redox
+    kg.add_edge(KGEdge(
+        source_id="a1g_intensity",
+        target_id="prop_ox_redox",
+        edge_type=EdgeType.INDICATES,
+        properties={
+            "details": "A1g intensity changes indicate oxygen participation in redox"
+        },
+        confidence=0.85,
+        source_papers=["Capacity Decay Mechanism for Lithium-rich Layered Oxides..."]
+    ))
+
+    # Eg position -> M-O bond (angle)
+    kg.add_edge(KGEdge(
+        source_id="eg_position",
+        target_id="prop_mo_bond",
+        edge_type=EdgeType.INDICATES,
+        properties={
+            "details": "Eg position sensitive to O-M-O bond angle"
+        },
+        confidence=0.85,
+        source_papers=["Advanced Raman spectroscopy for battery applications..."]
+    ))
+
+    # D-band intensity -> Carbon disorder (ID/IG)
+    kg.add_edge(KGEdge(
+        source_id="dband_intensity",
+        target_id="prop_cation_order",
+        edge_type=EdgeType.INDICATES,
+        properties={
+            "details": "D-band intensity (ID/IG ratio) indicates carbon disorder/defects"
+        },
+        confidence=0.80,
+        source_papers=["In-operando Raman study of lithium plating on graphite electrodes..."]
+    ))
+
+    # =========================================================================
+    # EDGES: Structural Property -> Electrochemical Parameter
+    # =========================================================================
+    kg.add_edge(KGEdge(
+        source_id="prop_mo_bond",
+        target_id="param_voltage",
+        edge_type=EdgeType.CORRELATES_WITH,
+        properties={
+            "details": "M-O bond length changes with oxidation state during charge/discharge"
+        },
+        confidence=0.90,
+        source_papers=["In situ and Operando Raman Spectroscopy of Layered Transition Metal Oxides..."]
+    ))
+
+    # =========================================================================
+    # EDGES: Inter-Peak Feature Relationships
+    # =========================================================================
+
+    # ID/IG ratio: D-band and G-band intensities are used together
+    kg.add_edge(KGEdge(
+        source_id="dband_intensity",
+        target_id="gband_intensity",
+        edge_type=EdgeType.RELATED_TO,
+        properties={
+            "relationship": "ID/IG ratio",
+            "details": "D-band and G-band intensities form ID/IG ratio for carbon disorder"
+        },
+        confidence=0.95,
+        source_papers=["In-operando Raman study of lithium plating on graphite electrodes..."]
+    ))
+
+    # Eg and A1g positions are correlated (same structure)
+    kg.add_edge(KGEdge(
+        source_id="eg_position",
+        target_id="a1g_position",
+        edge_type=EdgeType.CORRELATES_WITH,
+        properties={
+            "details": "Eg and A1g modes from same R-3m structure, positions shift together"
+        },
+        confidence=0.85,
+        source_papers=["In situ and Operando Raman Spectroscopy of Layered Transition Metal Oxides..."]
+    ))
+
+    # Eg and A1g intensities have inverse relationship during charge
+    kg.add_edge(KGEdge(
+        source_id="eg_intensity",
+        target_id="a1g_intensity",
+        edge_type=EdgeType.CORRELATES_WITH,
+        properties={
+            "details": "Eg/A1g intensity ratio changes with Li content, both increase during charge"
+        },
+        confidence=0.80,
+        source_papers=["Cation Ordering and Redox Chemistry of Layered Ni-Rich LixNi1−2yCoyMnyO2..."]
+    ))
+
+    # A1g position and width are anti-correlated
+    kg.add_edge(KGEdge(
+        source_id="a1g_position",
+        target_id="a1g_width",
+        edge_type=EdgeType.CORRELATES_WITH,
+        properties={
+            "correlation": "negative",
+            "details": "A1g redshift often accompanied by narrowing (improved ordering)"
+        },
+        confidence=0.82,
+        source_papers=["Cation Ordering and Redox Chemistry of Layered Ni-Rich LixNi1−2yCoyMnyO2..."]
+    ))
+
+    # G-band position and D-band intensity relationship
+    kg.add_edge(KGEdge(
+        source_id="gband_position",
+        target_id="dband_intensity",
+        edge_type=EdgeType.CORRELATES_WITH,
+        properties={
+            "details": "G-band shift and D-band growth indicate carbon structural changes"
+        },
+        confidence=0.75,
+        source_papers=["In-operando Raman study of lithium plating on graphite electrodes..."]
+    ))
+
+    return kg
+
+
+def create_raman_battery_kg_v2() -> KnowledgeGraph:
+    """
+    Create v2 knowledge graph for Raman battery analysis from literature.
+
+    Changes vs v1:
+    - Adds explicit carbon disorder structural property.
+    - Reroutes D-band intensity to carbon disorder (not cation ordering).
+    - Keeps existing edges and nodes otherwise unchanged.
+    """
+    base_kg = create_raman_battery_kg()
+
+    kg = KnowledgeGraph()
+    for node in base_kg.nodes.values():
+        kg.add_node(KGNode.from_dict(node.to_dict()))
+
+    # Add explicit carbon disorder node
+    kg.add_node(KGNode(
+        id="prop_carbon_disorder",
+        node_type=NodeType.STRUCTURAL_PROPERTY,
+        name="Carbon disorder",
+        properties={
+            "description": "Graphitic disorder quantified by ID/IG from D/G bands"
+        },
+        aliases=["graphite disorder", "carbon defects", "ID/IG"]
+    ))
+
+    for edge in base_kg.edges:
+        if (
+            edge.source_id == "dband_intensity"
+            and edge.target_id == "prop_cation_order"
+            and edge.edge_type == EdgeType.INDICATES
+        ):
+            continue
+        kg.add_edge(KGEdge.from_dict(edge.to_dict()))
+
+    kg.add_edge(KGEdge(
+        source_id="dband_intensity",
+        target_id="prop_carbon_disorder",
+        edge_type=EdgeType.INDICATES,
+        properties={
+            "details": "D-band intensity (ID/IG ratio) indicates carbon disorder/defects"
+        },
+        confidence=0.80,
+        source_papers=["In-operando Raman study of lithium plating on graphite electrodes..."]
+    ))
+
     return kg

@@ -176,6 +176,14 @@ class ReactAgent():
         try:
             self.agent.tools[0]._set_globals(data_loader.table_dict)
             dataset_desc = data_loader.data_desc
+
+            # Initialize particle tool with data (if present)
+            for tool in self.agent.tools:
+                if hasattr(tool, 'set_data') and 'df_raman_peaks' in data_loader.table_dict:
+                    tool.set_data(data_loader.table_dict['df_raman_peaks'])
+                    # Share the globals namespace so particle tool can store results
+                    if hasattr(tool, 'set_globals'):
+                        tool.set_globals(self.agent.tools[0]._exec_globals)
             
             # Use LiveLogger only if a log is provided
             logger = LiveLogger(log) if log is not None else sys.stdout

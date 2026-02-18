@@ -12,6 +12,8 @@ import io
 import logging
 import re
 
+from volta.particle_tools import ParticleIdentificationTool
+
 logging.basicConfig(level=logging.INFO)
 
 template = """{system_prompt}
@@ -259,10 +261,17 @@ def create_agent(
     handlers,
     max_iterations = 50,
     early_stopping_method: str = "force",
+    include_particle_tool: bool = True,
 ):
     output_parser = CustomOutputParser()
     python_tool = CustomPythonAstREPLTool(callbacks=handlers)
     tools = [python_tool]
+
+    # Add particle identification tool
+    if include_particle_tool:
+        particle_tool = ParticleIdentificationTool()
+        tools.append(particle_tool)
+
     tool_names = [tool.name for tool in tools]
 
     prompt = CustomPromptTemplate(

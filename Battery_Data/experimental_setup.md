@@ -65,9 +65,14 @@ Complex spectral profiles are deconvoluted using non-linear least squares fittin
 ### Sample Independence
 In statistical testing, the **900 pixels are highly correlated** and cannot be treated as independent events. The spatial proximity of pixels within the 30 × 30 μm measurement area means they share common local conditions (e.g., electrolyte exposure, current distribution, thermal gradients), violating the independence assumption required for many statistical tests.
 
-**Independent Events**: Instead of using individual pixels, the **electrochemical half-cycles** should be treated as independent events:
-*   **Charging Half-Cycle 1**: First charge from 3.0 V to 4.7 V
-*   **Discharge Half-Cycle**: Discharge from 4.7 V to 3.0 V
-*   **Charging Half-Cycle 2**: Second charge from 3.0 V to 4.7 V
+**Approach 1: Half-Cycle Based (Limited)**
+- 3 half-cycles (2 charging + 1 discharge)
+- Provides n=3 independent events
+- Limited statistical power (min p-value = 0.125)
 
-This provides **n = 3 independent events** for statistical analysis. When designing hypothesis tests, consider this limited sample size and choose appropriate statistical methods (e.g., non-parametric tests, effect size estimation) rather than tests requiring large sample sizes.
+**Approach 2: Particle-Based (Recommended)**
+- Identify spatially isolated particles from A1g intensity
+- Use `identify_particles` tool for segmentation
+- Typically yields 5-20 independent particles
+- Each particle's behavior is independent
+- Enables meaningful statistical testing with n >> 3
